@@ -25,9 +25,14 @@ yarn-error.log*
 # env
 .env
 
-# firebase
-.firebase
-.firebaserc
+# Firebase
+.idea
+/node_modules/*
+/.firebaserc
+
+# Firebase Patch
+.runtimeconfig.json
+.firebase/
 
 # VisualStudioCode
 .vscode/*
