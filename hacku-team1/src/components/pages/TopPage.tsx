@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TopPage = () => {
+const TopPage : React.FC = () => {
   return (
     <>
       <h2>トップページ</h2>
