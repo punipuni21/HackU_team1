@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import StatusItem from '../atoms/StatusItem';
+import StatusItem from '../molecules/StatusItem';
 
 interface Props {
     text: string;

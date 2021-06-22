@@ -1,8 +1,8 @@
 import React from 'react';
-import User from '../molecules/User';
-import Status from '../molecules/Status';
-import Recommended from '../molecules/Recommended';
-import Complete from '../molecules/Complete';
+import User from '../organisms/User';
+import Status from '../organisms/Status';
+import Recommended from '../organisms/Recommended';
+import Complete from '../organisms/Complete';
 // import Button from '../atoms/Button'
 
 const UserPage = () => {

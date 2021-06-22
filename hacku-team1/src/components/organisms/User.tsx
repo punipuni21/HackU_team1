@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
-import UserIcon from '../atoms/UserIcon';
-import UserName from '../atoms/UserName';
+import UserIcon from '../molecules/UserIcon';
+import UserName from '../molecules/UserName';
 
 
 interface Props {

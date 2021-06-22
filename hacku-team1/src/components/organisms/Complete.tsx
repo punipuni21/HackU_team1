@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import RecommendButton from '../atoms/RecommendButton';
+import RecommendButton from '../molecules/RecommendButton';
 
 interface Props {
     text: string;
