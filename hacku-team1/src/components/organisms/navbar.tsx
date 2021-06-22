@@ -12,33 +12,23 @@ const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
     },
-    // head: {
-    //   display: 'flex'
-    // },
     logoutButton: {
       marginRight: theme.spacing(2),
       marginLeft: 'auto',
       marginTop: 0,
       color: 'white',
       borderColor: 'white',
-      // alignItems: 'flex-start',
-      // justifyContent: 'right'
     },
     toolbar: {
       minHeight: 96,
-      // alignItems: 'flex-start',
       paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(1),
-      // display: 'flex',
+      paddingBottom: 0,
       flexDirection: 'column',
       justifyContent: 'center'
     },
     title: {
       flexGrow: 1,
-    //   alignSelf: 'flex-start',
-      // justifyContent: 'center',
       marginLeft: 'calc(20%)',
-      // marginRight: 'auto'
     },
     pageButton: {
       alignSelf: 'flex-end',
@@ -52,7 +42,6 @@ const NavBar: React.FC = () => {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar className={classes.toolbar}>
-            {/* <div className={classes.head}> */}
             <Grid container spacing={3}>
               <Grid item xs={10}>
                 <Typography className={classes.title} variant="h5" noWrap>
@@ -63,22 +52,6 @@ const NavBar: React.FC = () => {
                 <Button variant="outlined" className={classes.logoutButton}>Logout</Button>
               </Grid>
             </Grid>
-            {/* <Typography className={classes.title} variant="h5" noWrap>
-              AppName
-            </Typography>
-            <Button variant="outlined" className={classes.logoutButton}>Logout</Button> */}
-            {/* </div> */}
-            {/* <Grid container spacing={3} className={classes.pageButton}>
-              <Grid item xs={4}>
-                <Button>あなた</Button>
-              </Grid>
-              <Grid item xs={4}>
-                <Button>わたし</Button>
-              </Grid>
-              <Grid item xs={4}>
-                <Button>トップ</Button>
-              </Grid>
-            </Grid> */}
             <Tabs aria-label="simple tabs example">
               <Tab label="Item One" />
               <Tab label="Item Two" />
