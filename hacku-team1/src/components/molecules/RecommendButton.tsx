@@ -9,6 +9,7 @@ interface Props {
 const useStyles = makeStyles((theme) => ({
   button: {
     backgroundColor: "red",
+    margin: theme.spacing(1),
   },
 }));
 
