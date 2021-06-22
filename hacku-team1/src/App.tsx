@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import TopPage from './components/pages/TopPage';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import TopPage from "./components/pages/TopPage";
 
+import NavBar from "./components/organisms/navbar";
+import Footer from "./components/organisms/footer";
 
-import NavBar from './components/organisms/navbar';
-import Footer from './components/organisms/footer';
+import UserPage from "./components/pages/UserPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Router>
         <NavBar />
           <Switch>
-            <Route exact path='/' component={TopPage}/>
+            <Route exact path="/" component={TopPage} />
           </Switch>
         <Footer />
       </Router>
