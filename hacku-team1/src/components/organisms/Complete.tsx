@@ -19,8 +19,9 @@ const Complete = (props: Props) => {
             <h2 className={classes.title}>Complete</h2>
             <hr></hr>
             <div>
-                <RecommendButton text={props.text} />
-                <RecommendButton text={props.text + "2"} />
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                    <RecommendButton text={props.text+num} />
+                ))}
             </div>
         </div>
     );

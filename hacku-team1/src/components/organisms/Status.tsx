@@ -19,20 +19,9 @@ const Status = (props: Props) => {
             <h2 className={classes.title}>Status</h2>
             <hr></hr>
             <div>
-                <StatusItem text={props.text} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
-                <StatusItem text={props.text + "2"} />
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                    <StatusItem text={props.text+num} />
+                ))}
             </div>
         </div>
     );
