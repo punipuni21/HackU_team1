@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     title: {
         textAlign: 'left',
     },
+    parentItem: {
+        display: 'flex',
+    }
 }));
 
 const Status = (props: Props) => {
@@ -18,8 +21,22 @@ const Status = (props: Props) => {
         <div>
             <h2 className={classes.title}>Status</h2>
             <hr></hr>
-            <StatusItem text={props.text} />
-            <StatusItem text={props.text + "2"} />
+            <div className={classes.parentItem}>
+                <StatusItem text={props.text} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+                <StatusItem text={props.text + "2"} />
+            </div>
         </div>
     );
 }
