@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     width: "100%",
     position: "absolute",
     bottom: 0,
+    textAlign: 'center',
   },
 });
 

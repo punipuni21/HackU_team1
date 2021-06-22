@@ -11,10 +11,12 @@ function App() {
     <div className="App">
       <header className="App-header">
       <Router>
+        <NavBar />
           <Switch>
             <Route exact path='/' component={TopPage}/>
           </Switch>
-        </Router>
+        <Footer />
+      </Router>
       </header>
     </div>
   );
