@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
       flexGrow: 1,
-      marginLeft: 'calc(20%)',
+      marginLeft: 'calc(54%)',
     },
     pageButton: {
       alignSelf: 'flex-end',
