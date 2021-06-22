@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
     title: {
         textAlign: 'left',
     },
-    parentItem: {
-        display: 'flex',
-    }
 }));
 
 const Complete = (props: Props) => {
@@ -21,7 +18,7 @@ const Complete = (props: Props) => {
         <div>
             <h2 className={classes.title}>Complete</h2>
             <hr></hr>
-            <div className={classes.parentItem}>
+            <div>
                 <RecommendButton text={props.text} />
                 <RecommendButton text={props.text + "2"} />
             </div>

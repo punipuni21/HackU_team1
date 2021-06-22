@@ -15,11 +15,9 @@ const useStyles = makeStyles((theme) => ({
 const RecommendButton = (props: Props) => {
     const classes = useStyles();
     return (
-        <div>
-            <Button variant="contained" className={classes.button}>
-                {props.text}
-            </Button>
-        </div>
+        <Button variant="contained" className={classes.button}>
+            {props.text}
+        </Button>
     );
 }
 

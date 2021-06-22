@@ -5,9 +5,6 @@ import Recommended from '../molecules/Recommended';
 import Complete from '../molecules/Complete';
 // import Button from '../atoms/Button'
 
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-
 const UserPage = () => {
     return (
         <div>
@@ -16,14 +13,6 @@ const UserPage = () => {
             <Recommended text="test_recommended" />
             <Complete text="test_complete" />
             {/* <Button text="qwer" onClick={() => ("asd")} /> */}
-
-            {/* <Box component="span"> */}
-            <Box component="div">
-                <Button>btn</Button>
-                <Button>btn2</Button>
-                <Button>btn3</Button>
-            </Box>
-
         </div>
     );
 }
