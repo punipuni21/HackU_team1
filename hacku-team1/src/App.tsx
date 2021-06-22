@@ -15,6 +15,7 @@ function App() {
         <NavBar />
           <Switch>
             <Route exact path="/" component={TopPage} />
+            <Route path='/mypage' component={UserPage} />
           </Switch>
         <Footer />
       </Router>

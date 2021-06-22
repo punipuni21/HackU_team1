@@ -5,23 +5,13 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import SectionTab from '../atoms/sectionTab';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-  },
-}));
-
 const SectionBar: React.FC = () => {
-  const classes = useStyles();
   return (
-    // <div className={classes.root}>
-      <Tabs TabIndicatorProps={{style: {backgroundColor: "white"}}}>
-        <Link to="/"><SectionTab label="Top" /></Link>
-        <SectionTab label="あなた" />
-        <SectionTab label="みんな" />
-      </Tabs>
-    // </div>
+    <Tabs TabIndicatorProps={{style: {backgroundColor: "white"}}}>
+      <Link to="/"><SectionTab label="Top" /></Link>
+      <Link to="/mypage"><SectionTab label="わたし" /></Link>
+      <SectionTab label="みんな" />
+    </Tabs>
   )
 }
 
