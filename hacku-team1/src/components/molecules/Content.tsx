@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "../atoms/Image";
 import TextLabel from "../atoms/TextLabel";
-import { Stack } from "@material-ui/core";
 import { classicNameResolver } from "typescript";
 
 type Props = {
@@ -14,14 +13,14 @@ type Props = {
 const Content: React.FC<Props> = ({ src, alt, classname, text }) => {
   return (
     <>
-      <Stack>
-        <Image
+      <div>
+      <Image
           src={src}
           alt={alt}
           classname={classname}
         ></Image>
         <TextLabel classname={classname} text={text}></TextLabel>
-      </Stack>
+      </div>
     </>
   );
 };
