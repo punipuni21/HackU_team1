@@ -28,9 +28,9 @@ const Introduction: React.FC = () => {
         </Stack>
       </Container>
       <TextLabel
-          classname="description"
-          text="みんなに消化されたコンテンツ"
-        ></TextLabel>
+        classname="description"
+        text="みんなに消化されたコンテンツ"
+      ></TextLabel>
     </>
   );
 };
