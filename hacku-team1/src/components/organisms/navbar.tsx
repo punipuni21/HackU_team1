@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+
+import AppName from '../molecules/appName';
+import LogoutButton from '../molecules/logoutButton';
+import SectionBar from '../molecules/sectionBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,19 +44,13 @@ const NavBar: React.FC = () => {
           <Toolbar className={classes.toolbar}>
             <Grid container spacing={3}>
               <Grid item xs={10}>
-                <Typography className={classes.title} variant="h5" noWrap>
-                  AppName
-                </Typography>
+                <AppName className={classes.title} />
               </Grid>
               <Grid item xs={2}>
-                <Button variant="outlined" className={classes.logoutButton}>Logout</Button>
+                <LogoutButton className={classes.logoutButton} />
               </Grid>
             </Grid>
-            <Tabs aria-label="simple tabs example">
-              <Tab label="Item One" />
-              <Tab label="Item Two" />
-              <Tab label="Item Three" />
-            </Tabs>
+            <SectionBar />
           </Toolbar>
         </AppBar>
       </div>
