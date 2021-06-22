@@ -1,23 +1,17 @@
 import React from "react";
-import Button2 from "@material-ui/core/Button";
 
-interface Props {
-  text: string;
+type Props = {
+  name: string;
   onClick: VoidFunction;
-}
+  classname: string;
+};
 
-// カード一枚のコンポーネント Atoms
-function Button(props: Props) {
+const Button: React.FC<Props> = ({ name, onClick, classname }) => {
   return (
-    <Button2
-      variant="contained"
-      color="primary"
-      className="button"
-      onClick={props.onClick}
-    >
-      {props.text}
-    </Button2>
+    <button className={classname} onClick={onClick}>
+      {name}
+    </button>
   );
-}
+};
 
 export default Button;
