@@ -33,10 +33,10 @@ const TopPage: React.FC = () => {
   ];
 
   return (
-    <Container>
+    <div>
       <Introduction></Introduction>
       <ContentList contents={contents}></ContentList>
-    </Container>
+    </div>
   );
 };
 
