@@ -8,7 +8,7 @@ import Complete from "../organisms/Complete";
 const UserPage = () => {
   return (
     <div>
-      <User name="asdf" picture_src="/logo192.png" />
+      <User name="asdf" icon="/logo192.png" />
       <Status text="test_status" />
       <Recommended text="test_recommended" />
       <Complete text="test_complete" />
