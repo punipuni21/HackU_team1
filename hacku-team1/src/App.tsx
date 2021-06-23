@@ -7,6 +7,8 @@ import Footer from "./components/organisms/footer";
 
 import UserPage from "./components/pages/UserPage";
 
+import OtherUsersPage from "./components/pages/OtherUsersPage";
+
 function App() {
   return (
     <div className="App">
@@ -16,6 +18,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={TopPage} />
             <Route path='/mypage' component={UserPage} />
+            <Route path='/otherspage' component={OtherUsersPage} />
           </Switch>
         <Footer />
       </Router>

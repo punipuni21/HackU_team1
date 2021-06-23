@@ -10,7 +10,7 @@ const SectionBar: React.FC = () => {
     <Tabs TabIndicatorProps={{style: {backgroundColor: "white"}}}>
       <Link to="/"><SectionTab label="Top" /></Link>
       <Link to="/mypage"><SectionTab label="わたし" /></Link>
-      <SectionTab label="みんな" />
+      <Link to="/otherspage"><SectionTab label="みんな" /></Link>
     </Tabs>
   )
 }
