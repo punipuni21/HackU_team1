@@ -5,13 +5,11 @@ import { Container } from "@material-ui/core";
 
 const TopPage: React.FC = () => {
   return (
-    <>
-      <Container>
-        <h2>トップページ</h2>
-        <Introduction></Introduction>
-        <ContentList></ContentList>
-      </Container>
-    </>
+    <Container>
+      <h2>トップページ</h2>
+      <Introduction></Introduction>
+      <ContentList></ContentList>
+    </Container>
   );
 };
 
