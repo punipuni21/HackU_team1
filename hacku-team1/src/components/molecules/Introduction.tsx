@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
       top: "12.68%",
       bottom: "55.18%",
       background: "#BBDEFB",
-      opacity: "0.5",
       paddingBottom: "5%",
     },
     textLabel: {
@@ -57,6 +56,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
       /* Accent / Default */
       background: "#3C64B1",
+      color: "white",
+      fontWeight: "bold",
+      borderColor: "#3C64B1",
 
       /* Inside Auto Layout */
       flex: "none",
@@ -88,6 +90,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
       /* Accent / Default */
       color: "#3C64B1",
+      borderColor: "#3C64B1",
       background: "#BBDEFB",
 
       /* Inside Auto Layout */
