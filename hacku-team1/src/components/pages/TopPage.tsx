@@ -1,8 +1,6 @@
 import React from "react";
 import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
-import { Container } from "@material-ui/core";
-import Content from "../molecules/Content";
 
 const TopPage: React.FC = () => {
   const contents = [
