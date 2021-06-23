@@ -36,25 +36,21 @@ const useStyles = makeStyles((theme: Theme) =>
 const TopPage: React.FC = () => {
   const contents = [
     {
-      classname: "content",
       src: "./logo192.png",
       alt: "画像",
       text: "画像1",
     },
     {
-      classname: "content",
       src: "./logo192.png",
       alt: "画像",
       text: "画像2",
     },
     {
-      classname: "content",
       src: "./logo192.png",
       alt: "画像",
       text: "画像3",
     },
     {
-      classname: "content",
       src: "./logo192.png",
       alt: "画像",
       text: "画像4",
