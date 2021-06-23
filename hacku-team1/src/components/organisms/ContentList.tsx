@@ -27,9 +27,9 @@ const ContentList: React.FC<Props> = ({ contents }) => {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root} spacing={2}>
+    <Grid container className={classes.root}>
       <Grid item xs={12}>
-        <Grid container justify="center" spacing={3}>
+        <Grid container justify="center" spacing={2}>
           {contents.map((content) => (
             <Content
               classname={content.classname}
