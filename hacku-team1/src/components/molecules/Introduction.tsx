@@ -109,7 +109,6 @@ const Introduction: React.FC = () => {
   return (
     <div>
       <div className={classes.introduction}>
-        {/* <Container> */}
         <TextLabel
           classname={classes.textLabel}
           text="ここはアプリの紹介"
@@ -130,7 +129,6 @@ const Introduction: React.FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        {/* </Container> */}
       </div>
       <TextLabel
         classname="description"
