@@ -26,7 +26,10 @@ const Complete = (props: Props) => {
       <h2 className={classes.h2}>達成！！</h2>
       <div className={classes.buttons}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-          <CompleteButton text={props.text + num} />
+          <CompleteButton
+            text={props.text + num}
+            onClick={() => alert(props.text + num + "を押した")}
+          />
         ))}
       </div>
     </div>

@@ -5,6 +5,7 @@ import DoneIcon from "@material-ui/icons/Done";
 
 interface Props {
   text: string;
+  onClick: VoidFunction;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +22,7 @@ const CompleteButton = (props: Props) => {
       variant="contained"
       color="default"
       className={classes.button}
+      onClick={props.onClick}
       startIcon={<DoneIcon />}
     >
       {props.text}

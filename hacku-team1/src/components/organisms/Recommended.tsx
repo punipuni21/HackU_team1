@@ -26,7 +26,10 @@ const Recommended = (props: Props) => {
       <h2 className={classes.h2}>おすすめです。</h2>
       <div className={classes.buttons}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-          <RecommendButton text={props.text + num} />
+          <RecommendButton
+            text={props.text + num}
+            onClick={() => alert(props.text + num + "を押した")}
+          />
         ))}
       </div>
     </div>

@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 
 interface Props {
   text: string;
+  onClick: VoidFunction;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +17,11 @@ const useStyles = makeStyles((theme) => ({
 const RecommendButton = (props: Props) => {
   const classes = useStyles();
   return (
-    <Button variant="outlined" className={classes.button}>
+    <Button
+      variant="outlined"
+      className={classes.button}
+      onClick={props.onClick}
+    >
       {props.text}
     </Button>
   );
