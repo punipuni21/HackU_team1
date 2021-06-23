@@ -9,6 +9,7 @@ interface Props {
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+    borderRadius: 15,
   },
 }));
 
