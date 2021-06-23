@@ -18,38 +18,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContentList: React.FC = () => {
+type Props = {
+  contents: any[];
+};
+
+const ContentList: React.FC<Props> = ({ contents }) => {
   const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={12}>
-        <Grid container justify="center">
-          <Content
-            classname={"hoge"}
-            src="./logo192.png"
-            alt={"画像"}
-            text={"画像だよ"}
-          ></Content>
-          <Content
-            classname={"hoge"}
-            src="./logo192.png"
-            alt={"画像"}
-            text={"画像だよ"}
-          ></Content>
-          <Content
-            classname={"hoge"}
-            src="./logo192.png"
-            alt={"画像"}
-            text={"画像だよ"}
-          ></Content>
-          <Content
-            classname={"hoge"}
-            src="./logo192.png"
-            alt={"画像"}
-            text={"画像だよ"}
-          ></Content>
+        <Grid container justify="center" spacing={3}>
+          {contents.map((content) => (
+            <Content
+              classname={content.classname}
+              src={content.src}
+              alt={content.alt}
+              text={content.text}
+            ></Content>
+          ))}
         </Grid>
       </Grid>
     </Grid>
