@@ -7,6 +7,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  content: {
+    textAlign: "center",
+    position: "inherit",
+    padding: "0 10px",
+  },
 }));
 
 type Props = {
@@ -23,7 +28,7 @@ const ContentList: React.FC<Props> = ({ contents }) => {
         <Grid container justify="center" spacing={2}>
           {contents.map((content) => (
             <Content
-              classname={content.classname}
+              classname={classes.content}
               src={content.src}
               alt={content.alt}
               text={content.text}
