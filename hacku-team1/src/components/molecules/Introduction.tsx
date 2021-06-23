@@ -2,8 +2,7 @@ import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextLabel from "../atoms/TextLabel";
 import Button from "../atoms/Button";
-import { Container, Grid } from "@material-ui/core";
-import { normalize } from "path/posix";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
