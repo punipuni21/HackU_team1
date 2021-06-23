@@ -25,7 +25,7 @@ const Introduction: React.FC = () => {
     alert("押した");
   };
   return (
-    <>
+    <div>
       <Container fixed>
         <TextLabel
           classname="description"
@@ -52,7 +52,7 @@ const Introduction: React.FC = () => {
         classname="description"
         text="みんなに消化されたコンテンツ"
       ></TextLabel>
-    </>
+    </div>
   );
 };
 
