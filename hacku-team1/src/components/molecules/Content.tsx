@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "../atoms/Image";
 import TextLabel from "../atoms/TextLabel";
-import { classicNameResolver } from "typescript";
 
 type Props = {
   src: string;
@@ -12,16 +11,10 @@ type Props = {
 
 const Content: React.FC<Props> = ({ src, alt, classname, text }) => {
   return (
-    <>
-      <div>
-      <Image
-          src={src}
-          alt={alt}
-          classname={classname}
-        ></Image>
-        <TextLabel classname={classname} text={text}></TextLabel>
-      </div>
-    </>
+    <div>
+      <Image src={src} alt={alt} classname={classname}></Image>
+      <TextLabel classname={classname} text={text}></TextLabel>
+    </div>
   );
 };
 
