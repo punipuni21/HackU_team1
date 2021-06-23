@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     color: "#ebf6f7",
     backgroundColor: "#0f2350",
     width: "100%",
-    position: "absolute",
+    position: 'fixed',
     bottom: 0,
     textAlign: 'center',
   },
