@@ -19,3 +19,16 @@
 
 ## 技術
 ![使用予定技術の概要](./images/technique.jpg)
+
+### frontend
+- react
+- material-ui
+
+### database
+- Cloud Firebase
+
+### Authentication（ユーザー認証）
+- Firebase Authentication + Google アカウント
+
+### deploy
+- Firebase Hosting
