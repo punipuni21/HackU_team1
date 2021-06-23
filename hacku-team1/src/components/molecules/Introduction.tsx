@@ -130,10 +130,6 @@ const Introduction: React.FC = () => {
           </Grid>
         </Grid>
       </div>
-      <TextLabel
-        classname="description"
-        text="みんなに消化されたコンテンツ"
-      ></TextLabel>
     </div>
   );
 };
