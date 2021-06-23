@@ -1,0 +1,108 @@
+@startuml
+title flow
+
+== Login ==
+User --> App: sign up/sign in
+App -> Database: Request
+
+ref over Database
+  - UserID
+  - User Name
+  - Avatar Image
+  - Status
+  - Recommendeds
+  - Completed
+end ref
+
+Database -> App: Responce
+App --> User: Link to: UserPage
+
+== Action of Header ==
+User --> App: Click: Top
+App --> User: Link to: TopPage
+
+User --> App: Click: わたし
+
+
+App -> Database: Request /{UserID}
+
+ref over Database
+  - User Name
+  - Avatar Image
+  - Status
+  - Recommendeds
+  - Completed
+end ref
+
+Database -> App: Responce
+App --> User: Link to: UserPage
+
+
+User --> App: Click: みんな
+App -> Database: Request
+
+ref over Database
+  - UsersList
+    - UserID
+    - Avatar Image
+    - Status
+end ref
+
+Database -> App: Responce
+App --> User: Link to: OtherUsersPage
+
+== Action of UserPage ==
+
+User --> App: Click: Question mark [?]
+App --> User: Pop up: Example
+
+User --> App: Click: Edit Button \n Status or Recommended
+App -> Database: Request: Edit or Delete about \n Status or Recommended
+
+ref over Database
+  - Update Items
+end ref
+
+Database -> App: Responce
+
+User --> App: Click: Recommened Tip
+App --> User: Pop up: Input Form
+User --> App: Upload: Text & Image
+App -> Database: Request: Store and Move \n Recommened Tip to Complete
+
+ref over Database
+  - Store Text & Image
+end ref
+
+Database -> App: Responce
+
+== Action of OtherUsersPage ==
+User --> App: Click: OtherUser
+App -> Database: Request /{OtherUserID}
+
+ref over Database
+  - User Name
+  - Avatar Image
+  - Status
+  - Recommendeds
+  - Completed
+end ref
+
+Database -> App: Responce
+App --> User: Link to: OtherUserPage
+
+== Action of OtherUserPage ==
+
+User --> App: Click: おすすめです
+App --> User: Pop up: Input Form 
+User --> App: Input: Text
+
+App -> Database: Request: Store Recommened Tip
+ref over Database
+  - Store Textd
+end ref
+
+Database -> App: Responce
+
+@enduml
+

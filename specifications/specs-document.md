@@ -32,3 +32,8 @@
 
 ### deploy
 - Firebase Hosting
+
+## フロー図
+まだ暫定
+
+![フロー図](./images/flow.png)
