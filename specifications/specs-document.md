@@ -42,7 +42,6 @@
 
 ## 画面遷移
 [Figmaを参照](https://www.figma.com/file/rvQ8Gh5RKixeuJxIh8BsHo/%E3%83%97%E3%83%AC%E3%83%A4%E3%83%95Hack-U-team1?node-id=60%3A277)
-- 2つあるけど、右側の方
 
 ## 技術
 ![使用予定技術の概要](./images/technique.jpg)
