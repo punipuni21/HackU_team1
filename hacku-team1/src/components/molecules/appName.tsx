@@ -7,7 +7,7 @@ type Props = {
 
 const AppName: React.FC<Props> = ({ className }) => {
   return (
-    <Typography className={className} variant="h5" noWrap>
+    <Typography className={className} variant="h4" noWrap>
       AppName
     </Typography>
   )
