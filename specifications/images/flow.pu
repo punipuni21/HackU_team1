@@ -99,7 +99,7 @@ User --> App: Input: Text
 
 App -> Database: Request: Store Recommened Tip
 ref over Database
-  - Store Textd
+  - Store Text
 end ref
 
 Database -> App: Responce
