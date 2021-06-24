@@ -1,0 +1,62 @@
+@startuml
+
+entity User00 {
+  * userID: String
+  --
+  * statuIDs: List<String>
+  * tipsIDs: List<String>
+}
+
+entity User01 {
+  * userID: String
+  --
+  * statuIDs: List<String>
+  * tipsIDs: List<String>
+}
+
+entity Statu00 {
+  * statuID: String
+  --
+  * content: String
+}
+
+entity Statu01 {
+  * statuID: String
+  --
+  * content: String
+}
+
+entity Statu02 {
+  * statuID: String
+  --
+  * content: String
+}
+
+entity Tip00 {
+  * TipID: String
+  --
+  * content: String
+  * recommenderIDs: List<String>
+  * done: Boolen
+  * doneContens: String
+  * imageURL: String
+}
+
+entity Tip01 {
+  * TipID: String
+  --
+  * content: String
+  * recommenderIDs: List<String>
+  * done: Boolen
+  * doneContens: String
+  * imageURL: String
+}
+
+Statu00 }|..|| User00
+Statu01 }|..|| User00
+Tip00 }|..|| User00
+Tip01 }|..|| User00
+User01 }|..|| Tip01
+Statu02 }|..|| User01
+
+@enduml
