@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextLabel from "../atoms/TextLabel";
 import Button from "../atoms/Button";
 import { Grid } from "@material-ui/core";
+import { GoogleLoginButton } from "react-social-login-buttons";
+
+import firebase from "../../firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -109,8 +112,28 @@ const Introduction: React.FC = () => {
   const handleClickButton = () => {
     alert("押した");
   };
+
+  const [user, setUser] =
+    useState<firebase.firestore.DocumentData | null>(null);
+
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  }, []);
+
+  const login = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  };
+
+  const logout = () => {
+    firebase.auth().signOut();
+  };
+
   return (
     <div>
+      <p className="App-intro">UID: {user && user.uid}</p>
       <div className={classes.introduction}>
         <TextLabel
           classname={classes.textLabel}
@@ -119,16 +142,12 @@ const Introduction: React.FC = () => {
         <Grid container>
           <Grid item xs={12}>
             <Grid container justify="center" spacing={3}>
-              <Button
-                name="Sign Up"
-                classname={classes.SignUp}
-                onClick={handleClickButton}
-              ></Button>
-              <Button
+              <GoogleLoginButton onClick={login} />
+              {/* <Button
                 name="Sign In"
                 classname={classes.SignIn}
                 onClick={handleClickButton}
-              ></Button>
+              ></Button> */}
             </Grid>
           </Grid>
         </Grid>
