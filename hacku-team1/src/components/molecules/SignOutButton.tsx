@@ -6,8 +6,8 @@ import Button from "@material-ui/core/Button";
 import firebase from "../../firebase/firebase";
 
 type Props = {
-  setIsSignIn: any;
-  signOut: any;
+  // setIsSignIn: any;
+  signOut: VoidFunction;
 };
 
 const useStyles = makeStyles(() => ({
@@ -22,11 +22,11 @@ const useStyles = makeStyles(() => ({
 const SignOutButton: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const history = useHistory();
-  const signOut = () => {
-    props.setIsSignIn(false);
-    history.push("/");
-  };
+  // const history = useHistory();
+  // const signOut = () => {
+  //   props.setIsSignIn(false);
+  //   history.push("/");
+  // };
 
   return (
     <Button className={classes.logoutButton} variant="outlined" onClick={() => props.signOut()}>

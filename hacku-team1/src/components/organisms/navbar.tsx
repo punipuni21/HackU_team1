@@ -34,7 +34,7 @@ const NavBar: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const [isSignIn, setIsSignIn] = React.useState<boolean>(false);
+  // const [isSignIn, setIsSignIn] = React.useState<boolean>(false);
 
   const [user, setUser] =
     useState<firebase.firestore.DocumentData | null>(null);
@@ -46,15 +46,18 @@ const NavBar: React.FC = () => {
   }, []);
 
   const signIn = () => {
-    setIsSignIn(true)
-    // const provider = new firebase.auth.GoogleAuthProvider();
-    // firebase.auth().signInWithRedirect(provider);
+    // setIsSignIn(true)
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
   };
 
   const signOut = () => {
-    setIsSignIn(false);
+    // setIsSignIn(false);
+    firebase.auth().signOut();
     history.push("/");
   };
+
+  console.log(user);
 
   return (
     <div className={classes.root}>
@@ -62,19 +65,25 @@ const NavBar: React.FC = () => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
           <div className={classes.sectionBar}>
-            <SectionBar isSignIn={isSignIn} />
+            <SectionBar isSignIn={user ? true : false} />
           </div>
           <div
             className={classes.signInOutButton}
-            style={!isSignIn ? {} : { display: "none" }}
+            style={!user ? {} : { display: "none" }}
           >
-            <SignInButton setIsSignIn={setIsSignIn} signIn={signIn}/>
+            <SignInButton 
+            // setIsSignIn={setIsSignIn} 
+            signIn={signIn}
+            />
           </div>
           <div
             className={classes.signInOutButton}
-            style={isSignIn ? {} : { display: "none" }}
+            style={user ? {} : { display: "none" }}
           >
-            <SignOutButton setIsSignIn={setIsSignIn} signOut={signOut}/>
+            <SignOutButton 
+            // setIsSignIn={setIsSignIn} 
+            signOut={signOut}
+            />
           </div>
         </Toolbar>
       </AppBar>
