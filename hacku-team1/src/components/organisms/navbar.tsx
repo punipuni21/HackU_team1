@@ -1,60 +1,53 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from '@material-ui/core/Grid';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 
-import AppName from '../molecules/appName';
-import LogoutButton from '../molecules/logoutButton';
-import SectionBar from '../molecules/sectionBar';
+import SignInButton from "../molecules/SignInButton";
+import SignOutButton from "../molecules/SignOutButton";
+import SectionBar from "../molecules/sectionBar";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    logoutButton: {
-      marginRight: theme.spacing(2),
-      marginLeft: 'auto',
-      marginTop: 0,
-      color: 'white',
-      borderColor: 'white',
-    },
-    toolbar: {
-      minHeight: 96,
-      paddingTop: theme.spacing(2),
-      paddingBottom: 0,
-      flexDirection: 'column',
-      justifyContent: 'center'
-    },
-    title: {
-      flexGrow: 1,
-      marginLeft: 'calc(54%)',
-    },
-    pageButton: {
-      alignSelf: 'flex-end',
-    }
+  root: {
+    flexGrow: 1,
+  },
+  appBar: {
+    backgroundColor: "gray",
+  },
+  toolBar: {
+    minHeight: 24,
+    padding: 0,
+  },
+  sectionBar: {
+    flexGrow: 1,
+  },
+  signInOutButton: {
+    marginRight: theme.spacing(2),
+    marginLeft: "auto",
+  },
 }));
 
 const NavBar: React.FC = () => {
-    const classes = useStyles();
+  const classes = useStyles();
+  const [isSignIn, setIsSignIn] = React.useState<boolean>(false);
 
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar className={classes.toolbar}>
-            <Grid container spacing={3}>
-              <Grid item xs={10}>
-                <AppName className={classes.title} />
-              </Grid>
-              <Grid item xs={2}>
-                <LogoutButton className={classes.logoutButton} />
-              </Grid>
-            </Grid>
-            <SectionBar />
-          </Toolbar>
-        </AppBar>
-      </div>
-    )
-}
+  return (
+    <div className={classes.root}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar className={classes.toolBar}>
+          <div className={classes.sectionBar}>
+            <SectionBar isSignIn={isSignIn} />
+          </div>
+          <div className={classes.signInOutButton} style={!isSignIn ? {} : {display: "none"}}>
+            <SignInButton setIsSignIn={setIsSignIn} />
+          </div>
+          <div className={classes.signInOutButton} style={isSignIn ? {} : {display: "none"}}>
+            <SignOutButton setIsSignIn={setIsSignIn} />
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
 
 export default NavBar
