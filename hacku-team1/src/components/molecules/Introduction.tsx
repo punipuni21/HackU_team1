@@ -5,7 +5,7 @@ import Button from "../atoms/Button";
 import { Grid } from "@material-ui/core";
 import { GoogleLoginButton } from "react-social-login-buttons";
 
-import firebase from "../../firebase";
+import firebase from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

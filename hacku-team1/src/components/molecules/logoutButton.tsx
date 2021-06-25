@@ -1,7 +1,7 @@
 import React from "react";
 import OutlineButton from "../atoms/outlineButton";
 
-import firebase from "../../firebase";
+import firebase from "../../firebase/firebase";
 
 type Props = {
   className: string;
