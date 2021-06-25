@@ -3,8 +3,11 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
+import firebase from "../../firebase/firebase";
+
 type Props = {
   setIsSignIn: any;
+  signOut: any;
 };
 
 const useStyles = makeStyles(() => ({
@@ -16,7 +19,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LogoutButton: React.FC<Props> = (props) => {
+const SignOutButton: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const history = useHistory();
@@ -26,10 +29,10 @@ const LogoutButton: React.FC<Props> = (props) => {
   };
 
   return (
-    <Button className={classes.logoutButton} variant="outlined" onClick={() => signOut()}>
+    <Button className={classes.logoutButton} variant="outlined" onClick={() => props.signOut()}>
       Sign Out
     </Button>
   );
 };
 
-export default LogoutButton;
+export default SignOutButton;
