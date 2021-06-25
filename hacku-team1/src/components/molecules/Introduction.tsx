@@ -142,7 +142,7 @@ const Introduction: React.FC = () => {
         <Grid container>
           <Grid item xs={12}>
             <Grid container justify="center" spacing={3}>
-              <GoogleLoginButton onClick={login} />
+              {/* <GoogleLoginButton onClick={login} /> */}
               {/* <Button
                 name="Sign In"
                 classname={classes.SignIn}
