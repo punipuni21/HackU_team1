@@ -28,7 +28,8 @@ const Recommended = (props: Props) => {
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
           <RecommendButton
             text={props.text + num}
-            onClick={() => alert(props.text + num + "を押した")}
+            img={"./logo192.png"}
+            // onClick={}
           />
         ))}
       </div>
