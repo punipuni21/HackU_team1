@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { GoogleLoginButton } from "react-social-login-buttons";
+
+import firebase from "../../firebase/firebase";
 
 type Props = {
-  setIsSignIn: any;
+  signIn: VoidFunction;
 };
 
 const useStyles = makeStyles(() => ({
-  logoutButton: {
+  loginButton: {
     color: "white",
     borderColor: "white",
     backgroundColor: "inherit",
@@ -15,18 +18,18 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LogoutButton: React.FC<Props> = (props) => {
+const SignInButton: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const signIn = () => {
-    props.setIsSignIn(true);
-  };
-
   return (
-    <Button className={classes.logoutButton} variant="outlined" onClick={() => signIn()}>
+    <Button
+      className={classes.loginButton}
+      variant="outlined"
+      onClick={() => props.signIn()}
+    >
       Sign In
     </Button>
   );
 };
 
-export default LogoutButton;
+export default SignInButton;

@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 type Props = {
-  setIsSignIn: any;
+  signOut: VoidFunction;
 };
 
 const useStyles = makeStyles(() => ({
@@ -16,20 +16,18 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LogoutButton: React.FC<Props> = (props) => {
+const SignOutButton: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const history = useHistory();
-  const signOut = () => {
-    props.setIsSignIn(false);
-    history.push("/");
-  };
-
   return (
-    <Button className={classes.logoutButton} variant="outlined" onClick={() => signOut()}>
+    <Button
+      className={classes.logoutButton}
+      variant="outlined"
+      onClick={() => props.signOut()}
+    >
       Sign Out
     </Button>
   );
 };
 
-export default LogoutButton;
+export default SignOutButton;
