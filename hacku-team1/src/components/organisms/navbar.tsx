@@ -34,25 +34,21 @@ const NavBar: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  // const [isSignIn, setIsSignIn] = React.useState<boolean>(false);
-
   const [user, setUser] =
     useState<firebase.firestore.DocumentData | null>(null);
 
-   useEffect(() => {
+  useEffect(() => {
     return firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
     });
   }, []);
 
   const signIn = () => {
-    // setIsSignIn(true)
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithRedirect(provider);
   };
 
   const signOut = () => {
-    // setIsSignIn(false);
     firebase.auth().signOut();
     history.push("/");
   };
@@ -71,19 +67,13 @@ const NavBar: React.FC = () => {
             className={classes.signInOutButton}
             style={!user ? {} : { display: "none" }}
           >
-            <SignInButton 
-            // setIsSignIn={setIsSignIn} 
-            signIn={signIn}
-            />
+            <SignInButton signIn={signIn} />
           </div>
           <div
             className={classes.signInOutButton}
             style={user ? {} : { display: "none" }}
           >
-            <SignOutButton 
-            // setIsSignIn={setIsSignIn} 
-            signOut={signOut}
-            />
+            <SignOutButton signOut={signOut} />
           </div>
         </Toolbar>
       </AppBar>

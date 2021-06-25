@@ -109,23 +109,8 @@ const Introduction: React.FC = () => {
   const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
-  // const [user, setUser] =
-  //   useState<firebase.firestore.DocumentData | null>(null);
-
-  //  useEffect(() => {
-  //   return firebase.auth().onAuthStateChanged((user) => {
-  //     setUser(user);
-  //   });
-  // }, []);
-
-  // const login = () => {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   firebase.auth().signInWithRedirect(provider);
-  // };
-
   return (
     <div>
-      {/* <p className="App-intro">UID: {user && user.uid}</p> */}
       <div className={classes.introduction}>
         <TextLabel
           classname={classes.textLabel}
@@ -133,19 +118,7 @@ const Introduction: React.FC = () => {
         ></TextLabel>
         <Grid container>
           <Grid item xs={12}>
-            <Grid container justify="center" spacing={3}>
-              {/* <GoogleLoginButton onClick={login} /> */}
-              {/* <Button
-                name="Sign Up"
-                classname={classes.SignUp}
-                onClick={handleClickButton}
-              ></Button>
-              <Button
-                name="Sign In"
-                classname={classes.SignIn}
-                onClick={handleClickButton}
-              ></Button> */}
-            </Grid>
+            <Grid container justify="center" spacing={3}></Grid>
           </Grid>
         </Grid>
       </div>

@@ -6,7 +6,6 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import firebase from "../../firebase/firebase";
 
 type Props = {
-  // setIsSignIn: any;
   signIn: VoidFunction;
 };
 
@@ -21,10 +20,6 @@ const useStyles = makeStyles(() => ({
 
 const SignInButton: React.FC<Props> = (props) => {
   const classes = useStyles();
-
-  // const signIn = () => {
-  //   props.setIsSignIn(true);
-  // };
 
   return (
     <Button
