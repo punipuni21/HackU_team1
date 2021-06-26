@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEvent, ChangeEventHandler } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import LocalHospitalRoundedIcon from '@material-ui/icons/LocalHospitalRounded';
 import {
@@ -10,7 +10,6 @@ import {
   TextField,
   IconButton
 } from "@material-ui/core";
-import Image from "../atoms/Image";
 import StatusItem from "../molecules/StatusItem";
 
 type Props = {
@@ -45,8 +44,6 @@ const EditDialog = (props: Props) => {
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
-
-  // const prevContents = props.contents
 
   useEffect(() => {
     setOpen(props.isOpen);

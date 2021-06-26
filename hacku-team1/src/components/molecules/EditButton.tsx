@@ -25,7 +25,6 @@ const EditButton: React.FC<Props> = (props) => {
     return (
         <React.Fragment>
             <IconButton 
-                // style={{marginTop: "5px"}}
                 className={props.style}
                 onClick={handleOpen}
             >
