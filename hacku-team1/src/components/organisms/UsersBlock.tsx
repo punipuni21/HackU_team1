@@ -24,7 +24,7 @@ const UsersBlock: React.FC<Props> = ({ Users }) => {
   return (
     <div>
       <Grid item xs={12}>
-        <Grid container justify="center" spacing={2}>
+        <Grid container justify="center" >
           {Users.map((usr) => (
             <UserBlock
               name={usr.username}

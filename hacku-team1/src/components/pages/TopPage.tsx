@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
 import TextLabel from "../atoms/TextLabel";

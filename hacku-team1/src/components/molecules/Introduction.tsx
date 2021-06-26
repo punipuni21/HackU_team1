@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextLabel from "../atoms/TextLabel";
 import Button from "../atoms/Button";
 import { Grid } from "@material-ui/core";
+import { GoogleLoginButton } from "react-social-login-buttons";
+
+import firebase from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -106,9 +109,6 @@ const Introduction: React.FC = () => {
   const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
-  const handleClickButton = () => {
-    alert("押した");
-  };
   return (
     <div>
       <div className={classes.introduction}>
@@ -118,18 +118,7 @@ const Introduction: React.FC = () => {
         ></TextLabel>
         <Grid container>
           <Grid item xs={12}>
-            <Grid container justify="center" spacing={3}>
-              <Button
-                name="Sign Up"
-                classname={classes.SignUp}
-                onClick={handleClickButton}
-              ></Button>
-              <Button
-                name="Sign In"
-                classname={classes.SignIn}
-                onClick={handleClickButton}
-              ></Button>
-            </Grid>
+            <Grid container justify="center" spacing={3}></Grid>
           </Grid>
         </Grid>
       </div>

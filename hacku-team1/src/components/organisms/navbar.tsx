@@ -1,60 +1,84 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from '@material-ui/core/Grid';
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import { useHistory } from "react-router-dom";
 
-import AppName from '../molecules/appName';
-import LogoutButton from '../molecules/logoutButton';
-import SectionBar from '../molecules/sectionBar';
+import SignInButton from "../molecules/SignInButton";
+import SignOutButton from "../molecules/SignOutButton";
+import SectionBar from "../molecules/sectionBar";
+
+import firebase from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    logoutButton: {
-      marginRight: theme.spacing(2),
-      marginLeft: 'auto',
-      marginTop: 0,
-      color: 'white',
-      borderColor: 'white',
-    },
-    toolbar: {
-      minHeight: 96,
-      paddingTop: theme.spacing(2),
-      paddingBottom: 0,
-      flexDirection: 'column',
-      justifyContent: 'center'
-    },
-    title: {
-      flexGrow: 1,
-      marginLeft: 'calc(54%)',
-    },
-    pageButton: {
-      alignSelf: 'flex-end',
-    }
+  root: {
+    flexGrow: 1,
+  },
+  appBar: {
+    backgroundColor: "gray",
+  },
+  toolBar: {
+    minHeight: 24,
+    padding: 0,
+  },
+  sectionBar: {
+    flexGrow: 1,
+  },
+  signInOutButton: {
+    marginRight: theme.spacing(2),
+    marginLeft: "auto",
+  },
 }));
 
 const NavBar: React.FC = () => {
-    const classes = useStyles();
+  const classes = useStyles();
+  const history = useHistory();
 
-    return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar className={classes.toolbar}>
-            <Grid container spacing={3}>
-              <Grid item xs={10}>
-                <AppName className={classes.title} />
-              </Grid>
-              <Grid item xs={2}>
-                <LogoutButton className={classes.logoutButton} />
-              </Grid>
-            </Grid>
-            <SectionBar />
-          </Toolbar>
-        </AppBar>
-      </div>
-    )
-}
+  const [user, setUser] =
+    useState<firebase.firestore.DocumentData | null>(null);
 
-export default NavBar
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  }, []);
+
+  const signIn = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  };
+
+  const signOut = () => {
+    firebase.auth().signOut();
+    history.push("/");
+  };
+
+  console.log(user);
+
+  return (
+    <div className={classes.root}>
+      <p className="App-intro">UID: {user && user.uid}</p>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar className={classes.toolBar}>
+          <div className={classes.sectionBar}>
+            <SectionBar isSignIn={user ? true : false} />
+          </div>
+          <div
+            className={classes.signInOutButton}
+            style={!user ? {} : { display: "none" }}
+          >
+            <SignInButton signIn={signIn} />
+          </div>
+          <div
+            className={classes.signInOutButton}
+            style={user ? {} : { display: "none" }}
+          >
+            <SignOutButton signOut={signOut} />
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
+
+export default NavBar;
