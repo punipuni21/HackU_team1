@@ -31,21 +31,19 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Router>
-          <NavBar />
-          <div className={classes.toolbar} />
-          <Switch>
-            <Route exact path="/" component={TopPage} />
-            <Route path="/mypage" component={UserPage} />
-            <Route path="/otherspage" component={OtherUsersPage} />
-          </Switch>
-          <div className={classes.footbar} />
-          <div className={classes.footer}>
-            <Footer />
-          </div>
-        </Router>
-      </header>
+      <Router>
+        <NavBar />
+        <div className={classes.toolbar} />
+        <Switch>
+          <Route exact path="/" component={TopPage} />
+          <Route path="/mypage" component={UserPage} />
+          <Route path="/otherspage" component={OtherUsersPage} />
+        </Switch>
+        <div className={classes.footbar} />
+        <div className={classes.footer}>
+          <Footer />
+        </div>
+      </Router>
     </div>
   );
 }
