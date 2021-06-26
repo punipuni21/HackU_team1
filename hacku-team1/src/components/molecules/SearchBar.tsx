@@ -2,6 +2,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
+import React, { useState } from 'react'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,15 +22,28 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SearchBar: React.FC = () => {
+type Props= {
+  text: string; 
+  onChange: any;
+  onClick: any;
+}
+
+const SearchBar: React.FC<Props> = ({text, onChange, onClick}) => {
   const classes = useStyles();
   return (
     <div className={classes.searchBox}>
       <form noValidate className={classes.root} autoComplete="off">
-        <TextField id="outlined-basic" label="ユーザー名" fullWidth variant="outlined" />
+        <TextField 
+          id="outlined-basic"
+          value={text}
+          label="ユーザー名" 
+          fullWidth 
+          variant="outlined" 
+          onChange={onChange}
+        />
       </form>
 
-      <Button onClick={() => alert("検索を押した")} variant="contained">
+      <Button onClick={onClick} variant="contained">
      <SearchIcon className={classes.searchIcon} />
        </Button>
     </div>
