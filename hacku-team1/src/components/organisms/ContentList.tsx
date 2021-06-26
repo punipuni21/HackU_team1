@@ -1,42 +1,60 @@
 import React from "react";
-import Content from "../molecules/Content";
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  content: {
-    textAlign: "center",
-    position: "inherit",
-    padding: "0 10px",
-  },
-}));
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-around",
+      overflow: "hidden",
+      backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+      flexWrap: "nowrap",
+      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+      transform: "translateZ(0)",
+    },
+    title: {
+      color: "white",
+      fontWeight: "bold",
+    },
+    titleBar: {
+      background:
+        "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    },
+  })
+);
 
 type Props = {
+  classname: string;
   contents: any[];
 };
 
-const ContentList: React.FC<Props> = ({ contents }) => {
-  const [spacing, setSpacing] = React.useState(2);
+const ContentList: React.FC<Props> = ({ classname, contents }) => {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={12}>
-        <Grid container justify="center" spacing={2}>
-          {contents.map((content) => (
-            <Content
-              classname={classes.content}
-              src={content.src}
-              alt={content.alt}
-              text={content.text}
-            ></Content>
-          ))}
-        </Grid>
-      </Grid>
-    </Grid>
+    <div className={classes.root}>
+      <GridList className={classes.gridList} cols={2.5}>
+        {contents.map((content) => (
+          <GridListTile>
+            <img src={content.src} alt={content.alt} />
+            <GridListTileBar
+              title={content.text}
+              classes={{
+                root: classes.titleBar,
+                title: classes.title,
+              }}
+            />
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
   );
 };
 
