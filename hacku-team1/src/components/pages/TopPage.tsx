@@ -3,6 +3,7 @@ import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
 import TextLabel from "../atoms/TextLabel";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { db } from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +35,24 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TopPage: React.FC = () => {
+  const [contentList, setContentList] = React.useState([]);
+
+  const getData = async () => {
+    const snapshots = await db.collection("Tips").limit(5).get()
+    console.log(snapshots.size)
+    console.log(snapshots.docs.map(postDoc => postDoc.id))
+    console.log(snapshots.empty)
+    console.log(snapshots.docs.map(postDoc => postDoc.id))
+    snapshots.forEach((postDoc) => {
+      console.log(postDoc.id, ' => ', JSON.stringify(postDoc.data()))
+    })
+    // const docs = snapshots.docs.map(doc => doc.data());
+    // console.log(docs)
+    // docs.map((doc) => doc.data());
+    // await setContentList({
+    //   list: docs,
+    // });
+  };
   const contents = [
     {
       src: "./logo192.png",
@@ -59,6 +78,7 @@ const TopPage: React.FC = () => {
 
   return (
     <div>
+      
       <Introduction></Introduction>
       <TextLabel
         classname="description"
