@@ -12,15 +12,12 @@ type Props = {
 };
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   image: {
-    width: "200px",
-    height: "200px",
+    width: "50%",
+    height: "50%",
   },
   content: {
-    position: "static",
+    // position: "static",
     width: "25%",
     textAlign: "center",
   },
