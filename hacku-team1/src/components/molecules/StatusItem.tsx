@@ -42,15 +42,6 @@ const StatusItem = (props: Props) => {
       />
     );
   }
-
-  // return (
-  //   <Chip 
-  //     variant="outlined"
-  //     className={classes.chip}
-  //     label={props.text} 
-  //     onDelete={handleDelete}
-  //   />
-  // );
 };
 
 export default StatusItem;

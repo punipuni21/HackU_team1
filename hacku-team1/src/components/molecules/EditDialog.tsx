@@ -17,7 +17,7 @@ type Props = {
   contents: any[];
   editContents : any;
   isOpen: boolean;
-  doClose: () => void;
+  doClose: VoidFunction;
   getPrevContents: VoidFunction;
 };
 
