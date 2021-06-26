@@ -2,9 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import RecommendButton from "../molecules/RecommendButton";
 
-interface Props {
-  text: string;
-}
+type Props = {
+  dataList: any[];
+};
 
 const useStyles = makeStyles((theme) => ({
   h2: {
@@ -19,15 +19,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Recommended = (props: Props) => {
+const Recommended: React.FC<Props> = ({ dataList }) => {
   const classes = useStyles();
   return (
     <div>
       <h2 className={classes.h2}>おすすめです。</h2>
       <div className={classes.buttons}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+        {dataList.map((data) => (
           <RecommendButton
-            text={props.text + num}
+            text={data.content}
             img={"./logo192.png"}
             // onClick={}
           />
