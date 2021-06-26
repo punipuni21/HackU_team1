@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import StatusDialog from './StatusDialog'
+import EditDialog from './EditDialog'
 
 interface Props {
     style: string;
@@ -28,8 +28,8 @@ const EditButton: React.FC<Props> = (props) => {
             >
                 <ExpandMoreIcon />
             </IconButton>
-            <StatusDialog
-                title={"何の初心者"}
+            <EditDialog
+                title={"何の初心者?"}
                 isOpen={open}
                 doClose={() => handleClose()}
             />

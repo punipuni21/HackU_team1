@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import LocalHospitalRoundedIcon from '@material-ui/icons/LocalHospitalRounded';
 import {
   Button,
   Dialog,
@@ -7,6 +8,7 @@ import {
   DialogActions,
   DialogTitle,
   TextField,
+  IconButton
 } from "@material-ui/core";
 import Image from "../atoms/Image";
 
@@ -22,11 +24,18 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   text: {
-    width: "30em",
+    width: "20em",
   },
+  dialog: {
+    height: "80px"
+  },
+  add: {
+    padding: "0",
+    
+  }
 }));
 
-const StatusDialog = (props: Props) => {
+const EditDialog = (props: Props) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -48,28 +57,39 @@ const StatusDialog = (props: Props) => {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
-        <DialogContent>
-          <div className={classes.content}>
-            {/* <Image
-              // src={props.img}
-              alt={props.title}
-              classname={classes.content}
-            /> */}
-          </div>
+        <DialogContent className={classes.dialog}> 
           <form>
             <TextField
               className={classes.text}
               id="outlined-multiline-static"
-              label="感想など"
-              multiline
-              rows={8}
+              label="10文字以内"
+              // multiline
+              // rows={8}
               variant="outlined"
             />
+            <IconButton
+              className={classes.add}
+              // style={{width: "100px",}}
+              // className={props.style}
+              // onClick={handleOpen}
+            >
+                <LocalHospitalRoundedIcon style={{maxWidth: '60px', maxHeight: '60px', minWidth: '60px', minHeight: '60px'}} />
+            </IconButton>
           </form>
         </DialogContent>
+        {/* <form>
+            <TextField
+              className={classes.text}
+              id="outlined-multiline-static"
+              label="10文字以内"
+              // multiline
+              // rows={8}
+              variant="outlined"
+            />
+          </form> */}
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            投稿
+            更新
           </Button>
           <Button onClick={handleClose} color="primary">
             キャンセル
@@ -80,4 +100,4 @@ const StatusDialog = (props: Props) => {
   );
 };
 
-export default StatusDialog;
+export default EditDialog;

@@ -1,13 +1,15 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect, useState } from "react";
+import { makeStyles} from "@material-ui/core/styles";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StatusItem from "../molecules/StatusItem";
 import { IconButton } from "@material-ui/core";
 
 import EditButton from "../molecules/EditButton"
+import { db } from "../../firebase/firebase";
 
 interface Props {
   text: string;
+  uid: string | null;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +30,32 @@ const useStyles = makeStyles((theme) => ({
 
 const Status = (props: Props) => {
   const classes = useStyles();
+  const [statusDataList, setStatusDataList] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const tmpData: any = [];
+    await db
+      .collection("Tips")
+      .where("done", "==", true)
+      .get()
+      .then(async (snapshots) => {
+        snapshots.docs.map((doc) => {
+          tmpData.push({
+            src: doc.data().imageURL,
+            alt: doc.data().content,
+            text: doc.data().content,
+          });
+        });
+      });
+    setStatusDataList(tmpData);
+    console.log(await Promise.all(statusDataList));
+  };
+
+
   return (
     <div>
       <div style={{display: "flex"}}>
