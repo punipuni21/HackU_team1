@@ -11,7 +11,11 @@ const useStyles = makeStyles({
   },
 });
 
-const OtherUsersPage: React.FC = () => {
+type Props = {
+  uid: string | null;
+};
+
+const OtherUsersPage: React.FC<Props> = ({ uid }) => {
   const Users = [
     {
       username: "Ikeda",
@@ -35,29 +39,30 @@ const OtherUsersPage: React.FC = () => {
   ];
 
   const classes = useStyles();
-  const [text, setText] = useState('')
-  const [users, setUsers] = useState(Users)
+  const [text, setText] = useState("");
+  const [users, setUsers] = useState(Users);
   const inputValue = (e: any) => {
-    setText(e.target.value)
-  }
+    setText(e.target.value);
+  };
   const filterList = () => {
-    let Usercopy = []
+    let Usercopy = [];
     for (let user of Users) {
-      if (user.username.toLowerCase().indexOf(text.trim().toLowerCase()) > -1){
-       Usercopy.push(user)
+      if (user.username.toLowerCase().indexOf(text.trim().toLowerCase()) > -1) {
+        Usercopy.push(user);
       }
-      setUsers(Usercopy)   
+      setUsers(Usercopy);
     }
-  }
+  };
 
-  const isLoggedIn = false
+  const isLoggedIn = false;
   return (
     <div>
-      <Search text = {text} onChange={inputValue} onClick={filterList}/>
-      {users.length == 0
-        ? <h3 className={classes.h4}>該当のおすすめ待ちびとはいませんでした</h3>
-        : <UsersBlock Users = {users}/>
-      }
+      <Search text={text} onChange={inputValue} onClick={filterList} />
+      {users.length == 0 ? (
+        <h3 className={classes.h4}>該当のおすすめ待ちびとはいませんでした</h3>
+      ) : (
+        <UsersBlock Users={users} />
+      )}
     </div>
   );
 };
