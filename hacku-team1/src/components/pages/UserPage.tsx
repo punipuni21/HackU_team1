@@ -5,6 +5,7 @@ import Recommended from "../organisms/Recommended";
 import Complete from "../organisms/Complete";
 import { db } from "../../firebase/firebase";
 
+<<<<<<< HEAD
 const UserPage = () => {
   let statusDataList: any = [];
   let recommendedDataList: any = [];
@@ -55,6 +56,13 @@ const UserPage = () => {
   getRecommendedData();
   getCompleteData();
 
+=======
+type Props = {
+  uid: string | null;
+};
+
+const UserPage: React.FC<Props> = ({ uid }) => {
+>>>>>>> develop
   return (
     <div>
       <User name="asdf" icon="/logo192.png" />
