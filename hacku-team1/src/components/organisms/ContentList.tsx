@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
       transform: "translateZ(0)",
     },
     title: {
-      color: theme.palette.primary.light,
+      color: "white",
+      fontWeight: "bold",
     },
     titleBar: {
       background:
