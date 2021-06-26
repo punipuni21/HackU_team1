@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Introduction: React.FC = () => {
-  const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
   return (
