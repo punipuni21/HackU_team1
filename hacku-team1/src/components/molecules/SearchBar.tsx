@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props= {
   text: string; 
-  onChenge: any;
+  onChange: any;
   onClick: any;
 }
 
-const SearchBar: React.FC<Props> = ({text, onChenge, onClick}) => {
+const SearchBar: React.FC<Props> = ({text, onChange, onClick}) => {
   const classes = useStyles();
   return (
     <div className={classes.searchBox}>
@@ -40,7 +40,7 @@ const SearchBar: React.FC<Props> = ({text, onChenge, onClick}) => {
           label="ユーザー名" 
           fullWidth 
           variant="outlined" 
-          onChange={onChenge}
+          onChange={onChange}
         />
       </form>
 
