@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TopPage from "./components/pages/TopPage";
 
-import NavBar from "./components/organisms/navbar";
-import Footer from "./components/organisms/footer";
+import NavigationBar from "./components/organisms/NavigationBar";
+
+import Footer from "./components/organisms/Footer";
 
 import UserPage from "./components/pages/UserPage";
 
@@ -26,26 +27,39 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function App() {
+const App: React.FC = () => {
   const classes = useStyles();
+
+  const [uid, setUid] = useState<string | null>(null);
+
+  const handleLogin = (uid: string | null) => {
+    console.log(uid);
+
+    setUid(uid);
+  };
 
   return (
     <div className="App">
-      <Router>
-        <NavBar />
-        <div className={classes.toolbar} />
-        <Switch>
-          <Route exact path="/" component={TopPage} />
-          <Route path="/mypage" component={UserPage} />
-          <Route path="/otherspage" component={OtherUsersPage} />
-        </Switch>
-        <div className={classes.footbar} />
-        <div className={classes.footer}>
-          <Footer />
-        </div>
-      </Router>
+      <header className="App-header">
+        <Router>
+          <NavigationBar handleLogin={handleLogin} />
+          <div className={classes.toolbar} />
+          <Switch>
+            <Route exact path="/" render={() => <TopPage uid={uid} />} />
+            <Route path="/mypage" render={() => <UserPage uid={uid} />} />
+            <Route
+              path="/otherspage"
+              render={() => <OtherUsersPage uid={uid} />}
+            />
+          </Switch>
+          <div className={classes.footbar} />
+          <div className={classes.footer}>
+            <Footer />
+          </div>
+        </Router>
+      </header>
     </div>
   );
-}
+};
 
 export default App;

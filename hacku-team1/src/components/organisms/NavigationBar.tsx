@@ -30,7 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar: React.FC = () => {
+type Props = {
+  handleLogin: (uid: string | null) => void;
+};
+const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -40,6 +43,11 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
+      if (user) {
+        handleLogin(user.uid);
+      } else {
+        handleLogin(null);
+      }
     });
   }, []);
 
@@ -78,4 +86,4 @@ const NavBar: React.FC = () => {
   );
 };
 
-export default NavBar;
+export default NavigationBar;
