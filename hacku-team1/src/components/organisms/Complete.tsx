@@ -2,9 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CompleteButton from "../molecules/CompleteButton";
 
-interface Props {
-  text: string;
-}
+type Props = {
+  dataList: any[];
+};
 
 const useStyles = makeStyles((theme) => ({
   h2: {
@@ -19,17 +19,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Complete = (props: Props) => {
+const Complete: React.FC<Props> = ({ dataList }) => {
   const classes = useStyles();
   return (
     <div>
       <h2 className={classes.h2}>達成！！</h2>
       <div className={classes.buttons}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+        {dataList.map((data) => (
           <CompleteButton
-            text={props.text + num}
-            img={"./logo192.png"}
-            msg={"達成したこと。" + num}
+            text={data.content}
+            img={data.imageURL}
+            msg={data.doneContent}
             // onClick={}
           />
         ))}
