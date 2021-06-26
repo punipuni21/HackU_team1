@@ -63,7 +63,7 @@ const TopPage: React.FC<Props> = ({ uid }) => {
   }, []);
 
   const getData = async () => {
-    const tmpData: any = [];
+    const temporaryContentData: any = [];
     await db
       .collection("Tips")
       .where("done", "==", true)
@@ -71,14 +71,14 @@ const TopPage: React.FC<Props> = ({ uid }) => {
       .get()
       .then(async (snapshots) => {
         snapshots.docs.map((doc) => {
-          tmpData.push({
+          temporaryContentData.push({
             src: doc.data().imageURL,
             alt: doc.data().content,
             text: doc.data().content,
           });
         });
       });
-    setContentDataList(tmpData);
+    setContentDataList(temporaryContentData);
     console.log(await Promise.all(contentDataList));
   };
 
