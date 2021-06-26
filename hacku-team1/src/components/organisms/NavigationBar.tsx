@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 type Props = {
   handleLogin: (uid: string | null) => void;
 };
-const Navbar: React.FC<Props> = ({ handleLogin }) => {
+const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -89,4 +89,4 @@ const Navbar: React.FC<Props> = ({ handleLogin }) => {
   );
 };
 
-export default Navbar;
+export default NavigationBar;

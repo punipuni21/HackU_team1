@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TopPage from "./components/pages/TopPage";
-// import Navbar from "./components/organisms/navbar";
 
-import Navbar from "./components/organisms/NavigationBar";
+import NavigationBar from "./components/organisms/NavigationBar";
 
-import Footer from "./components/organisms/Hooter";
+import Footer from "./components/organisms/Footer";
 
 import UserPage from "./components/pages/UserPage";
 
@@ -43,7 +42,7 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <Router>
-          <Navbar handleLogin={handleLogin} />
+          <NavigationBar handleLogin={handleLogin} />
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path="/" render={() => <TopPage uid={uid} />} />
