@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TopPage: React.FC = () => {
-  const [contentList, setContentList] = React.useState({});
 
   let contentDataList: any = [];
 

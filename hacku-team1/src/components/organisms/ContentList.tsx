@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   content: {
-    width: " 200px",
+    width: "300px",
     textAlign: "center",
     position: "inherit",
     padding: "0 10px",
