@@ -78,29 +78,6 @@ const TopPage: React.FC = () => {
     console.log(await Promise.all(contentDataList));
   };
 
-  const contents = [
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像1",
-    },
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像2",
-    },
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像3",
-    },
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像4",
-    },
-  ];
-
   return (
     <div>
       <div className={classes.introduction}>
