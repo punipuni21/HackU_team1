@@ -51,13 +51,10 @@ const NavBar: React.FC = () => {
   const signOut = () => {
     firebase.auth().signOut();
     history.push("/");
-  };
-
-  console.log(user);
+  }
 
   return (
     <div className={classes.root}>
-      <p className="App-intro">UID: {user && user.uid}</p>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
           <div className={classes.sectionBar}>
