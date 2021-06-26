@@ -8,6 +8,9 @@ import EditDialog from './EditDialog'
 
 interface Props {
     style: string;
+    contents: any[];
+    editContents: any;
+    getPrevContents: VoidFunction;
 }
 
 const EditButton: React.FC<Props> = (props) => {
@@ -30,8 +33,11 @@ const EditButton: React.FC<Props> = (props) => {
             </IconButton>
             <EditDialog
                 title={"何の初心者?"}
+                contents={props.contents}
+                editContents={props.editContents}
                 isOpen={open}
                 doClose={() => handleClose()}
+                getPrevContents={props.getPrevContents}
             />
         </React.Fragment>
     )

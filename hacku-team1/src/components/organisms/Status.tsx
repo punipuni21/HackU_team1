@@ -30,29 +30,27 @@ const useStyles = makeStyles((theme) => ({
 
 const Status = (props: Props) => {
   const classes = useStyles();
-  const [statusDataList, setStatusDataList] = useState([]);
+  const [statusDataList, setStatusDataList] = useState([{content: ""}]);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    const tmpData: any = [];
+    const rowData: any = [];
     await db
-      .collection("Tips")
-      .where("done", "==", true)
+      .collection("Status")
+      .where("userID", "==", props.uid)
       .get()
       .then(async (snapshots) => {
         snapshots.docs.map((doc) => {
-          tmpData.push({
-            src: doc.data().imageURL,
-            alt: doc.data().content,
-            text: doc.data().content,
+          rowData.push({
+            content: doc.data().content,
           });
         });
       });
-    setStatusDataList(tmpData);
-    console.log(await Promise.all(statusDataList));
+    setStatusDataList(rowData);
+    // console.log(await Promise.all(statusDataList));
   };
 
 
@@ -60,13 +58,15 @@ const Status = (props: Props) => {
     <div>
       <div style={{display: "flex"}}>
         <h2 className={classes.h2}>何の初心者？</h2>
-        <EditButton style={classes.editButton} />
+        <EditButton 
+          style={classes.editButton} 
+          contents={statusDataList} 
+          editContents={setStatusDataList}
+          getPrevContents={getData}　/>
       </div>
-      
-      
       <div className={classes.items}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-          <StatusItem text={props.text + num} />
+        {statusDataList.map((status) => (
+          <StatusItem text={status.content} isEditMode={false} index={0} handleDelete={null}/>
         ))}
       </div>
     </div>
