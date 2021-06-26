@@ -35,56 +35,38 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TopPage: React.FC = () => {
-  const [contentList, setContentList] = React.useState([]);
+  const [contentList, setContentList] = React.useState({});
+
+  let contentDataList: any = [];
 
   const getData = async () => {
-    const snapshots = await db.collection("Tips").limit(5).get()
-    console.log(snapshots.size)
-    console.log(snapshots.docs.map(postDoc => postDoc.id))
-    console.log(snapshots.empty)
-    console.log(snapshots.docs.map(postDoc => postDoc.id))
-    snapshots.forEach((postDoc) => {
-      console.log(postDoc.id, ' => ', JSON.stringify(postDoc.data()))
-    })
-    // const docs = snapshots.docs.map(doc => doc.data());
-    // console.log(docs)
-    // docs.map((doc) => doc.data());
-    // await setContentList({
-    //   list: docs,
-    // });
+    await db
+      .collection("Tips")
+      .where("done", "==", true)
+      .limit(5)
+      .get()
+      .then((snapshots) => {
+        snapshots.docs.map((doc) => {
+          contentDataList.push({
+            src: doc.data().imageURL,
+            alt: doc.data().content,
+            text: doc.data().content,
+          });
+        });
+        console.log(contentDataList);
+      });
   };
-  const contents = [
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像1",
-    },
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像2",
-    },
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像3",
-    },
-    {
-      src: "./logo192.png",
-      alt: "画像",
-      text: "画像4",
-    },
-  ];
+
+  getData();
 
   return (
     <div>
-      
       <Introduction></Introduction>
       <TextLabel
         classname="description"
         text="みんなに消化されたコンテンツ"
       ></TextLabel>
-      <ContentList contents={contents}></ContentList>
+      <ContentList contents={contentDataList}></ContentList>
     </div>
   );
 };
