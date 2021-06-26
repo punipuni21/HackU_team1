@@ -16,13 +16,20 @@ const useStyles = makeStyles({
   },
 });
 
-const Search: React.FC = () => {
+type Props= {
+    text: string; 
+    onChenge: any;
+    onClick: any;
+}
+
+const Search: React.FC<Props> = ({ text, onChenge, onClick }) => {
   const classes = useStyles();
+
   return (
     <div>
       <h2 className={classes.h2}>ユーザー検索</h2>
       <div className={classes.searchbar}>
-        <SearchBar />
+        <SearchBar text = {text} onChenge = {onChenge} onClick = {onClick}/>
       </div>
       <Divider className={classes.divider} variant="middle"/>
     </div>

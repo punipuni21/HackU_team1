@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Search from "../organisms/Search";
 import UsersBlock from "../organisms/UsersBlock";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  h4: {
+    textAlign: "left",
+    marginLeft: "20px",
+    marginBottom: "20px",
+  },
+});
 
 const OtherUsersPage: React.FC = () => {
-  const classes = useStyles();
-
   const Users = [
     {
       username: "Ikeda",
@@ -30,10 +34,31 @@ const OtherUsersPage: React.FC = () => {
     },
   ];
 
+  const classes = useStyles();
+  const [text, setText] = useState('')
+  const [sent, setSent] = useState('')
+  const [users, setUsers] = useState(Users)
+  const inputValue = (e: any) => {
+    setText(() => e.target.value)
+  }
+  const filterList = () => {
+    let Usercopy = []
+    for (let user of Users) {
+      if (user.username.toLowerCase().indexOf(text.trim().toLowerCase()) > -1){
+       Usercopy.push(user)
+       setSent("")
+      }
+      if (Usercopy.length == 0){
+         setSent("該当者のユーザはいませんでした")
+      }
+      setUsers(Usercopy)   
+    }
+  }
   return (
     <div>
-      <Search />
-      <UsersBlock Users = {Users}/>
+      <Search text = {text} onChenge={inputValue} onClick={filterList}/>
+      <h4 className={classes.h4}>{sent}</h4>
+      <UsersBlock Users = {users}/>
     </div>
   );
 };
