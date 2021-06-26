@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  uid: string;
+  uid : string | null;
 };
 
 const TopPage: React.FC<Props> = ({ uid }) => {

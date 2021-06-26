@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type Props = {
-  handleLogin: (uid: string) => void;
+  handleLogin: (uid: string | null) => void;
 };
 const Navbar: React.FC<Props> = ({ handleLogin }) => {
   const classes = useStyles();
@@ -45,6 +45,8 @@ const Navbar: React.FC<Props> = ({ handleLogin }) => {
       setUser(user);
       if (user) {
         handleLogin(user.uid);
+      } else {
+        handleLogin(null);
       }
     });
   }, []);

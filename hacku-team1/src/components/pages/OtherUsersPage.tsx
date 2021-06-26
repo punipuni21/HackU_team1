@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 type Props = {
-  uid: string;
+  uid: string | null;
 };
 
 const OtherUsersPage: React.FC<Props> = ({ uid }) => {

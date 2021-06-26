@@ -6,7 +6,7 @@ import Complete from "../organisms/Complete";
 // import Button from '../atoms/Button'
 
 type Props = {
-  uid: string;
+  uid: string | null;
 };
 
 const UserPage: React.FC<Props> = ({ uid }) => {

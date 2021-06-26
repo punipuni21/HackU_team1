@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TopPage from "./components/pages/TopPage";
 // import Navbar from "./components/organisms/navbar";
 
-import Navbar from "./components/organisms/Navbar";
+import Navbar from "./components/organisms/NavigationBar";
 
 import Footer from "./components/organisms/Hooter";
 
@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
 const App: React.FC = () => {
   const classes = useStyles();
 
-  const [uid, setUid] = useState<any>("");
+  const [uid, setUid] = useState<string | null>(null);
 
-  const handleLogin = (uid: string) => {
+  const handleLogin = (uid: string | null) => {
     console.log(uid);
 
     setUid(uid);
