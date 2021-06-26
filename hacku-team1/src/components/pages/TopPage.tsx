@@ -33,7 +33,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TopPage: React.FC = () => {
+type Props = {
+  uid : string | null;
+};
+
+const TopPage: React.FC<Props> = ({ uid }) => {
   const contents = [
     {
       src: "./logo192.png",

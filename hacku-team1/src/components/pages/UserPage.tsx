@@ -5,7 +5,11 @@ import Recommended from "../organisms/Recommended";
 import Complete from "../organisms/Complete";
 // import Button from '../atoms/Button'
 
-const UserPage = () => {
+type Props = {
+  uid: string | null;
+};
+
+const UserPage: React.FC<Props> = ({ uid }) => {
   return (
     <div>
       <User name="asdf" icon="/logo192.png" />
