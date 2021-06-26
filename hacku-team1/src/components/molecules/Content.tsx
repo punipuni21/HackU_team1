@@ -2,6 +2,7 @@ import React from "react";
 import Image from "../atoms/Image";
 import TextLabel from "../atoms/TextLabel";
 import { makeStyles } from "@material-ui/core/styles";
+import { ClassTwoTone } from "@material-ui/icons";
 
 type Props = {
   src: string;
@@ -19,8 +20,10 @@ const useStyles = makeStyles((theme) => ({
     height: "200px",
   },
   content: {
+    position: "static",
+    width: "25%",
     textAlign: "center",
-  }
+  },
 }));
 
 const Content: React.FC<Props> = ({ src, alt, classname, text }) => {
