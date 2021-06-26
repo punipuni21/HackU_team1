@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import User from "../organisms/User";
 import Status from "../organisms/Status";
 import Recommended from "../organisms/Recommended";
@@ -10,54 +10,42 @@ type Props = {
 };
 
 const UserPage: React.FC<Props> = ({ uid }) => {
-  let statusDataList: any = [];
-  let recommendedDataList: any = [];
-  let completeDataList: any = [];
+  const [recommendedDataList, setRecommendedDataList] = useState([]);
+  const [completeDataList, setCompleteDataList] = useState([]);
 
-  const getStatusData = async () => {
-    const userRef = await db
-      .collection("User")
-      .doc("H4hqSRxo27OJy0800T9iWRjZOvu2")
-      .get();
-    statusDataList = userRef.get("statusIDs");
-    console.log("Document data:", statusDataList);
+  useEffect(() => {
+    getData();
+  }, []);
 
-    // userRef.get("statusIDs").forEach((element: string) => {
-    //   const statusRef = await db.collection("Status").doc(element).get();
-    // });
+  const getData = async () => {
+    const tmpRecommendedData: any = [];
+    const tmpCompleteData: any = [];
+    await db
+      .collection("Tips")
+      .where("userID", "==", uid)
+      .get()
+      .then(async (snapshots) => {
+        snapshots.docs.map((doc) => {
+          console.log(doc.data().content);
+          if (doc.data().done) {
+            tmpCompleteData.push({
+              content: doc.data().content,
+              imageURL: doc.data().imageURL,
+              doneContent: doc.data().doneContent,
+            });
+          } else {
+            tmpRecommendedData.push({
+              content: doc.data().content,
+            });
+          }
+        });
+      });
+    setRecommendedDataList(tmpRecommendedData);
+    setCompleteDataList(tmpCompleteData);
   };
 
-  const getRecommendedData = async () => {
-    const userRef = await db
-      .collection("User")
-      .doc("H4hqSRxo27OJy0800T9iWRjZOvu2")
-      .get();
-    recommendedDataList = userRef.get("tipsIDs");
-    console.log("Document data:", recommendedDataList);
-  };
-
-  const getCompleteData = async () => {
-    // await db
-    //   .collection("User")
-    //   // .where("done", "==", true)
-    //   .get()
-    //   .then((snapshots) => {
-    //     snapshots.docs.map((doc) => {
-    //       completeDataList.push({
-    //         src: doc.data().imageURL,
-    //         alt: doc.data().content,
-    //         text: doc.data().content,
-    //         statusids: doc.data().statusIDs,
-    //         tipsids: doc.data().tipsIDs,
-    //       });
-    //     });
-    //     console.log(completeDataList);
-    //   });
-  };
-
-  getStatusData();
-  getRecommendedData();
-  getCompleteData();
+  console.log(recommendedDataList);
+  console.log(completeDataList);
 
   return (
     <div>
