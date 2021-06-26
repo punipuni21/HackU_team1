@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar: React.FC = () => {
+const Navbar: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -81,4 +81,4 @@ const NavBar: React.FC = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
