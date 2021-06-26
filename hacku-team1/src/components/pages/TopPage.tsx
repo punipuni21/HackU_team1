@@ -8,7 +8,7 @@ import { db } from "../../firebase/firebase";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     textLabel: {
-      position: "absolute",
+      position: "static",
       left: "0.69%",
       right: "72.08%",
       top: "50%",
@@ -25,18 +25,18 @@ const useStyles = makeStyles((theme: Theme) =>
       /* identical to box height, or 127% */
       textDecorationLine: "underline",
       textAlign: "center",
-      // letterSpacing: "0.2px",
+      letterSpacing: "0.2px",
       /* Light / Black */
       color: "black",
       /* Inside Auto Layout */
-      // flex: "none",
-      // order: 0,
-      // flexGrow: 0,
-      // margin: "0",
-      // padding: "3% 0",
+      flex: "none",
+      order: 0,
+      flexGrow: 0,
+      margin: "0",
+      padding: "3% 0",
     },
     contentList: {
-      position: "absolute",
+      position: "static",
       width: "100%",
       top: "20px",
       left: "0px",
@@ -44,18 +44,22 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: "0px",
       background: "#FFFFFF",
     },
+    introduction: {
+      margin: "0px",
+    },
   })
 );
 
 const TopPage: React.FC = () => {
-  let contentDataList: any = [];
+  const [contentDataList, setContentDataList] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
     getData();
-  }, [])
+  }, []);
 
   const getData = async () => {
+    const tmpData: any = [];
     await db
       .collection("Tips")
       .where("done", "==", true)
@@ -63,16 +67,16 @@ const TopPage: React.FC = () => {
       .get()
       .then(async (snapshots) => {
         snapshots.docs.map((doc) => {
-          contentDataList.push({
+          tmpData.push({
             src: doc.data().imageURL,
             alt: doc.data().content,
             text: doc.data().content,
           });
         });
       });
+    setContentDataList(tmpData);
     console.log(await Promise.all(contentDataList));
   };
-
 
   const contents = [
     {
@@ -99,15 +103,19 @@ const TopPage: React.FC = () => {
 
   return (
     <div>
-      <Introduction></Introduction>
-      <TextLabel
-        classname="description"
-        text="みんなに消化されたコンテンツ"
-      ></TextLabel>
-      <ContentList
-        classname={classes.contentList}
-        contents={contentDataList}
-      ></ContentList>
+      <div className={classes.introduction}>
+        <Introduction></Introduction>
+        <TextLabel
+          classname="description"
+          text="みんなに消化されたコンテンツ"
+        ></TextLabel>
+      </div>
+      <div>
+        <ContentList
+          classname={classes.contentList}
+          contents={contentDataList}
+        ></ContentList>
+      </div>
     </div>
   );
 };
