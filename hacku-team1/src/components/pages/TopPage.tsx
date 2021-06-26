@@ -51,6 +51,10 @@ const TopPage: React.FC = () => {
   let contentDataList: any = [];
   const classes = useStyles();
 
+  useEffect(() => {
+    getData();
+  }, [])
+
   const getData = async () => {
     await db
       .collection("Tips")
@@ -69,7 +73,6 @@ const TopPage: React.FC = () => {
     console.log(await Promise.all(contentDataList));
   };
 
-  getData();
 
   const contents = [
     {
