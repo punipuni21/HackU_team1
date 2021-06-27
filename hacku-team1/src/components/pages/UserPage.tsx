@@ -11,7 +11,7 @@ type Props = {
 const UserPage: React.FC<Props> = ({ uid }) => {
   return (
     <div>
-      <User name="asdf" icon="/logo192.png" />
+      <User uid={uid} />
       <Status text="test_status" uid={uid} />
       <Recommended uid={uid} />
       <Complete uid={uid} />
