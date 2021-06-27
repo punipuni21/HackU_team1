@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import RecommendButton from "../molecules/RecommendButton";
+import { db } from "../../firebase/firebase";
 
 type Props = {
-  dataList: any[];
+  uid: string | null;
+};
+
+type Data = {
+  content: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -19,13 +24,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Recommended: React.FC<Props> = ({ dataList }) => {
+const Recommended: React.FC<Props> = ({ uid }) => {
   const classes = useStyles();
+  const [recommendedDataList, setRecommendedDataList] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const tmpData: any = [];
+    await db
+      .collection("Tips")
+      .where("userID", "==", uid)
+      .where("done", "==", false)
+      .get()
+      .then(async (snapshots) => {
+        snapshots.docs.map((doc) => {
+          tmpData.push({
+            content: doc.data().content,
+          });
+        });
+      });
+    setRecommendedDataList(tmpData);
+  };
+
   return (
     <div>
       <h2 className={classes.h2}>おすすめです。</h2>
       <div className={classes.buttons}>
-        {dataList.map((data) => (
+        {recommendedDataList.map((data: Data) => (
           <RecommendButton
             text={data.content}
             img={"./logo192.png"}
