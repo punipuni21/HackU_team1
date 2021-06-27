@@ -12,7 +12,6 @@ import {
 } from "@material-ui/core";
 
 import StatusItem from "../molecules/StatusItem";
-import { db } from "../../firebase/firebase";
 
 type Props = {
   title: string;
@@ -71,7 +70,6 @@ const EditDialog = (props: Props) => {
 
   const handleAddButton = (value: string) => {
     props.editContents([...props.contents, value]);  
-    // props.editContents([...props.contents, {content : value}]);    
     setInput("")
   }
 
@@ -107,8 +105,6 @@ const EditDialog = (props: Props) => {
             value={input}
             helperText={`${input.length}/${CHARACTER_LIMIT}`}
             onChange={(event) => setInput(event.target.value)}
-            // multiline
-            // rows={8}
             variant="outlined"
           />
           <IconButton

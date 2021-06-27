@@ -42,7 +42,6 @@ async function createStatusOnDB(content: string, uid: string | null) {
 }
 
 async function deleteStatusFromDB(content: string, uid: string | null) {
-  // const statusID: any;
   await db
     .collection("Status")
     .where("userID", "==", uid)
@@ -58,7 +57,6 @@ async function deleteStatusFromDB(content: string, uid: string | null) {
 const Status = (props: Props) => {
   const classes = useStyles();
   const [statusDataList, setStatusDataList] = useState<string[]>([]);
-  // const [statusDataList, setStatusDataList] = useState([{content: ""}]);
 
   useEffect(() => {
     getData();
@@ -92,9 +90,6 @@ const Status = (props: Props) => {
         const deletedItems = rowData.filter(item =>
           uniqueContents.indexOf(item) === -1
         );
-
-        // console.log(createdItems);
-        // console.log(deletedItems);
         
         // DBに格納
         createdItems.map((item) => {
@@ -104,8 +99,6 @@ const Status = (props: Props) => {
         deletedItems.map((item) => {
           deleteStatusFromDB(item, props.uid)
         })
-
-        // getData()
 
       });
 
@@ -127,7 +120,6 @@ const Status = (props: Props) => {
         });
       });
     setStatusDataList(rowData);
-    // console.log(await Promise.all(statusDataList));
   };
 
 
