@@ -13,7 +13,7 @@ const UserPage: React.FC<Props> = ({ uid }) => {
   return (
     <div>
       <User name="asdf" icon="/logo192.png" />
-      <Status text="test_status" />
+      <Status text="test_status" uid={uid}/>
       <Recommended text="test_recommended" />
       <Complete text="test_complete" />
       {/* <Button text="qwer" onClick={() => ("asd")} /> */}
