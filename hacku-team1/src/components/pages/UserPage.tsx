@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import User from "../organisms/User";
 import Status from "../organisms/Status";
 import Recommended from "../organisms/Recommended";
 import Complete from "../organisms/Complete";
-// import Button from '../atoms/Button'
 
 type Props = {
   uid: string | null;
@@ -12,11 +11,10 @@ type Props = {
 const UserPage: React.FC<Props> = ({ uid }) => {
   return (
     <div>
-      <User name="asdf" icon="/logo192.png" />
-      <Status text="test_status" uid={uid}/>
-      <Recommended text="test_recommended" />
-      <Complete text="test_complete" />
-      {/* <Button text="qwer" onClick={() => ("asd")} /> */}
+      <User uid={uid} />
+      <Status text="test_status" uid={uid} />
+      <Recommended uid={uid} />
+      <Complete uid={uid} />
     </div>
   );
 };

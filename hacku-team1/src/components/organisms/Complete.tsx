@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CompleteButton from "../molecules/CompleteButton";
+import { db } from "../../firebase/firebase";
 
-interface Props {
-  text: string;
-}
+type Props = {
+  uid: string | null;
+};
+
+type Data = {
+  content: string;
+  imageURL: string;
+  doneContent: string;
+};
 
 const useStyles = makeStyles((theme) => ({
   h2: {
@@ -19,17 +26,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Complete = (props: Props) => {
+const Complete: React.FC<Props> = ({ uid }) => {
   const classes = useStyles();
+  const [completeDataList, setCompleteDataList] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const tmpData: any = [];
+    await db
+      .collection("Tips")
+      .where("userID", "==", uid)
+      .where("done", "==", true)
+      .get()
+      .then(async (snapshots) => {
+        snapshots.docs.map((doc) => {
+          tmpData.push({
+            content: doc.data().content,
+            imageURL: doc.data().imageURL,
+            doneContent: doc.data().doneContent,
+          });
+        });
+      });
+    setCompleteDataList(tmpData);
+  };
+
   return (
     <div>
       <h2 className={classes.h2}>達成！！</h2>
       <div className={classes.buttons}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+        {completeDataList.map((data: Data) => (
           <CompleteButton
-            text={props.text + num}
-            img={"./logo192.png"}
-            msg={"達成したこと。" + num}
+            text={data.content}
+            img={data.imageURL}
+            msg={data.doneContent}
             // onClick={}
           />
         ))}

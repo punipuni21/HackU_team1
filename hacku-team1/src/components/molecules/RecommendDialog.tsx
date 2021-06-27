@@ -47,7 +47,9 @@ const RecommendDialog = (props: Props) => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
+        <DialogTitle id="form-dialog-title" className={classes.content}>
+          {props.title}
+        </DialogTitle>
         <DialogContent>
           <div className={classes.content}>
             <Image
