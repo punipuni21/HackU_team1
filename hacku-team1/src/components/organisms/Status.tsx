@@ -28,25 +28,102 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+async function createStatusOnDB(content: string, uid: string | null) {
+  try {
+        await db
+          .collection("Status")
+          .add({
+            content: content,
+            userID: uid
+          });
+  } catch (error) {
+      console.log("新たなStatuの作成に失敗 : content = " + content );
+  }
+}
+
+async function deleteStatusFromDB(content: string, uid: string | null) {
+  // const statusID: any;
+  await db
+    .collection("Status")
+    .where("userID", "==", uid)
+    .where("content", "==", content)
+    .get()
+    .then(async (snapshot) => {
+      snapshot.docs.map((doc) => {
+        db.collection("Status").doc(doc.id).delete()
+      })
+    })
+}
+
 const Status = (props: Props) => {
   const classes = useStyles();
-  const [statusDataList, setStatusDataList] = useState([{content: ""}]);
+  const [statusDataList, setStatusDataList] = useState<string[]>([]);
+  // const [statusDataList, setStatusDataList] = useState([{content: ""}]);
 
   useEffect(() => {
     getData();
   }, []);
 
-  const getData = async () => {
-    const rowData: any = [];
+  const updateDB = async () => {
+
+    // 追加されたリストから重複の削除
+    const uniqueContents = [...new Set(statusDataList)];
+
+    // 直前の要素をDBからもう一度取
+    const rowData: string[] = [];
     await db
       .collection("Status")
       .where("userID", "==", props.uid)
       .get()
       .then(async (snapshots) => {
         snapshots.docs.map((doc) => {
-          rowData.push({
-            content: doc.data().content,
-          });
+          rowData.push(
+            doc.data().content,
+          );
+        });
+
+        // 2つのリストの差分をとる
+          // 追加されるもの
+        const createdItems = uniqueContents.filter(item =>
+          rowData.indexOf(item) === -1
+        );
+
+          // 削除されるもの
+        const deletedItems = rowData.filter(item =>
+          uniqueContents.indexOf(item) === -1
+        );
+
+        // console.log(createdItems);
+        // console.log(deletedItems);
+        
+        // DBに格納
+        createdItems.map((item) => {
+          createStatusOnDB(item, props.uid)
+        })
+        // DBから削除
+        deletedItems.map((item) => {
+          deleteStatusFromDB(item, props.uid)
+        })
+
+        // getData()
+
+      });
+
+    
+  }
+
+  const getData = async () => {
+    const rowData: string[] = [];
+    await db
+      .collection("Status")
+      .where("userID", "==", props.uid)
+      .get()
+      .then(async (snapshots) => {
+        // eslint-disable-next-line array-callback-return
+        snapshots.docs.map((doc) => {
+          rowData.push(
+            doc.data().content,
+          );
         });
       });
     setStatusDataList(rowData);
@@ -62,11 +139,12 @@ const Status = (props: Props) => {
           style={classes.editButton} 
           contents={statusDataList} 
           editContents={setStatusDataList}
-          getPrevContents={getData}　/>
+          getPrevContents={getData}
+          updateDB={updateDB}　/>
       </div>
       <div className={classes.items}>
         {statusDataList.map((status) => (
-          <StatusItem text={status.content} isEditMode={false} index={0} handleDelete={null}/>
+          <StatusItem text={status} isEditMode={false} index={0} handleDelete={null}/>
         ))}
       </div>
     </div>

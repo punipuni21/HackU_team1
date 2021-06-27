@@ -10,15 +10,18 @@ import {
   TextField,
   IconButton
 } from "@material-ui/core";
+
 import StatusItem from "../molecules/StatusItem";
+import { db } from "../../firebase/firebase";
 
 type Props = {
   title: string;
-  contents: any[];
+  contents: string[];
   editContents : any;
   isOpen: boolean;
   doClose: VoidFunction;
   getPrevContents: VoidFunction;
+  updateDB: VoidFunction;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EditDialog = (props: Props) => {
+
+  const CHARACTER_LIMIT = 10;
+
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -49,12 +55,14 @@ const EditDialog = (props: Props) => {
     setOpen(props.isOpen);
   }, [props.isOpen]);
 
-  const handleClose = () => {
+  const handleCloseWithUpdate = () => {
+    props.updateDB();
+    setInput("");
     setOpen(false);
     props.doClose();
   };
 
-  const handleCancelClose = () => {
+  const handleCloseWithCancel = () => {
     props.getPrevContents();
     setInput("")
     setOpen(false);
@@ -62,7 +70,9 @@ const EditDialog = (props: Props) => {
   };
 
   const handleAddButton = (value: string) => {
-    props.editContents([...props.contents, {content : value}]);    
+    props.editContents([...props.contents, value]);  
+    // props.editContents([...props.contents, {content : value}]);    
+    setInput("")
   }
 
   const handleDeleteButton = (index: number) => {
@@ -73,13 +83,13 @@ const EditDialog = (props: Props) => {
     
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={handleCloseWithCancel}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
       <div className={classes.items}>
         {props.contents.map((status, index) => (
-          <StatusItem text={status.content} 
+          <StatusItem text={status} 
           isEditMode={true} 
           index={index} 
           handleDelete={handleDeleteButton}/>
@@ -91,7 +101,11 @@ const EditDialog = (props: Props) => {
             className={classes.text}
             id="outlined-multiline-static"
             label="10文字以内"
+            inputProps={{
+              maxlength: CHARACTER_LIMIT
+            }}
             value={input}
+            helperText={`${input.length}/${CHARACTER_LIMIT}`}
             onChange={(event) => setInput(event.target.value)}
             // multiline
             // rows={8}
@@ -106,10 +120,10 @@ const EditDialog = (props: Props) => {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleCloseWithUpdate} color="primary">
           更新
         </Button>
-        <Button onClick={handleCancelClose} color="primary">
+        <Button onClick={handleCloseWithCancel} color="primary">
           キャンセル
         </Button>
       </DialogActions>

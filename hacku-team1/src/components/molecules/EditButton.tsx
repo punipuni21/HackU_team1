@@ -8,9 +8,10 @@ import EditDialog from './EditDialog'
 
 interface Props {
     style: string;
-    contents: any[];
+    contents: string[];
     editContents: any;
     getPrevContents: VoidFunction;
+    updateDB: VoidFunction;
 }
 
 const EditButton: React.FC<Props> = (props) => {
@@ -37,6 +38,7 @@ const EditButton: React.FC<Props> = (props) => {
                 isOpen={open}
                 doClose={() => handleClose()}
                 getPrevContents={props.getPrevContents}
+                updateDB={props.updateDB}
             />
         </React.Fragment>
     )
