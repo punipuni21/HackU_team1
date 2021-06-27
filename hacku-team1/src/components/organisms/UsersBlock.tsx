@@ -3,36 +3,46 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import UserBlock from "../molecules/UserBlock";
 
-const useStyles = makeStyles({
-  divider: {
-    marginTop: "20px",
-    marginBottom: "20px",
-  },
-  h2: {
-    textAlign: "left",
-    marginLeft: "20px",
-  },
-});
+const useStyles = makeStyles({});
 
 type Props = {
-  Users: any[];
+  Users: {
+    [key: string]: {
+      user: { displayName: string; iconURL: string };
+      status: { useID: string; content: string }[];
+    };
+  };
 };
 
 const UsersBlock: React.FC<Props> = ({ Users }) => {
   const classes = useStyles();
 
+  const returnUserBlock = () => {
+    let elements: any = [];
+
+    Users &&
+      Object.keys(Users).forEach((value) => {
+        elements.push(
+          <UserBlock
+            name={Users[value].user.displayName}
+            icon={Users[value].user.iconURL}
+            tag1={
+              Users[value].status[0] ? Users[value].status[0].content : "null"
+            }
+            tag2={
+              Users[value].status[1] ? Users[value].status[1].content : "null"
+            }
+          />
+        );
+      });
+
+    return elements;
+  };
   return (
     <div>
       <Grid item xs={12}>
-        <Grid container justify="center" >
-          {Users.map((usr) => (
-            <UserBlock
-              name={usr.username}
-              icon={usr.setIcon}
-              tag1={usr.setTag1}
-              tag2={usr.setTag2}
-            />
-          ))}
+        <Grid container justify="center">
+          {returnUserBlock()}
         </Grid>
       </Grid>
     </div>
