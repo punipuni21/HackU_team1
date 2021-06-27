@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Search from "../organisms/Search";
 import UsersBlock from "../organisms/UsersBlock";
+import { db } from "../../firebase/firebase";
 
 const useStyles = makeStyles({
   h4: {
@@ -16,52 +17,85 @@ type Props = {
 };
 
 const OtherUsersPage: React.FC<Props> = ({ uid }) => {
-  const Users = [
-    {
-      username: "Ikeda",
-      setIcon: "ic",
-      setTag1: "Art",
-      setTag2: "Cook",
-    },
-    {
-      username: "Shimazu",
-      setIcon:
-        "https://ca.slack-edge.com/T01PND95J8H-U01PDAP1F29-5cb0d1593ce3-512",
-      setTag1: "Illust",
-      setTag2: "Love",
-    },
-    {
-      username: "Hase",
-      setIcon: "hase",
-      setTag1: "Soccer",
-      setTag2: "Sing",
-    },
-  ];
-
   const classes = useStyles();
   const [text, setText] = useState("");
-  const [users, setUsers] = useState(Users);
+
+  const [usersOrig, setUsersOrig] =
+    useState<{
+      [key: string]: {
+        user: { displayName: string; iconURL: string };
+        status: { useID: string; content: string }[];
+      };
+    }>();
+
+  const [users, setUsers] =
+    useState<{
+      [key: string]: {
+        user: { displayName: string; iconURL: string };
+        status: { useID: string; content: string }[];
+      };
+    }>();
+
+  // 初期マウント時に発火する
+  // Firestoreからデータを取得
+  useEffect(() => {
+    GetAllUserData();
+  }, []);
+
+  // 全てのユーザの情報を取得、uidをハッシュ値に変数を格納する。
+  // 全てのStatusを取得、status.userIDをハッシュ値に変数のstatusを更新する
+  const GetAllUserData = () => {
+    let usersInfo: any = [];
+    db.collection("User")
+      .get()
+      .then((response) => {
+        // then()の中は逐次処理となるので上から実行していく。
+        response.forEach((userDocument) => {
+          usersInfo[userDocument.id] = {
+            user: userDocument.data(),
+            status: [],
+          };
+        });
+
+        db.collection("Status")
+          .get()
+          .then((response) => {
+            response.forEach((statusDocument) => {
+              let status = statusDocument.data();
+
+              usersInfo[status.userID].status.push(status);
+            });
+            setUsersOrig(usersInfo);
+            setUsers(usersInfo);
+          });
+      });
+  };
+
   const inputValue = (e: any) => {
     setText(e.target.value);
   };
   const filterList = () => {
-    let Usercopy = [];
-    for (let user of Users) {
-      if (user.username.toLowerCase().indexOf(text.trim().toLowerCase()) > -1) {
-        Usercopy.push(user);
-      }
-      setUsers(Usercopy);
-    }
+    let Usercopy: { [key: string]: any } = {};
+    usersOrig &&
+      Object.keys(usersOrig).forEach((value) => {
+        if (
+          usersOrig[value].user.displayName
+            .toLowerCase()
+            .indexOf(text.trim().toLowerCase()) > -1
+        ) {
+          Usercopy[value] = usersOrig[value];
+        }
+      });
+    setUsers(Usercopy);
   };
 
-  const isLoggedIn = false;
   return (
     <div>
       <Search text={text} onChange={inputValue} onClick={filterList} />
-      {users.length == 0 ? (
-        <h3 className={classes.h4}>該当のおすすめ待ちびとはいませんでした</h3>
+      {users && Object.keys(users).length !== 0 ? (
+        users && <UsersBlock Users={users} />
       ) : (
-        <UsersBlock Users={users} />
+        <h3 className={classes.h4}>該当のおすすめ待ちびとはいませんでした</h3>
       )}
     </div>
   );
