@@ -69,7 +69,7 @@ const EditDialog = (props: Props) => {
   };
 
   const handleAddButton = (value: string) => {
-    props.editContents([...props.contents, value]);  
+    props.editContents([...props.contents, value]);
     setInput("")
   }
 

@@ -100,6 +100,8 @@ const Status = (props: Props) => {
           deleteStatusFromDB(item, props.uid)
         })
 
+        setStatusDataList(uniqueContents)
+
       });
 
     
