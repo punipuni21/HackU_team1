@@ -4,7 +4,7 @@ import RecommendButton from "../molecules/RecommendButton";
 import { db } from "../../firebase/firebase";
 
 type Props = {
-  uid: string | null;
+  uid: any;
 };
 
 type Data = {
