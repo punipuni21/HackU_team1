@@ -4,7 +4,7 @@ import CompleteButton from "../molecules/CompleteButton";
 import { db } from "../../firebase/firebase";
 
 type Props = {
-  uid: string | null;
+  uid: any;
 };
 
 type Data = {

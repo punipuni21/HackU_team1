@@ -9,6 +9,7 @@ import SignOutButton from "../molecules/SignOutButton";
 import SectionBar from "../molecules/sectionBar";
 
 import firebase from "../../firebase/firebase";
+import { db } from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,10 +42,31 @@ const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
     useState<firebase.firestore.DocumentData | null>(null);
 
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged((user) => {
+    return firebase.auth().onAuthStateChanged(async (user) => {
       setUser(user);
       if (user) {
         handleLogin(user.uid);
+        var userDoc = await db
+                        .collection('User')
+                        .doc(user.uid)
+                        .get();
+        if (!userDoc.exists) {
+          // Firestore にユーザー用のドキュメントが作られていなければ作る
+          await userDoc.ref.set({
+          displayName: user.displayName,
+          iconURL: user.photoURL,
+          });
+
+          // 例として、statusに「このアプリの初心者」
+          await db.collection("Status").add({content: "このアプリの初心者", userID: user.uid});
+          
+        } else {
+          // 存在する場合はディスプレイネームとアイコンを更新
+          await userDoc.ref.update({
+            displayName: user.displayName,
+            iconURL: user.photoURL,
+          });
+        }
       } else {
         handleLogin(null);
       }
