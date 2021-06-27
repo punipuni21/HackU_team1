@@ -50,7 +50,7 @@ const UserPage: React.FC<Props> = ({ uid }) => {
   return (
     <div>
       <User name="asdf" icon="/logo192.png" />
-      <Status text="test_status" />
+      <Status text="test_status" uid={uid} />
       <Recommended dataList={recommendedDataList} />
       <Complete dataList={completeDataList} />
     </div>
