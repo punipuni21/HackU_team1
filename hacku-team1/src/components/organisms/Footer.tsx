@@ -4,6 +4,7 @@ import { Typography, makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
   footer: {
     backgroundColor: "gray",
+    // footerを上に上がらないようにする
     // width: "100%",
     // position: "absolute",
     // bottom: 0,
