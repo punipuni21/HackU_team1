@@ -24,7 +24,7 @@ const UsersBlock: React.FC<Props> = ({ Users }) => {
     Users &&
       Object.keys(Users).forEach((value) => {
         elements.push(
-          <Grid item>
+          <Grid item key={Users[value].user.displayName + value}>
             <UserBlock
               name={Users[value].user.displayName}
               icon={Users[value].user.iconURL}
