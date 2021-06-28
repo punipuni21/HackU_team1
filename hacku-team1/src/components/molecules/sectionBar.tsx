@@ -8,6 +8,7 @@ import UserIcon from "../atoms/UserIcon";
 import GroupIcon from "../atoms/GroupIcon";
 import AppIcon from "../atoms/AppIcon";
 import AppName from "./appName";
+import { Typography } from "@material-ui/core";
 
 type Props = {
   isSignIn: boolean;
@@ -18,7 +19,7 @@ function a11yProps(index: any) {
     id: `section-tab-${index}`,
     "aria-controls": `section-tabpanel-${index}`,
   };
-};
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -62,10 +63,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const SectionBar: React.FC<Props> = (props) => {
   const currentTab = () => {
-    let path = window.location.pathname
-    if (path === "/") return 0
-    else if (path === "/mypage") return 1
-    else if (path === "/otherspage") return 2
+    let path = window.location.pathname;
+    if (path === "/") return 0;
+    else if (path === "/mypage") return 1;
+    else if (path === "/otherspage") return 2;
   };
 
   const classes = useStyles();
@@ -88,93 +89,120 @@ const SectionBar: React.FC<Props> = (props) => {
 
   return (
     <>
-    <div className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="section tabs"
-        classes={{
-          indicator: classes.indicator
-        }}
-      >
-        <Tab
-          style={{width: "220px", textTransform: "none"}}
-          label={
-            <div style={{display: "flex"}}>
-              <AppIcon size={40} color="white" style={{marginRight: "8px"}} />
-              <AppName className={classes.title} />
-            </div>
-          }
-          component={Link}
-          to="/"
-          {...a11yProps(0)}
-        />
-
-        <div className={classes.tabPC} onClick={() => handleClick(1)} style={props.isSignIn ? {} : {display: "none"}} >
-          <Tab
-            label={
-              <div style={{display: "flex"}}>
-                <UserIcon size={24} color="white" style={{marginRight: "2px"}} />
-                わたし
-              </div>
-            }
-            component={Link}
-            to="/mypage"
-            {...a11yProps(1)}
-          />
-        </div>
-        <div className={classes.tabPC} onClick={() => handleClick(2)} style={props.isSignIn ? {} : {display: "none"}}>
-          <Tab
-            label={
-              <div style={{display: "flex"}}>
-                <GroupIcon size={24} color="white" style={{marginRight: "2px"}} />
-                だれか
-              </div>
-            }
-            component={Link}
-            to="/otherspage"
-            {...a11yProps(2)}
-          />
-        </div>
-      </Tabs>
-
-      <div className={classes.tabsMobile} style={props.isSignIn ? {} : {display: "none"}}>
+      <div className={classes.root}>
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="mobile tabs"
-          variant="fullWidth"
+          aria-label="section tabs"
           classes={{
-            indicator: classes.indicator
+            indicator: classes.indicator,
           }}
-          style={{height: "48px"}}
         >
-          <Tab style={{display: "none"}} ></Tab>
-          <div className={classes.tabMobile} onClick={() => handleClick(1)}>
+          <Tab
+            style={{ width: "220px", textTransform: "none" }}
+            label={
+              <div style={{ display: "flex" }}>
+                <AppIcon
+                  size={40}
+                  color="white"
+                  style={{ marginRight: "8px" }}
+                />
+                <AppName className={classes.title} />
+              </div>
+            }
+            component={Link}
+            to="/"
+            {...a11yProps(0)}
+          />
+
+          <div
+            className={classes.tabPC}
+            onClick={() => handleClick(1)}
+            style={props.isSignIn ? {} : { display: "none" }}
+          >
             <Tab
-              icon={<UserIcon size={18} color="white" style={{margin: 0}} />}
-              label={<span className={classes.tabMobileLabel}>わたし</span>}
+              label={
+                <div style={{ display: "flex", paddingTop: "0.8rem" }}>
+                  <UserIcon
+                    size={28}
+                    color="white"
+                    style={{ marginRight: "0.5rem" }}
+                  />
+                  <Typography variant="h6">わたし</Typography>
+                </div>
+              }
               component={Link}
               to="/mypage"
               {...a11yProps(1)}
-              style={{width: "100%"}}
             />
           </div>
-          <div className={classes.tabMobile} onClick={() => handleClick(2)}>
+          <div
+            className={classes.tabPC}
+            onClick={() => handleClick(2)}
+            style={props.isSignIn ? {} : { display: "none" }}
+          >
             <Tab
-              icon={<GroupIcon size={18} color="white" style={{margin: 0}} />}
-              label={<span className={classes.tabMobileLabel}>だれか</span>}
+              label={
+                <div style={{ display: "flex", paddingTop: "0.8rem" }}>
+                  <GroupIcon
+                    size={30}
+                    color="white"
+                    style={{ marginRight: "0.5rem" }}
+                  />
+                  <Typography variant="h6">だれか</Typography>
+                </div>
+              }
               component={Link}
               to="/otherspage"
               {...a11yProps(2)}
-              style={{width: "100%"}}
             />
           </div>
         </Tabs>
+
+        <div
+          className={classes.tabsMobile}
+          style={props.isSignIn ? {} : { display: "none" }}
+        >
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="mobile tabs"
+            variant="fullWidth"
+            classes={{
+              indicator: classes.indicator,
+            }}
+            style={{ height: "48px" }}
+          >
+            <Tab style={{ display: "none" }}></Tab>
+            <div className={classes.tabMobile} onClick={() => handleClick(1)}>
+              <Tab
+                icon={
+                  <UserIcon size={18} color="white" style={{ margin: 0 }} />
+                }
+                label={<span className={classes.tabMobileLabel}>わたし</span>}
+                component={Link}
+                to="/mypage"
+                {...a11yProps(1)}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div className={classes.tabMobile} onClick={() => handleClick(2)}>
+              <Tab
+                icon={
+                  <GroupIcon size={18} color="white" style={{ margin: 0 }} />
+                }
+                label={<span className={classes.tabMobileLabel}>だれか</span>}
+                component={Link}
+                to="/otherspage"
+                {...a11yProps(2)}
+                style={{ width: "100%" }}
+              />
+            </div>
+          </Tabs>
+        </div>
       </div>
-    </div>
     </>
   );
 };
 
-export default SectionBar
+export default SectionBar;
