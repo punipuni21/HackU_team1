@@ -9,10 +9,11 @@ import {
   TextField,
 } from "@material-ui/core";
 import Image from "../atoms/Image";
+import { db } from "../../firebase/firebase";
 
 type Props = {
+  docid: string;
   title: string;
-  img: string;
   isOpen: boolean;
   doClose: () => void;
 };
@@ -30,12 +31,31 @@ const RecommendDialog = (props: Props) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     setOpen(props.isOpen);
   }, [props.isOpen]);
 
-  const handleClose = () => {
+  const uploadData = async () => {
+    const userRef = db.collection("Tips").doc(props.docid);
+    await userRef.update({
+      done: true,
+      doneContent: input,
+      imageURL: "aa",
+    });
+  };
+
+  const handleCloseWithUpload = () => {
+    uploadData();
+    window.location.reload();
+    setInput("");
+    setOpen(false);
+    props.doClose();
+  };
+
+  const handleCloseWithCancel = () => {
+    setInput("");
     setOpen(false);
     props.doClose();
   };
@@ -44,7 +64,7 @@ const RecommendDialog = (props: Props) => {
     <>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseWithCancel}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title" className={classes.content}>
@@ -53,7 +73,7 @@ const RecommendDialog = (props: Props) => {
         <DialogContent>
           <div className={classes.content}>
             <Image
-              src={props.img}
+              src={"./logo192.png"}
               alt={props.title}
               classname={classes.content}
             />
@@ -65,15 +85,17 @@ const RecommendDialog = (props: Props) => {
               label="感想など"
               multiline
               rows={8}
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
               variant="outlined"
             />
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCloseWithUpload} color="primary">
             投稿
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCloseWithCancel} color="primary">
             キャンセル
           </Button>
         </DialogActions>
