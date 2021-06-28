@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import Image from "../atoms/Image";
 import { db } from "../../firebase/firebase";
+import Upload from "../molecules/Upload";
 
 type Props = {
   docid: string;
@@ -32,6 +33,7 @@ const RecommendDialog = (props: Props) => {
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [imageURL, setImageURL] = useState("");
 
   useEffect(() => {
     setOpen(props.isOpen);
@@ -42,7 +44,7 @@ const RecommendDialog = (props: Props) => {
     await userRef.update({
       done: true,
       doneContent: input,
-      imageURL: "aa",
+      imageURL: imageURL,
     });
   };
 
@@ -72,11 +74,7 @@ const RecommendDialog = (props: Props) => {
         </DialogTitle>
         <DialogContent>
           <div className={classes.content}>
-            <Image
-              src={"./logo192.png"}
-              alt={props.title}
-              classname={classes.content}
-            />
+            <Upload setImageURL={setImageURL} />
           </div>
           <form>
             <TextField
