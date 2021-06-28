@@ -74,24 +74,22 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <Router>
-          <NavigationBar handleLogin={handleLogin} />
-          <div className={classes.toolbar} />
-          <Switch>
-            <Route exact path="/" render={() => <TopPage uid={uid} />} />
-            <Route path="/mypage" render={() => <UserPage uid={uid} />} />
-            <Route
-              path="/otherspage"
-              render={() => <OtherUsersPage uid={uid} />}
-            />
-          </Switch>
-          <div className={classes.footbar} />
-          <div className={classes.footer}>
-            <Footer />
-          </div>
-        </Router>
-      </header>
+      <Router>
+        <NavigationBar handleLogin={handleLogin} />
+        <div className={classes.toolbar} />
+        <Switch>
+          <Route exact path="/" render={() => <TopPage uid={uid} />} />
+          <Route path="/mypage" render={() => <UserPage uid={uid} />} />
+          <Route
+            path="/otherspage"
+            render={() => <OtherUsersPage uid={uid} />}
+          />
+        </Switch>
+      </Router>
+      <div className={classes.footer}>
+        <Footer />
+      </div>
+      <div className={classes.footbar} />
     </div>
   );
 };
