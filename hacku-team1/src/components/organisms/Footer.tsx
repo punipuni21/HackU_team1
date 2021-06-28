@@ -1,30 +1,28 @@
 import React from "react";
-import { Typography, makeStyles } from "@material-ui/core";
+import { Box, Toolbar, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { AppBar } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  footer: {
-    backgroundColor: "gray",
-    // footerを上に上がらないようにする
-    // width: "100%",
-    // position: "absolute",
-    // bottom: 0,
-    marginTop: "4rem",
-    height: "2rem",
-    color: "#ebf6f7",
-  },
-  typography: {
-    paddingTop: "0.8rem",
-  },
-});
+const useStyles = makeStyles((theme) => ({
+  appBar: { bottom: 0, top: "auto" },
+  toolbar: { justifyContent: "center", minHeight: "48px" },
+}));
 
 const Footer: React.FC = () => {
   const classes = useStyles();
   return (
-    <footer className={classes.footer}>
-      <Typography variant="body2" align="center" className={classes.typography}>
-        Copyright © 2021 コノヘンデヒトヤスミ All Rights Reserved.
-      </Typography>
-    </footer>
+    <AppBar
+      color="primary"
+      className={classes.appBar}
+      component="footer"
+      position="absolute"
+    >
+      <Toolbar className={classes.toolbar}>
+        <Typography variant="body2" align="center">
+          Copyright © 2021 コノヘンデヒトヤスミ All Rights Reserved.
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 };
 

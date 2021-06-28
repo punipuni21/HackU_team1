@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme: Theme) =>
         marginTop: "48px",
       },
     },
+    fixedfooter: {
+      minHeight: "100vh",
+      position: "relative",
+      paddingBottom: "60px",
+      boxSizing: "border-box",
+    },
     footer: {
       [theme.breakpoints.down("sm")]: {
         display: "none",
@@ -74,22 +80,24 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Router>
-        <NavigationBar handleLogin={handleLogin} />
-        <div className={classes.toolbar} />
-        <Switch>
-          <Route exact path="/" render={() => <TopPage uid={uid} />} />
-          <Route path="/mypage" render={() => <UserPage uid={uid} />} />
-          <Route
-            path="/otherspage"
-            render={() => <OtherUsersPage uid={uid} />}
-          />
-        </Switch>
-      </Router>
-      <div className={classes.footer}>
-        <Footer />
+      <div className={classes.fixedfooter}>
+        <Router>
+          <NavigationBar handleLogin={handleLogin} />
+          <div className={classes.toolbar} />
+          <Switch>
+            <Route exact path="/" render={() => <TopPage uid={uid} />} />
+            <Route path="/mypage" render={() => <UserPage uid={uid} />} />
+            <Route
+              path="/otherspage"
+              render={() => <OtherUsersPage uid={uid} />}
+            />
+          </Switch>
+        </Router>
+        <div className={classes.footer}>
+          <Footer />
+        </div>
+        <div className={classes.footbar} />
       </div>
-      <div className={classes.footbar} />
     </div>
   );
 };
