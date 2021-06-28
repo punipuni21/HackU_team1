@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+
 import { useHistory } from "react-router-dom";
 
-import SignInButton from "../molecules/SignInButton";
-import SignOutButton from "../molecules/SignOutButton";
-import SectionBar from "../molecules/sectionBar";
+import SectionBar from "../molecules/SectionBar";
 
 import firebase from "../../firebase/firebase";
 import { db } from "../../firebase/firebase";
-import { Avatar } from "@material-ui/core";
-import { Box } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Menu,
+  MenuItem,
+  AppBar,
+  Toolbar,
+  Box,
+} from "@material-ui/core";
+import MeetingRoomOutlinedIcon from "@material-ui/icons/MeetingRoomOutlined";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   appBar: {
-    backgroundColor: "gray",
+    backgroundColor: "primary",
   },
   toolBar: {
     minHeight: 24,
@@ -27,9 +32,13 @@ const useStyles = makeStyles((theme) => ({
   sectionBar: {
     flexGrow: 1,
   },
-  signInOutButton: {
+  loginButton: {
     marginRight: theme.spacing(2),
     marginLeft: "auto",
+    color: "white",
+    borderColor: "white",
+    backgroundColor: "inherit",
+    textTransform: "none",
   },
 }));
 
@@ -44,6 +53,7 @@ const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
     useState<firebase.firestore.DocumentData | null>(null);
 
   const [usericon, setUserIcon] = useState<string>("");
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (user) => {
@@ -86,6 +96,14 @@ const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
     history.push("/");
   };
 
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
@@ -96,17 +114,36 @@ const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
 
           {user ? (
             <>
-              <Box m={1}>
+              <Button
+                onClick={handleClick}
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+              >
                 <Avatar src={usericon} />
-              </Box>
-              <div className={classes.signInOutButton}>
-                <SignOutButton signOut={signOut} />
-              </div>
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={signOut}>
+                  <Box mr={1} mt={1}>
+                    <MeetingRoomOutlinedIcon />
+                  </Box>
+                  Logout
+                </MenuItem>
+              </Menu>
             </>
           ) : (
-            <div className={classes.signInOutButton}>
-              <SignInButton signIn={signIn} />
-            </div>
+            <Button
+              className={classes.loginButton}
+              variant="outlined"
+              onClick={signIn}
+            >
+              Sign In
+            </Button>
           )}
         </Toolbar>
       </AppBar>
