@@ -5,9 +5,9 @@ const useStyles = makeStyles({
   footer: {
     backgroundColor: "gray",
     // footerを上に上がらないようにする
-    // width: "100%",
-    // position: "absolute",
-    // bottom: 0,
+    width: "100%",
+    position: "absolute",
+    bottom: 0,
     marginTop: "4rem",
     height: "2rem",
     color: "#ebf6f7",

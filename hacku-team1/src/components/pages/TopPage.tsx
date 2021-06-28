@@ -36,17 +36,20 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "3% 0",
     },
     contentList: {
-      position: "static",
       width: "100%",
-      top: "20px",
-      left: "0px",
-      right: "0px",
-      bottom: "0px",
+      height: "auto",
+      // top: "20px",
+      // left: "0px",
+      // right: "0px",
+      // bottom: "0px",
       background: "#FFFFFF",
     },
     introduction: {
       margin: "0px",
     },
+    introContent: {
+      height: "90vh",
+    }
   })
 );
 
@@ -83,7 +86,7 @@ const TopPage: React.FC<Props> = ({ uid }) => {
   };
 
   return (
-    <div>
+    <div className={classes.introContent}>
       <div className={classes.introduction}>
         <Introduction></Introduction>
         <TextLabel
@@ -91,12 +94,10 @@ const TopPage: React.FC<Props> = ({ uid }) => {
           text="みんなに消化されたコンテンツ"
         ></TextLabel>
       </div>
-      <div>
         <ContentList
           classname={classes.contentList}
           contents={contentDataList}
         ></ContentList>
-      </div>
     </div>
   );
 };
