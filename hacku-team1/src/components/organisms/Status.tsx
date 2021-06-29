@@ -123,13 +123,15 @@ const Status = (props: Props) => {
     <div>
       <div style={{ display: "flex" }}>
         <h2 className={classes.h2}>何の初心者？</h2>
-        <EditButton
-          style={classes.editButton}
-          contents={statusDataList}
-          editContents={setStatusDataList}
-          getPrevContents={getData}
-          updateDB={updateDB}
-        />
+        {props.myUid === props.otherUid && (
+          <EditButton
+            style={classes.editButton}
+            contents={statusDataList}
+            editContents={setStatusDataList}
+            getPrevContents={getData}
+            updateDB={updateDB}
+          />
+        )}
       </div>
       <div className={classes.items}>
         {statusDataList.map((status) => (
