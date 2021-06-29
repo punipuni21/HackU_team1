@@ -11,6 +11,8 @@ import UserPage from "./components/pages/UserPage";
 
 import OtherUsersPage from "./components/pages/OtherUsersPage";
 
+import { Redirect } from "react-router";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     toolbar: theme.mixins.toolbar,
@@ -106,7 +108,14 @@ const App: React.FC = () => {
             />
             <Route
               path="/otheruserpage"
-              render={() => <UserPage myUid={uid} otherUid={otherUid} />}
+              // render={() => <UserPage myUid={uid} otherUid={otherUid} />}
+              render={() =>
+                uid === otherUid ? (
+                  <Redirect to="/mypage" />
+                ) : (
+                  <UserPage myUid={uid} otherUid={otherUid} />
+                )
+              }
             />
           </Switch>
         </Router>
