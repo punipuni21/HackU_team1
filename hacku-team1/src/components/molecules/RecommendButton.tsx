@@ -40,7 +40,7 @@ const RecommendButton = (props: Props) => {
   const classes = useStyles();
 
   const [goodNum, setGoodNum] = useState(props.recommenderIDs.length)
-  const [isGoodInit, setIsGoodInit] = useState(props.recommenderIDs.indexOf(props.myUid) !== -1)
+  const [isGood, setIsGood] = useState(props.recommenderIDs.indexOf(props.myUid) !== -1)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -58,7 +58,7 @@ const RecommendButton = (props: Props) => {
         onClick={handleOpen}
         endIcon={
           <div className={classes.goodIcon}>
-            <FavoriteIcon fontSize="small" />
+            <FavoriteIcon fontSize="small" color={ !isGood ? ("secondary") : ("primary")}/>
             <Typography className={classes.goodNumFont}>
               {goodNum}
             </Typography>
@@ -78,8 +78,8 @@ const RecommendButton = (props: Props) => {
         refURL={props.refURL}
         isOpen={open}
         isMyPage={props.isMyPage}
-        isGoodInit={isGoodInit}
-        setIsGoodInit={setIsGoodInit}
+        isGoodInit={isGood}
+        setIsGoodInit={setIsGood}
         goodNum={goodNum}
         setGoodNum={setGoodNum}
         doClose={() => handleClose()}
