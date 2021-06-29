@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { Box } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,14 +35,26 @@ type Props = {
   icon: string;
   tag1: string;
   tag2: string;
+  userid: string;
+  setOtherUid: any;
 };
 
-const UserBlock: React.FC<Props> = ({ name, icon, tag1, tag2 }) => {
+const UserBlock: React.FC<Props> = ({
+  name,
+  icon,
+  tag1,
+  tag2,
+  userid,
+  setOtherUid,
+}) => {
   const classes = useStyles();
+
   return (
     <Button
-      onClick={() => alert("ユーザを押した")}
+      onClick={() => setOtherUid(userid)}
       className={classes.overrall}
+      component={Link}
+      to="/otheruserpage"
     >
       <Container maxWidth="sm">
         <Avatar alt={name} src={icon} className={classes.avatar} />

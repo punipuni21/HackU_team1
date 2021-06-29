@@ -71,11 +71,15 @@ const App: React.FC = () => {
   const classes = useStyles();
 
   const [uid, setUid] = useLocalStorage("uid", null);
+  const [otherUid, setOtherUid] = useState("");
 
   const handleLogin = (uid: string | null) => {
     // console.log(uid);
     setUid(uid);
   };
+
+  console.log(uid);
+  console.log(otherUid);
 
   return (
     <div className="App">
@@ -88,7 +92,13 @@ const App: React.FC = () => {
             <Route path="/mypage" render={() => <UserPage uid={uid} />} />
             <Route
               path="/otherspage"
-              render={() => <OtherUsersPage uid={uid} />}
+              render={() => (
+                <OtherUsersPage uid={uid} setOtherUid={setOtherUid} />
+              )}
+            />
+            <Route
+              path="/otheruserpage"
+              render={() => <UserPage uid={otherUid} />}
             />
           </Switch>
         </Router>

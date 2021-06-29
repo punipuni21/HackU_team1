@@ -10,12 +10,14 @@ type Props = {
   Users: {
     [key: string]: {
       user: { displayName: string; iconURL: string };
+      userid: string;
       status: { useID: string; content: string }[];
     };
   };
+  setOtherUid: any;
 };
 
-const UsersBlock: React.FC<Props> = ({ Users }) => {
+const UsersBlock: React.FC<Props> = ({ Users, setOtherUid }) => {
   const classes = useStyles();
 
   const returnUserBlock = () => {
@@ -34,6 +36,8 @@ const UsersBlock: React.FC<Props> = ({ Users }) => {
               tag2={
                 Users[value].status[1] ? Users[value].status[1].content : "null"
               }
+              userid={Users[value].userid}
+              setOtherUid={setOtherUid}
             />
           </Grid>
         );

@@ -14,27 +14,28 @@ const useStyles = makeStyles({
 
 type Props = {
   uid: string | null;
+  setOtherUid: any;
 };
 
-const OtherUsersPage: React.FC<Props> = ({ uid }) => {
+const OtherUsersPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   const classes = useStyles();
   const [text, setText] = useState("");
 
-  const [usersOrig, setUsersOrig] =
-    useState<{
-      [key: string]: {
-        user: { displayName: string; iconURL: string };
-        status: { useID: string; content: string }[];
-      };
-    }>();
+  const [usersOrig, setUsersOrig] = useState<{
+    [key: string]: {
+      user: { displayName: string; iconURL: string };
+      userid: string;
+      status: { useID: string; content: string }[];
+    };
+  }>();
 
-  const [users, setUsers] =
-    useState<{
-      [key: string]: {
-        user: { displayName: string; iconURL: string };
-        status: { useID: string; content: string }[];
-      };
-    }>();
+  const [users, setUsers] = useState<{
+    [key: string]: {
+      user: { displayName: string; iconURL: string };
+      userid: string;
+      status: { useID: string; content: string }[];
+    };
+  }>();
 
   // 初期マウント時に発火する
   // Firestoreからデータを取得
@@ -53,6 +54,7 @@ const OtherUsersPage: React.FC<Props> = ({ uid }) => {
         response.forEach((userDocument) => {
           usersInfo[userDocument.id] = {
             user: userDocument.data(),
+            userid: userDocument.id,
             status: [],
           };
         });
@@ -93,7 +95,7 @@ const OtherUsersPage: React.FC<Props> = ({ uid }) => {
     <div>
       <Search text={text} onChange={inputValue} onClick={filterList} />
       {users && Object.keys(users).length !== 0 ? (
-        users && <UsersBlock Users={users} />
+        users && <UsersBlock Users={users} setOtherUid={setOtherUid} />
       ) : (
         <h3 className={classes.h4}>該当のおすすめ待ちびとはいませんでした</h3>
       )}
