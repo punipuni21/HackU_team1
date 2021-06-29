@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     dropzone: {
       width: "100%",
-      height: 200,
+      height: "200%",
       boxSizing: "border-box",
       borderWidth: 2,
       borderColor: "#666666",
@@ -48,11 +48,11 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: "2%",
     },
     thumbsContainer: {
-      marginTop: 16,
+      marginTop: 8,
     },
     gridList: {
       width: "100%",
-      height: 450,
+      // height: 450,
       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
       transform: "translateZ(0)",
     },
@@ -94,11 +94,6 @@ const maxFileSize = 1048576;
 
 export default function Upload(props: Props) {
 
-  // State
-  // const [files, setFiles] = useState<MyFile[]>([]);
-  // const [uploading, setUploading] = useState(false);
-  // const [progress, setProgress] = useState(0);
-
   const classes = useStyles(props);
 
   /*
@@ -125,78 +120,6 @@ export default function Upload(props: Props) {
     minSize: 0,
     maxSize: maxFileSize,
   });
-
-  // const onUpload = async () => {
-  //   console.log("onUpload start");
-
-  //   // ローディングをOn。progressを初期化
-  //   setUploading(true);
-  //   setProgress(0);
-
-  //   function uploadImageAsPromise(file: File) {
-  //     console.log("uploadImageAsPromise start");
-
-  //     // アップロード先のファイルパスの作成
-  //     const file_name = file.name;
-  //     const storageRef = firebaseApp
-  //       .storage()
-  //       .ref()
-  //       .child("images/" + file_name);
-
-  //     return new Promise(function (resolve, reject) {
-  //       //Upload file
-  //       var task = storageRef.put(file);
-
-  //       //Update progress bar
-  //       task.on(
-  //         firebase.storage.TaskEvent.STATE_CHANGED,
-  //         function progress(snapshot) {
-  //           var percent =
-  //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //           console.log(percent + "% done");
-  //         },
-  //         function error(err) {
-  //           // 失敗時
-  //           console.log("upload error");
-  //           reject(err);
-  //         },
-  //         function complete() {
-  //           // 成功時
-  //           console.log("upload complete.");
-  //           task.then(function (snapshot: firebase.storage.UploadTaskSnapshot) {
-  //             resolve(snapshot.ref.getDownloadURL());
-  //           });
-  //         }
-  //       );
-  //     })
-  //       .then(function (downloadURL) {
-  //         console.log("Finished uploading file: " + file_name);
-
-  //         // progressを更新する
-  //         setProgress((oldProgress) => oldProgress + 1);
-  //         return downloadURL;
-  //       })
-  //       .catch(function () {
-  //         console.log("Error:uploadImageAsPromise");
-  //       });
-  //   }
-
-  //   // 複数のファイルアップロードをPromise.allで並列に実行する
-  //   const file = files[0]
-  //   // const result = (new Promise(uploadImageAsPromise(file)));
-  //   const result = uploadImageAsPromise(file)
-  //   Promise.all( [ result ] ).then( function ( imageURL ) {
-  //     console.log("Upload result");
-  //     console.log(imageURL);
-  //     props.setImageURL(imageURL);
-
-  //     // ローディングを終了し、リストを空に
-  //     setUploading(false);
-  //     setProgress(0);
-  //     setFiles([]);
-
-  //   } );
-  // };
 
   // アップロード中はCircularを表示する
   if (props.uploading === true) {
@@ -263,26 +186,35 @@ export default function Upload(props: Props) {
       <Grid container className={classes.root} spacing={3} justify="center">
         <Grid item xs={6}>
           <Paper variant="outlined" elevation={3} className={classes.paper}>
-            <Typography variant="h4">Upload image files to GCS</Typography>
             <div>
-              <Paper className={classes.dropzone} {...getRootProps()}>
+              {props.files.length === 0 ? (
+                <Paper className={classes.dropzone} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {isDragActive ? (
+                    <p>ドロップ</p>
+                  ) : (
+                    <p>画像をアップロード</p>
+                  )}
+                </Paper>
+              ) : (
+                <aside className={classes.thumbsContainer}>
+                  <GridList
+                    cellHeight={200}
+                    className={classes.gridList}
+                    cols={tile_cols}
+                  >
+                    {thumbs}
+                  </GridList>
+                </aside>
+              )}
+              {/* <Paper className={classes.dropzone} {...getRootProps()}>
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                  <p>Drop the files here ...</p>
+                  <p>ドロップ</p>
                 ) : (
-                  <p>Drag 'n' drop some files here, or click to select files</p>
+                  <p>画像をアップロード</p>
                 )}
               </Paper>
-              {/* <Button
-                onClick={onUpload}
-                variant="outlined"
-                color="primary"
-                disabled={diabled_button}
-                className={classes.upButton}
-                startIcon={<CloudUploadIcon />}
-              >
-                Upload
-              </Button> */}
               <aside className={classes.thumbsContainer}>
                 <GridList
                   cellHeight={200}
@@ -291,7 +223,7 @@ export default function Upload(props: Props) {
                 >
                   {thumbs}
                 </GridList>
-              </aside>
+              </aside> */}
             </div>
           </Paper>
         </Grid>

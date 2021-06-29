@@ -137,52 +137,56 @@ const RecommendDialog = (props: Props) => {
 
   const handleCloseWithCancel = () => {
     setInput("");
+    setFiles([]);
     setOpen(false);
     props.doClose();
   };
 
   return (
-    <>
-      <Dialog
-        open={open}
-        onClose={handleCloseWithCancel}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title" className={classes.content}>
-          {props.title}
-        </DialogTitle>
-        <DialogContent>
-          <div className={classes.content}>
-            <Upload 
-              uploading={uploading}
-              files={files}
-              progress={progress}
-              setImageURL={setImageURL}
-              setFiles={setFiles} />
-          </div>
-          <form>
-            <TextField
-              className={classes.text}
-              id="outlined-multiline-static"
-              label="感想など"
-              multiline
-              rows={8}
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              variant="outlined"
-            />
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseWithUpload} color="primary">
-            投稿
-          </Button>
-          <Button onClick={handleCloseWithCancel} color="primary">
-            キャンセル
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
+    
+    <Dialog
+      open={open}
+      onClose={handleCloseWithCancel}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title" className={classes.content}>
+        {props.title}
+      </DialogTitle>
+      <DialogContent>
+        <div className={classes.content}>
+          <Upload
+            uploading={uploading}
+            files={files}
+            progress={progress}
+            setImageURL={setImageURL}
+            setFiles={setFiles} />
+        </div>
+        <form>
+          <TextField
+            className={classes.text}
+            id="outlined-multiline-static"
+            label="感想など"
+            multiline
+            rows={8}
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            variant="outlined"
+          />
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={handleCloseWithUpload}
+          color="primary"
+          disabled={ files.length === 0 || input === ""}
+        >
+          投稿
+        </Button>
+        <Button onClick={handleCloseWithCancel} color="primary">
+          キャンセル
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
