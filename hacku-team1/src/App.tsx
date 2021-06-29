@@ -67,8 +67,7 @@ const App: React.FC = () => {
   const [uid, setUid] = useLocalStorage("uid", null);
 
   const handleLogin = (uid: string | null) => {
-    console.log(uid);
-
+    // console.log(uid);
     setUid(uid);
   };
 

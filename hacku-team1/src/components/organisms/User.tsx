@@ -27,11 +27,11 @@ const User: React.FC<Props> = ({ uid }) => {
   }, []);
 
   const getData = async () => {
-    console.log("uid = ", uid);
+    // console.log("uid = ", uid);
     const userDoc = await db.collection("User").doc(uid).get();
     if (userDoc.exists) {
-      console.log(userDoc.get("displayName"));
-      console.log(userDoc.get("iconURL"));
+      // console.log(userDoc.get("displayName"));
+      // console.log(userDoc.get("iconURL"));
       setName(userDoc.get("displayName"));
       seticon(userDoc.get("iconURL"));
     } else {
