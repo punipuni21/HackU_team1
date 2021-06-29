@@ -74,27 +74,30 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// propsは無し
+// previewを追加
+type MyFile = File & {
+  preview: string;
+};
+
 type Props = {
+  uploading: boolean;
+  files: MyFile[];
+  progress: number;
+
   setImageURL: any;
+  setFiles: React.Dispatch<React.SetStateAction<MyFile[]>>;
 };
 
 // Dropzoneの設定
 const acceptFile = "image/*";
 const maxFileSize = 1048576;
 
-// previewを追加
-type MyFile = File & {
-  preview: string;
-};
-
 export default function Upload(props: Props) {
-  console.log("FileUpload page start.");
 
   // State
-  const [files, setFiles] = useState<MyFile[]>([]);
-  const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState(0);
+  // const [files, setFiles] = useState<MyFile[]>([]);
+  // const [uploading, setUploading] = useState(false);
+  // const [progress, setProgress] = useState(0);
 
   const classes = useStyles(props);
 
@@ -105,7 +108,7 @@ export default function Upload(props: Props) {
     console.log("onDrop");
 
     // previewの追加
-    setFiles(
+    props.setFiles(
       acceptedFiles.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
@@ -113,7 +116,6 @@ export default function Upload(props: Props) {
       )
     );
 
-    // onUpload();
   }, []);
 
   // Dropzone
@@ -124,84 +126,82 @@ export default function Upload(props: Props) {
     maxSize: maxFileSize,
   });
 
-  const onUpload = async () => {
-    console.log("onUpload start");
+  // const onUpload = async () => {
+  //   console.log("onUpload start");
 
-    // ローディングをOn。progressを初期化
-    setUploading(true);
-    setProgress(0);
+  //   // ローディングをOn。progressを初期化
+  //   setUploading(true);
+  //   setProgress(0);
 
-    function uploadImageAsPromise(file: File) {
-      console.log("uploadImageAsPromise start");
+  //   function uploadImageAsPromise(file: File) {
+  //     console.log("uploadImageAsPromise start");
 
-      // アップロード先のファイルパスの作成
-      const file_name = file.name;
-      const storageRef = firebaseApp
-        .storage()
-        .ref()
-        .child("images/" + file_name);
+  //     // アップロード先のファイルパスの作成
+  //     const file_name = file.name;
+  //     const storageRef = firebaseApp
+  //       .storage()
+  //       .ref()
+  //       .child("images/" + file_name);
 
-      return new Promise(function (resolve, reject) {
-        //Upload file
-        var task = storageRef.put(file);
+  //     return new Promise(function (resolve, reject) {
+  //       //Upload file
+  //       var task = storageRef.put(file);
 
-        //Update progress bar
-        task.on(
-          firebase.storage.TaskEvent.STATE_CHANGED,
-          function progress(snapshot) {
-            var percent =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log(percent + "% done");
-          },
-          function error(err) {
-            // 失敗時
-            console.log("upload error");
-            reject(err);
-          },
-          function complete() {
-            // 成功時
-            console.log("upload complete.");
-            task.then(function (snapshot: firebase.storage.UploadTaskSnapshot) {
-              resolve(snapshot.ref.getDownloadURL());
-            });
-          }
-        );
-      })
-        .then(function (downloadURL) {
-          console.log("Finished uploading file: " + file_name);
+  //       //Update progress bar
+  //       task.on(
+  //         firebase.storage.TaskEvent.STATE_CHANGED,
+  //         function progress(snapshot) {
+  //           var percent =
+  //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //           console.log(percent + "% done");
+  //         },
+  //         function error(err) {
+  //           // 失敗時
+  //           console.log("upload error");
+  //           reject(err);
+  //         },
+  //         function complete() {
+  //           // 成功時
+  //           console.log("upload complete.");
+  //           task.then(function (snapshot: firebase.storage.UploadTaskSnapshot) {
+  //             resolve(snapshot.ref.getDownloadURL());
+  //           });
+  //         }
+  //       );
+  //     })
+  //       .then(function (downloadURL) {
+  //         console.log("Finished uploading file: " + file_name);
 
-          // progressを更新する
-          setProgress((oldProgress) => oldProgress + 1);
-          return downloadURL;
-        })
-        .catch(function () {
-          console.log("Error:uploadImageAsPromise");
-        });
-    }
+  //         // progressを更新する
+  //         setProgress((oldProgress) => oldProgress + 1);
+  //         return downloadURL;
+  //       })
+  //       .catch(function () {
+  //         console.log("Error:uploadImageAsPromise");
+  //       });
+  //   }
 
-    // 複数のファイルアップロードをPromise.allで並列に実行する
-    const result = await Promise.all(
-      files.map((file) => {
-        return uploadImageAsPromise(file);
-      })
-    );
+  //   // 複数のファイルアップロードをPromise.allで並列に実行する
+  //   const file = files[0]
+  //   // const result = (new Promise(uploadImageAsPromise(file)));
+  //   const result = uploadImageAsPromise(file)
+  //   Promise.all( [ result ] ).then( function ( imageURL ) {
+  //     console.log("Upload result");
+  //     console.log(imageURL);
+  //     props.setImageURL(imageURL);
 
-    console.log("Upload result");
-    console.log(result);
-    props.setImageURL(result);
+  //     // ローディングを終了し、リストを空に
+  //     setUploading(false);
+  //     setProgress(0);
+  //     setFiles([]);
 
-    // ローディングを終了し、リストを空に
-    setUploading(false);
-    setProgress(0);
-    setFiles([]);
-
-    alert("送信されました");
-  };
+  //   } );
+  // };
 
   // アップロード中はCircularを表示する
-  if (uploading === true) {
-    const percent = Math.round((progress / files.length) * 100);
-    console.log("Loadingの表示。Progreass:" + progress + " Percent:" + percent);
+  if (props.uploading === true) {
+    const percent = Math.round((props.progress / props.files.length) * 100);
+    console.log("Loadingの表示。Progreass:" + props.progress + " Percent:" + percent);
 
     return (
       <Grid container className={classes.root} spacing={3} justify="center">
@@ -220,12 +220,12 @@ export default function Upload(props: Props) {
     // タイルを敷き詰められるように、一部画像のサイズは大きくする
     const tile_cols = 3;
     let tile_featured: any = [];
-    switch (files.length % tile_cols) {
+    switch (props.files.length % tile_cols) {
       case 0:
         tile_featured = [];
         break;
       case 1:
-        tile_featured = [0, files.length - 1];
+        tile_featured = [0, props.files.length - 1];
         break;
       case 2:
         tile_featured = [0];
@@ -233,7 +233,7 @@ export default function Upload(props: Props) {
     }
 
     // サムネイルの作成
-    const thumbs = files.map((file, index) => (
+    const thumbs = props.files.map((file, index) => (
       <GridListTile
         key={file.preview}
         cols={tile_featured.indexOf(index) >= 0 ? 2 : 1}
@@ -257,7 +257,7 @@ export default function Upload(props: Props) {
       </GridListTile>
     ));
 
-    const diabled_button = files.length === 0;
+    // const diabled_button = files.length === 0;
 
     return (
       <Grid container className={classes.root} spacing={3} justify="center">
@@ -273,7 +273,7 @@ export default function Upload(props: Props) {
                   <p>Drag 'n' drop some files here, or click to select files</p>
                 )}
               </Paper>
-              <Button
+              {/* <Button
                 onClick={onUpload}
                 variant="outlined"
                 color="primary"
@@ -282,7 +282,7 @@ export default function Upload(props: Props) {
                 startIcon={<CloudUploadIcon />}
               >
                 Upload
-              </Button>
+              </Button> */}
               <aside className={classes.thumbsContainer}>
                 <GridList
                   cellHeight={200}
