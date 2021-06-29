@@ -4,7 +4,6 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -49,8 +48,12 @@ const ContentList: React.FC<Props> = ({ classname, contents }) => {
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={2} spacing={5}>
         {contents.map((content) => (
-          <GridListTile>
-            <img className={classes.image} src={content.src} alt={content.alt} />
+          <GridListTile key={content.src + content.text}>
+            <img
+              className={classes.image}
+              src={content.src}
+              alt={content.alt}
+            />
             <GridListTileBar
               title={content.text}
               classes={{
