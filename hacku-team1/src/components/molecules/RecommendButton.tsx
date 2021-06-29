@@ -7,11 +7,16 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 // import { Typography } from "@material-ui/core/styles/createTypography";
 import { Typography } from "@material-ui/core";
 
+import firebase from "firebase/app";
+import { db, firebaseApp } from "../../firebase/firebase";
+
 interface Props {
+  myUid: string;
   docid: string;
   text: string;
   refURL: string;
-  goodNum: number;
+  recommenderIDs: Array<string>;
+  isMyPage: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
 const RecommendButton = (props: Props) => {
   const classes = useStyles();
 
+  const [goodNum, setGoodNum] = useState(props.recommenderIDs.length)
+  const [isGoodInit, setIsGoodInit] = useState(props.recommenderIDs.indexOf(props.myUid) !== -1)
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -52,19 +60,28 @@ const RecommendButton = (props: Props) => {
           <div className={classes.goodIcon}>
             <FavoriteIcon fontSize="small" />
             <Typography className={classes.goodNumFont}>
-              {props.goodNum}
+              {goodNum}
             </Typography>
           </div>
         }
       >
         {props.text}
-        {/* <FavoriteIcon fontSize="small"/> */}
       </Button>
       <RecommendDialog
+        myUid={props.myUid}
         docid={props.docid}
-        title={"「" + props.text + "」の成果を投稿！"}
+        title={ props.isMyPage ? (
+          "「" + props.text + "」の成果を投稿！"
+        ) : (
+          "「" + props.text + "」がオススメ！"
+        )}
         refURL={props.refURL}
         isOpen={open}
+        isMyPage={props.isMyPage}
+        isGoodInit={isGoodInit}
+        setIsGoodInit={setIsGoodInit}
+        goodNum={goodNum}
+        setGoodNum={setGoodNum}
         doClose={() => handleClose()}
       ></RecommendDialog>
     </>

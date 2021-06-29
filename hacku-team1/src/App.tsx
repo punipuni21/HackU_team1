@@ -81,9 +81,6 @@ const App: React.FC = () => {
     setOtherUid(otherUid);
   };
 
-  console.log(uid);
-  console.log(otherUid);
-
   return (
     <div className="App">
       <div className={classes.fixedfooter}>
