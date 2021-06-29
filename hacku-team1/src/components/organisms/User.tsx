@@ -14,10 +14,11 @@ const useStyles = makeStyles({
 });
 
 type Props = {
-  uid: any;
+  myUid: any;
+  otherUid: any;
 };
 
-const User: React.FC<Props> = ({ uid }) => {
+const User: React.FC<Props> = ({ myUid, otherUid }) => {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [icon, seticon] = useState("");
@@ -28,7 +29,7 @@ const User: React.FC<Props> = ({ uid }) => {
 
   const getData = async () => {
     // console.log("uid = ", uid);
-    const userDoc = await db.collection("User").doc(uid).get();
+    const userDoc = await db.collection("User").doc(otherUid).get();
     if (userDoc.exists) {
       // console.log(userDoc.get("displayName"));
       // console.log(userDoc.get("iconURL"));

@@ -5,7 +5,8 @@ import { db } from "../../firebase/firebase";
 import { DeleteForeverTwoTone } from "@material-ui/icons";
 
 type Props = {
-  uid: any;
+  myUid: any;
+  otherUid: any;
 };
 
 type Data = {
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Recommended: React.FC<Props> = ({ uid }) => {
+const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
   const classes = useStyles();
   const [recommendedDataList, setRecommendedDataList] = useState([]);
 
@@ -39,7 +40,7 @@ const Recommended: React.FC<Props> = ({ uid }) => {
     const tmpData: any = [];
     await db
       .collection("Tips")
-      .where("userID", "==", uid)
+      .where("userID", "==", otherUid)
       .where("done", "==", false)
       .get()
       .then(async (snapshots) => {
@@ -47,7 +48,7 @@ const Recommended: React.FC<Props> = ({ uid }) => {
           tmpData.push({
             docid: doc.id,
             content: doc.data().content,
-            recommenderIDs: doc.data().recommenderIDs
+            recommenderIDs: doc.data().recommenderIDs,
           });
         });
       });
