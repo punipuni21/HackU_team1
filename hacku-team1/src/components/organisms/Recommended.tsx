@@ -8,6 +8,7 @@ type Props = {
 };
 
 type Data = {
+  docid: string;
   content: string;
 };
 
@@ -42,6 +43,7 @@ const Recommended: React.FC<Props> = ({ uid }) => {
       .then(async (snapshots) => {
         snapshots.docs.map((doc) => {
           tmpData.push({
+            docid: doc.id,
             content: doc.data().content,
           });
         });
@@ -55,8 +57,8 @@ const Recommended: React.FC<Props> = ({ uid }) => {
       <div className={classes.buttons}>
         {recommendedDataList.map((data: Data) => (
           <RecommendButton
+            docid={data.docid}
             text={data.content}
-            img={"./logo192.png"}
             // onClick={}
           />
         ))}

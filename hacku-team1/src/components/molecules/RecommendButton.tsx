@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import RecommendDialog from "../molecules/RecommendDialog";
 
 interface Props {
+  docid: string;
   text: string;
-  img: string;
   // onClick: VoidFunction;
 }
 
@@ -38,8 +38,8 @@ const RecommendButton = (props: Props) => {
         {props.text}
       </Button>
       <RecommendDialog
+        docid={props.docid}
         title={"「" + props.text + "」の成果を投稿！"}
-        img={props.img}
         isOpen={open}
         doClose={() => handleClose()}
       ></RecommendDialog>
