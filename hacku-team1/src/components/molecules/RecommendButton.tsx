@@ -3,18 +3,31 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import RecommendDialog from "../molecules/RecommendDialog";
+import FavoriteIcon from '@material-ui/icons/Favorite';
+// import { Typography } from "@material-ui/core/styles/createTypography";
+import { Typography } from "@material-ui/core";
 
 interface Props {
   docid: string;
   text: string;
-  // onClick: VoidFunction;
+  goodNum: number;
 }
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
     borderRadius: 15,
+    paddingTop: 4,
+    paddingBottom: 4
   },
+  goodIcon: {
+    display: "flex"
+  } ,
+  goodNumFont: {
+    fontSize: 12,
+    marginTop: 2,
+    marginLeft: 2
+  }
 }));
 
 const RecommendButton = (props: Props) => {
@@ -34,8 +47,13 @@ const RecommendButton = (props: Props) => {
         variant="outlined"
         className={classes.button}
         onClick={handleOpen}
+        endIcon={<div className={classes.goodIcon}>
+          <FavoriteIcon fontSize="small"/>
+          <Typography className={classes.goodNumFont}>{props.goodNum}</Typography>
+        </div>}
       >
         {props.text}
+        {/* <FavoriteIcon fontSize="small"/> */}
       </Button>
       <RecommendDialog
         docid={props.docid}
