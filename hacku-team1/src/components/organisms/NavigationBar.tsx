@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { useHistory } from "react-router-dom";
 
-import SectionBar from "../molecules/sectionBar";
+import SectionBar from "../molecules/SectionBar";
 
 import firebase from "../../firebase/firebase";
 import { db } from "../../firebase/firebase";
