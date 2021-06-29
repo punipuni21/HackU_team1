@@ -16,6 +16,7 @@ import Upload from "../molecules/Upload";
 type Props = {
   docid: string;
   title: string;
+  refURL: string;
   isOpen: boolean;
   doClose: () => void;
 };
@@ -166,6 +167,11 @@ const RecommendDialog = (props: Props) => {
         {props.title}
       </DialogTitle>
       <DialogContent>
+        <div className={classes.content}>
+          <a href={props.refURL} target="_blank" rel="noopener noreferrer">
+            おすすめのリンク
+          </a>
+        </div>
         <div className={classes.content}>
           <Upload
             uploading={uploading}

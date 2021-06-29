@@ -10,6 +10,7 @@ type Props = {
 
 type Data = {
   content: string;
+  refURL: string;
   imageURL: string;
   doneContent: string;
 };
@@ -46,6 +47,7 @@ const Complete: React.FC<Props> = ({ myUid, otherUid }) => {
         snapshots.docs.map((doc) => {
           tmpData.push({
             content: doc.data().content,
+            refURL: doc.data().refURL,
             imageURL: doc.data().imageURL,
             doneContent: doc.data().doneContent,
           });
@@ -61,6 +63,7 @@ const Complete: React.FC<Props> = ({ myUid, otherUid }) => {
         {completeDataList.map((data: Data) => (
           <CompleteButton
             text={data.content}
+            refURL={data.refURL}
             img={data.imageURL}
             msg={data.doneContent}
             // onClick={}

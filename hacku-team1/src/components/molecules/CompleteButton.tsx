@@ -7,6 +7,7 @@ import CompleteDialog from "../molecules/CompleteDialog";
 
 interface Props {
   text: string;
+  refURL: string;
   img: string;
   msg: string;
   // onClick: VoidFunction;
@@ -43,6 +44,7 @@ const CompleteButton = (props: Props) => {
       </Button>
       <CompleteDialog
         title={"「" + props.text + "」を達成しました！"}
+        refURL={props.refURL}
         img={props.img}
         msg={props.msg}
         isOpen={open}

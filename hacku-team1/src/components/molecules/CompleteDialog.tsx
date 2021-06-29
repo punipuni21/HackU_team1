@@ -11,6 +11,7 @@ import Image from "../atoms/Image";
 
 type Props = {
   title: string;
+  refURL: string;
   img: string;
   msg: string;
   isOpen: boolean;
@@ -58,6 +59,9 @@ const CompleteDialog = (props: Props) => {
               classname={classes.image}
             />
           </div>
+          <a href={props.refURL} target="_blank" rel="noopener noreferrer">
+            おすすめのリンク
+          </a>
           <p>{props.msg}</p>
         </DialogContent>
         <DialogActions>
