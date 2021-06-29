@@ -12,6 +12,7 @@ type Props = {
 type Data = {
   docid: string;
   content: string;
+  refURL: string;
   recommenderIDs: Array<string>;
 };
 
@@ -48,6 +49,7 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
           tmpData.push({
             docid: doc.id,
             content: doc.data().content,
+            refURL: doc.data().refURL,
             recommenderIDs: doc.data().recommenderIDs,
           });
         });
@@ -63,6 +65,7 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
           <RecommendButton
             docid={data.docid}
             text={data.content}
+            refURL={data.refURL}
             goodNum={data.recommenderIDs.length}
             // onClick={}
           />
