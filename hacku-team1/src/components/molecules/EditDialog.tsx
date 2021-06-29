@@ -19,7 +19,6 @@ type Props = {
   editContents : any;
   isOpen: boolean;
   doClose: VoidFunction;
-  getPrevContents: VoidFunction;
   updateDB: VoidFunction;
 };
 
@@ -38,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
   add: {
     padding: "0",
+  },
+  returnButton: {
+    margin: "0 auto",
   }
 }));
 
@@ -61,13 +63,6 @@ const EditDialog = (props: Props) => {
     props.doClose();
   };
 
-  const handleCloseWithCancel = () => {
-    props.getPrevContents();
-    setInput("")
-    setOpen(false);
-    props.doClose();
-  };
-
   const handleAddButton = (value: string) => {
     props.editContents([...props.contents, value]);
     setInput("")
@@ -81,7 +76,7 @@ const EditDialog = (props: Props) => {
     
     <Dialog
       open={open}
-      onClose={handleCloseWithCancel}
+      onClose={handleCloseWithUpdate}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{props.title}</DialogTitle>
@@ -116,11 +111,8 @@ const EditDialog = (props: Props) => {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCloseWithUpdate} color="primary">
-          更新
-        </Button>
-        <Button onClick={handleCloseWithCancel} color="primary">
-          キャンセル
+        <Button onClick={handleCloseWithUpdate} color="primary" variant="outlined" className={classes.returnButton}>
+          閉じる
         </Button>
       </DialogActions>
     </Dialog>

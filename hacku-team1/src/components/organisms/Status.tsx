@@ -128,7 +128,6 @@ const Status = (props: Props) => {
             style={classes.editButton}
             contents={statusDataList}
             editContents={setStatusDataList}
-            getPrevContents={getData}
             updateDB={updateDB}
           />
         )}

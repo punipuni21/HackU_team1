@@ -10,7 +10,6 @@ interface Props {
     style: string;
     contents: string[];
     editContents: any;
-    getPrevContents: VoidFunction;
     updateDB: VoidFunction;
 }
 
@@ -37,7 +36,6 @@ const EditButton: React.FC<Props> = (props) => {
                 editContents={props.editContents}
                 isOpen={open}
                 doClose={() => handleClose()}
-                getPrevContents={props.getPrevContents}
                 updateDB={props.updateDB}
             />
         </React.Fragment>
