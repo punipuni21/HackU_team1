@@ -5,16 +5,17 @@ import Recommended from "../organisms/Recommended";
 import Complete from "../organisms/Complete";
 
 type Props = {
-  uid: string | null;
+  myUid: string | null;
+  otherUid: string | null;
 };
 
-const UserPage: React.FC<Props> = ({ uid }) => {
+const UserPage: React.FC<Props> = ({ myUid, otherUid }) => {
   return (
     <div>
-      <User uid={uid} />
-      <Status text="test_status" uid={uid} />
-      <Recommended uid={uid} />
-      <Complete uid={uid} />
+      <User myUid={myUid} otherUid={otherUid} />
+      <Status text="test_status" myUid={myUid} otherUid={otherUid} />
+      <Recommended myUid={myUid} otherUid={otherUid} />
+      <Complete myUid={myUid} otherUid={otherUid} />
     </div>
   );
 };

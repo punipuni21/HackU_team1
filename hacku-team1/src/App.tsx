@@ -76,6 +76,7 @@ const App: React.FC = () => {
   const handleLogin = (uid: string | null) => {
     // console.log(uid);
     setUid(uid);
+    setOtherUid(otherUid);
   };
 
   console.log(uid);
@@ -89,7 +90,10 @@ const App: React.FC = () => {
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path="/" render={() => <TopPage uid={uid} />} />
-            <Route path="/mypage" render={() => <UserPage uid={uid} />} />
+            <Route
+              path="/mypage"
+              render={() => <UserPage myUid={uid} otherUid={otherUid} />}
+            />
             <Route
               path="/otherspage"
               render={() => (
@@ -98,7 +102,7 @@ const App: React.FC = () => {
             />
             <Route
               path="/otheruserpage"
-              render={() => <UserPage uid={otherUid} />}
+              render={() => <UserPage myUid={uid} otherUid={otherUid} />}
             />
           </Switch>
         </Router>

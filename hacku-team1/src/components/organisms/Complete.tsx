@@ -4,7 +4,8 @@ import CompleteButton from "../molecules/CompleteButton";
 import { db } from "../../firebase/firebase";
 
 type Props = {
-  uid: any;
+  myUid: any;
+  otherUid: any;
 };
 
 type Data = {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Complete: React.FC<Props> = ({ uid }) => {
+const Complete: React.FC<Props> = ({ myUid, otherUid }) => {
   const classes = useStyles();
   const [completeDataList, setCompleteDataList] = useState([]);
 
@@ -38,7 +39,7 @@ const Complete: React.FC<Props> = ({ uid }) => {
     const tmpData: any = [];
     await db
       .collection("Tips")
-      .where("userID", "==", uid)
+      .where("userID", "==", otherUid)
       .where("done", "==", true)
       .get()
       .then(async (snapshots) => {
