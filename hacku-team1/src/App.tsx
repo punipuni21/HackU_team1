@@ -71,7 +71,7 @@ const App: React.FC = () => {
   const classes = useStyles();
 
   const [uid, setUid] = useLocalStorage("uid", null);
-  const [otherUid, setOtherUid] = useState("");
+  const [otherUid, setOtherUid] = useLocalStorage("otherUid", null);
 
   const handleLogin = (uid: string | null) => {
     // console.log(uid);
@@ -86,7 +86,11 @@ const App: React.FC = () => {
     <div className="App">
       <div className={classes.fixedfooter}>
         <Router>
-          <NavigationBar handleLogin={handleLogin} />
+          <NavigationBar
+            handleLogin={handleLogin}
+            uid={uid}
+            setOtherUid={setOtherUid}
+          />
           <div className={classes.toolbar} />
           <Switch>
             <Route exact path="/" render={() => <TopPage uid={uid} />} />

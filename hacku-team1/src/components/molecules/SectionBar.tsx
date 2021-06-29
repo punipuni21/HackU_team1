@@ -12,6 +12,8 @@ import { Typography } from "@material-ui/core";
 
 type Props = {
   isSignIn: boolean;
+  uid: string | null;
+  setOtherUid: any;
 };
 
 function a11yProps(index: any) {
@@ -81,10 +83,14 @@ const SectionBar: React.FC<Props> = (props) => {
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    props.setOtherUid(props.uid);
+    if (newValue === 1) window.location.reload();
   };
 
   const handleClick = (newValue: number) => {
     setValue(newValue);
+    props.setOtherUid(props.uid);
+    if (newValue === 1) window.location.reload();
   };
 
   return (

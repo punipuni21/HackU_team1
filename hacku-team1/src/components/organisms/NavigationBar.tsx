@@ -44,13 +44,16 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
   handleLogin: (uid: string | null) => void;
+  uid: string | null;
+  setOtherUid: any;
 };
-const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
+const NavigationBar: React.FC<Props> = ({ handleLogin, uid, setOtherUid }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const [user, setUser] =
-    useState<firebase.firestore.DocumentData | null>(null);
+  const [user, setUser] = useState<firebase.firestore.DocumentData | null>(
+    null
+  );
 
   const [usericon, setUserIcon] = useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -109,7 +112,11 @@ const NavigationBar: React.FC<Props> = ({ handleLogin }) => {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
           <div className={classes.sectionBar}>
-            <SectionBar isSignIn={user ? true : false} />
+            <SectionBar
+              isSignIn={user ? true : false}
+              uid={uid}
+              setOtherUid={setOtherUid}
+            />
           </div>
 
           {user ? (
