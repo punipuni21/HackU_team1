@@ -49,7 +49,6 @@ const RecommendDialog = (props: Props) => {
   }, [props.isOpen]);
 
   const uploadData = async () => {
-
     console.log("Image onUpload start");
 
     // ローディングをOn。progressを初期化
@@ -105,30 +104,36 @@ const RecommendDialog = (props: Props) => {
     }
 
     // 複数のファイルアップロードをPromise.allで並列に実行する
-    const file = files[0]
+    const file = files[0];
     // const result = (new Promise(uploadImageAsPromise(file)));
-    const result = uploadImageAsPromise(file)
-    result.then( async function (imageURL) {
+    const result = uploadImageAsPromise(file);
+    result.then(async function (imageURL) {
       console.log("Upload result");
       console.log(imageURL);
       setImageURL(imageURL);
 
       const userRef = db.collection("Tips").doc(props.docid);
-      await userRef.update({
-        done: true,
-        doneContent: input,
-        imageURL: imageURL,
-      }).then(() => {
-        // 最後にいろいろな変数のリセット
-        setUploading(false);
-        setProgress(0);
-        setFiles([]);
-        setInput("");
-        window.location.reload();
-        setOpen(false);
-        props.doClose();
-      })
+      await userRef
+        .update({
+          done: true,
+          doneContent: input,
+          imageURL: imageURL,
+        })
+        .then(() => {
+          // 最後にいろいろな変数のリセット
+          setUploading(false);
+          setProgress(0);
+          setFiles([]);
+          setInput("");
+          window.location.reload();
+          setOpen(false);
+          props.doClose();
+        });
     });
+  };
+
+  const DeleteData = async () => {
+    await db.collection("Tips").doc(props.docid).delete();
   };
 
   const handleCloseWithUpload = () => {
@@ -142,8 +147,16 @@ const RecommendDialog = (props: Props) => {
     props.doClose();
   };
 
+  const handleCloseWithDelete = () => {
+    DeleteData();
+    setInput("");
+    setFiles([]);
+    window.location.reload();
+    setOpen(false);
+    props.doClose();
+  };
+
   return (
-    
     <Dialog
       open={open}
       onClose={handleCloseWithCancel}
@@ -159,7 +172,8 @@ const RecommendDialog = (props: Props) => {
             files={files}
             progress={progress}
             setImageURL={setImageURL}
-            setFiles={setFiles} />
+            setFiles={setFiles}
+          />
         </div>
         <form>
           <TextField
@@ -176,9 +190,19 @@ const RecommendDialog = (props: Props) => {
       </DialogContent>
       <DialogActions>
         <Button
+          // onClick={handleCloseWithDelete}
+          onClick={() => {
+            if (window.confirm("本当にこのおすすめを削除しますか？"))
+              handleCloseWithDelete();
+          }}
+          color="primary"
+        >
+          削除
+        </Button>
+        <Button
           onClick={handleCloseWithUpload}
           color="primary"
-          disabled={ files.length === 0 || input === ""}
+          disabled={files.length === 0 || input === ""}
         >
           投稿
         </Button>
