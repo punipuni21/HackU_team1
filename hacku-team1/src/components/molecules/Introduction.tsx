@@ -6,22 +6,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     introduction: {
       width: "100%",
-      // height: "404px ",
       textAlign: "center",
-      position: "relative",
-      left: "0%",
-      right: "0%",
-      top: "12.68%",
-      bottom: "55.18%",
       background: "#BBDEFB",
-      paddingBottom: "5%",
+      padding: "2em 0",
     },
     textLabel: {
-      // position: "relative",
-      // width: "730px",
-      // height: "56px",
       left: "calc(50% - 730px/2)",
-      top: "0px",
       /* H2 - bold 44 (56, 0.2px) */
       fontFamily: "Mulish",
       fontStyle: "normal",
@@ -38,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
       order: 0,
       flexGrow: 0,
       margin: "0",
-      padding: "3% 0",
     },
   })
 );

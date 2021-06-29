@@ -8,13 +8,9 @@ import { db } from "../../firebase/firebase";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     textLabel: {
-      position: "static",
-      left: "0.69%",
-      right: "72.08%",
-      top: "50%",
-      bottom: "46.09%",
-      width: "730px",
-      height: "56px",
+      // position: "static",
+      width: "100%",
+      height: "20em",
       /* H2 - bold 44 (56, 0.2px) */
       fontFamily: "Roboto",
       fontStyle: "normal",
@@ -37,11 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     contentList: {
       width: "100%",
-      height: "auto",
-      // top: "20px",
-      // left: "0px",
-      // right: "0px",
-      // bottom: "0px",
+      height: "30em",
       background: "#FFFFFF",
     },
     introduction: {
@@ -49,6 +41,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     introContent: {
       height: "90vh",
+    },
+    textlabel: {
+      margin: "1em 0",
     }
   })
 );
@@ -89,7 +84,7 @@ const TopPage: React.FC<Props> = ({ uid }) => {
       <div className={classes.introduction}>
         <Introduction></Introduction>
         <TextLabel
-          classname="description"
+          classname={classes.textlabel}
           text="みんなに消化されたコンテンツ"
         ></TextLabel>
       </div>
