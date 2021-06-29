@@ -7,7 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import UserIcon from "../atoms/UserIcon";
 import GroupIcon from "../atoms/GroupIcon";
 import AppIcon from "../atoms/AppIcon";
-import AppName from "./appName";
+import AppName from "./AppName";
 import { Typography } from "@material-ui/core";
 
 type Props = {
