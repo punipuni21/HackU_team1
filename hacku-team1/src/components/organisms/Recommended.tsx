@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import RecommendButton from "../molecules/RecommendButton";
 import { db } from "../../firebase/firebase";
+import { DeleteForeverTwoTone } from "@material-ui/icons";
 
 type Props = {
   uid: any;
 };
 
 type Data = {
+  docid: string;
   content: string;
+  recommenderIDs: Array<string>;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +45,9 @@ const Recommended: React.FC<Props> = ({ uid }) => {
       .then(async (snapshots) => {
         snapshots.docs.map((doc) => {
           tmpData.push({
+            docid: doc.id,
             content: doc.data().content,
+            recommenderIDs: doc.data().recommenderIDs
           });
         });
       });
@@ -55,8 +60,9 @@ const Recommended: React.FC<Props> = ({ uid }) => {
       <div className={classes.buttons}>
         {recommendedDataList.map((data: Data) => (
           <RecommendButton
+            docid={data.docid}
             text={data.content}
-            img={"./logo192.png"}
+            goodNum={data.recommenderIDs.length}
             // onClick={}
           />
         ))}

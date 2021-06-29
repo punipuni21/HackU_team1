@@ -82,7 +82,6 @@ const TopPage: React.FC<Props> = ({ uid }) => {
         });
       });
     setContentDataList(temporaryContentData);
-    console.log(await Promise.all(contentDataList));
   };
 
   return (
