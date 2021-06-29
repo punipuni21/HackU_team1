@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import RecommendButton from "../molecules/RecommendButton";
 import { db } from "../../firebase/firebase";
+import { DeleteForeverTwoTone } from "@material-ui/icons";
 
 type Props = {
   uid: any;
@@ -10,6 +11,7 @@ type Props = {
 type Data = {
   docid: string;
   content: string;
+  recommenderIDs: Array<string>;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +47,7 @@ const Recommended: React.FC<Props> = ({ uid }) => {
           tmpData.push({
             docid: doc.id,
             content: doc.data().content,
+            recommenderIDs: doc.data().recommenderIDs
           });
         });
       });
@@ -59,6 +62,7 @@ const Recommended: React.FC<Props> = ({ uid }) => {
           <RecommendButton
             docid={data.docid}
             text={data.content}
+            goodNum={data.recommenderIDs.length}
             // onClick={}
           />
         ))}
