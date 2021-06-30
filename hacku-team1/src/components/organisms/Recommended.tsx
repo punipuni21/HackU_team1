@@ -36,7 +36,7 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [otherUid]);
 
   const getData = async () => {
     const tmpData: any = [];
@@ -69,7 +69,7 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
             text={data.content}
             refURL={data.refURL}
             recommenderIDs={data.recommenderIDs}
-            isMyPage={myUid===otherUid}
+            isMyPage={myUid === otherUid}
             // onClick={}
           />
         ))}

@@ -84,13 +84,11 @@ const SectionBar: React.FC<Props> = (props) => {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
     props.setOtherUid(props.uid);
-    if (newValue === 1) window.location.reload();
   };
 
   const handleClick = (newValue: number) => {
     setValue(newValue);
     props.setOtherUid(props.uid);
-    if (newValue === 1) window.location.reload();
   };
 
   return (
