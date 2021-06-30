@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+
 import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
+import Usage from "../organisms/Usage";
 import TextLabel from "../atoms/TextLabel";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { db } from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,17 +48,14 @@ const useStyles = makeStyles((theme: Theme) =>
       // bottom: "0px",
       background: "#FFFFFF",
     },
-    introduction: {
-      margin: "0px",
+    root: {
+      // height: "90vh",
     },
-    introContent: {
-      height: "90vh",
-    }
   })
 );
 
 type Props = {
-  uid : string | null;
+  uid: string | null;
 };
 
 const TopPage: React.FC<Props> = ({ uid }) => {
@@ -85,19 +86,15 @@ const TopPage: React.FC<Props> = ({ uid }) => {
   };
 
   return (
-    <div className={classes.introContent}>
-      <div className={classes.introduction}>
-        <Introduction></Introduction>
-        <TextLabel
-          classname="description"
-          text="みんなに消化されたコンテンツ"
-        ></TextLabel>
-      </div>
-        <ContentList
-          classname={classes.contentList}
-          contents={contentDataList}
-        ></ContentList>
-    </div>
+    <Container className={classes.root}>
+      <Introduction />
+      <Typography variant="h2">最近消化されたおすすめ</Typography>
+      <ContentList
+        classname={classes.contentList}
+        contents={contentDataList}
+      ></ContentList>
+      <Usage />
+    </Container>
   );
 };
 
