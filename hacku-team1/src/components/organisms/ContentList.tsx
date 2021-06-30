@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     typography: {
       margin: "1rem 0",
+      textTransform: "none",
     },
     overall: {
       width: "100%",

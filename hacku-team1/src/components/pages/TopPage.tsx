@@ -97,11 +97,6 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
       .get()
       .then((response) => {
         if (response.empty) setOpen(true);
-        // response.forEach((userDocument) => {
-        //   // console.log(userDocument.data());
-        //   console.log(response.empty);
-        //   if (!response) setOpen(true);
-        // });
       });
   };
 
