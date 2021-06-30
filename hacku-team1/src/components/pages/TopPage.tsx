@@ -10,7 +10,7 @@ import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 
 import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
-import RecommendedUsersList from "../organisms/UsersList";
+import UsersList from "../organisms/UsersList";
 import Usage from "../organisms/Usage";
 
 import { db } from "../../firebase/firebase";
@@ -103,7 +103,7 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
         color="primary.main"
         contents={contentDataList}
       ></ContentList>
-      <RecommendedUsersList
+      <UsersList
         uid={uid}
         setOtherUid={setOtherUid}
         colSize={5}
@@ -111,7 +111,7 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
         icon={<SupervisedUserCircleIcon />}
         color="primary.main"
         contents={shuffleArray(recoUsersList)}
-      ></RecommendedUsersList>
+      ></UsersList>
       <Usage />
       <Divider variant="middle" />
       <Typography variant="body2" align="right">

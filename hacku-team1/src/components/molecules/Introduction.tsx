@@ -43,7 +43,7 @@ const Introduction: React.FC = () => {
       />
       <Typography variant="body1" className={classes.typography}>
         興味はあるけれど <br className={classes.mobileBr} />
-        何から始めたらいいのか分からない
+        何から始めたらいいのか分からない…
       </Typography>
       <Typography variant="body1" className={classes.typography}>
         やっているあの人たちは <br className={classes.mobileBr} />
@@ -51,11 +51,13 @@ const Introduction: React.FC = () => {
       </Typography>
       <Typography variant="body1" className={classes.typography}>
         それは自分と他の人の間に引かれた <br className={classes.mobileBr} />
-        見えない境界線のよう
+        <span style={{ textDecoration: "underline" }}>見えない境界線</span>
+        のよう
       </Typography>
       <Typography variant="body1" className={classes.typography}>
-        「しろ-せん」は <br className={classes.mobileBr} />
-        経験値0を1に変える <br className={classes.mobileBr} />
+        <b style={{ color: "#bb4d54", fontSize: "1.2em" }}>「しろ-せん」</b>は{" "}
+        <br className={classes.mobileBr} />
+        その白い線から一歩踏み出す <br className={classes.mobileBr} />
         お手伝いをするアプリです
       </Typography>
       <Divider className={classes.divider} variant="middle" />
