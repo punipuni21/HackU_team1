@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -7,8 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 
+import CompleteDialog from "../molecules/CompleteDialog";
 import DecoratedHead from "../molecules/DecoratedHead";
-import ContentButton from "../molecules/ContentButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,14 +57,62 @@ const ContentList: React.FC<Props> = ({
 }) => {
   const classes = useStyles();
 
+  const [dialogContent, setDialogContent] = useState<any>();
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpen = (content: any) => {
+    setDialogContent(content);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const returnCompleteDialog = () => {
+    if (dialogContent) {
+      return (
+        <CompleteDialog
+          title={"「" + dialogContent.text + "」を達成しました！"}
+          refURL={dialogContent.refURL}
+          img={dialogContent.src}
+          msg={dialogContent.doneContent}
+          isOpen={open}
+          doClose={() => handleClose()}
+        />
+      );
+    }
+  };
+
   return (
     <div className={classname}>
       <DecoratedHead color={color} icon={icon} text={title} />
       <GridList className={classes.gridList} cols={colSize}>
         {contents.map((content) => (
-          <ContentButton content={content} />
+          <GridListTile
+            key={content.src + content.text}
+            className={classes.gridListTile}
+          >
+            <Button
+              onClick={() => handleOpen(content)}
+              className={classes.overall}
+            >
+              <Container style={{ padding: 0 }}>
+                <Avatar
+                  variant="square"
+                  alt={content.text}
+                  src={content.src}
+                  className={classes.avatar}
+                />
+                <Typography variant="body1" className={classes.typography}>
+                  {content.text}
+                </Typography>
+              </Container>
+            </Button>
+          </GridListTile>
         ))}
       </GridList>
+      {returnCompleteDialog()}
     </div>
   );
 };
