@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transform: "translateZ(0)",
     },
     gridListTile: {
-      width: "20%",
+      // width: "100%",
       minWidth: "180px",
       height: "100% !important",
       maxHeight: "400px",
