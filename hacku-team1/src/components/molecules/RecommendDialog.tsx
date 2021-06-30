@@ -7,7 +7,12 @@ import {
   DialogActions,
   DialogTitle,
   TextField,
+  Container,
+  Box,
+  Typography,
 } from "@material-ui/core";
+import SendRoundedIcon from "@material-ui/icons/SendRounded";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
 import firebase from "firebase/app";
 import { db, firebaseApp } from "../../firebase/firebase";
@@ -27,11 +32,14 @@ type MyFile = File & {
 };
 
 const useStyles = makeStyles((theme) => ({
-  content: {
-    textAlign: "center",
-  },
   text: {
-    width: "30em",
+    width: "100%",
+  },
+  action: {
+    width: "fit-content",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
   },
 }));
 
@@ -162,17 +170,33 @@ const RecommendDialog = (props: Props) => {
       open={open}
       onClose={handleCloseWithCancel}
       aria-labelledby="form-dialog-title"
+      fullWidth
     >
-      <DialogTitle id="form-dialog-title" className={classes.content}>
-        {props.title}
+      <DialogTitle id="form-dialog-title">
+        <Typography align="center" variant="h6">
+          {props.title}
+        </Typography>
       </DialogTitle>
-      <DialogContent>
-        <div className={classes.content}>
+      <DialogContent dividers>
+        <Container>
           <a href={props.refURL} target="_blank" rel="noopener noreferrer">
             おすすめのリンク
           </a>
-        </div>
-        <div className={classes.content}>
+
+          <Box mt={1} mb={1}>
+            <form>
+              <TextField
+                className={classes.text}
+                id="outlined-multiline-static"
+                label="感想など"
+                multiline
+                rows={8}
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                variant="outlined"
+              />
+            </form>
+          </Box>
           <Upload
             uploading={uploading}
             files={files}
@@ -180,19 +204,7 @@ const RecommendDialog = (props: Props) => {
             setImageURL={setImageURL}
             setFiles={setFiles}
           />
-        </div>
-        <form>
-          <TextField
-            className={classes.text}
-            id="outlined-multiline-static"
-            label="感想など"
-            multiline
-            rows={8}
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            variant="outlined"
-          />
-        </form>
+        </Container>
       </DialogContent>
       <DialogActions>
         <Button
@@ -203,18 +215,27 @@ const RecommendDialog = (props: Props) => {
           }}
           color="primary"
         >
-          削除
+          <DeleteOutlinedIcon />
+          このおすすめを削除
         </Button>
-        <Button
-          onClick={handleCloseWithUpload}
-          color="primary"
-          disabled={files.length === 0 || input === ""}
-        >
-          投稿
-        </Button>
-        <Button onClick={handleCloseWithCancel} color="primary">
-          キャンセル
-        </Button>
+      </DialogActions>
+      <DialogActions>
+        <Container className={classes.action}>
+          <Button
+            onClick={handleCloseWithUpload}
+            color="primary"
+            disabled={files.length === 0 || input === ""}
+            variant="contained"
+          >
+            <Box mr={1} mt={1}>
+              <SendRoundedIcon fontSize="small" />
+            </Box>
+            投稿
+          </Button>
+          <Button onClick={handleCloseWithCancel} color="primary">
+            キャンセル
+          </Button>
+        </Container>
       </DialogActions>
     </Dialog>
   );

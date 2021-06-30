@@ -93,7 +93,6 @@ const acceptFile = "image/*";
 const maxFileSize = 1048576;
 
 export default function Upload(props: Props) {
-
   const classes = useStyles(props);
 
   /*
@@ -110,7 +109,6 @@ export default function Upload(props: Props) {
         })
       )
     );
-
   }, []);
 
   // Dropzone
@@ -124,7 +122,9 @@ export default function Upload(props: Props) {
   // アップロード中はCircularを表示する
   if (props.uploading === true) {
     const percent = Math.round((props.progress / props.files.length) * 100);
-    console.log("Loadingの表示。Progreass:" + props.progress + " Percent:" + percent);
+    console.log(
+      "Loadingの表示。Progreass:" + props.progress + " Percent:" + percent
+    );
 
     return (
       <Grid container className={classes.root} spacing={3} justify="center">
@@ -141,7 +141,7 @@ export default function Upload(props: Props) {
     );
   } else {
     // タイルを敷き詰められるように、一部画像のサイズは大きくする
-    const tile_cols = 3;
+    const tile_cols = 2;
     let tile_featured: any = [];
     switch (props.files.length % tile_cols) {
       case 0:
@@ -184,22 +184,18 @@ export default function Upload(props: Props) {
 
     return (
       <Grid container className={classes.root} spacing={3} justify="center">
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Paper variant="outlined" elevation={3} className={classes.paper}>
             <div>
               {props.files.length === 0 ? (
                 <Paper className={classes.dropzone} {...getRootProps()}>
                   <input {...getInputProps()} />
-                  {isDragActive ? (
-                    <p>ドロップ</p>
-                  ) : (
-                    <p>画像をアップロード</p>
-                  )}
+                  {isDragActive ? <p>ドロップ</p> : <p>画像をアップロード</p>}
                 </Paper>
               ) : (
                 <aside className={classes.thumbsContainer}>
                   <GridList
-                    cellHeight={200}
+                    cellHeight="auto"
                     className={classes.gridList}
                     cols={tile_cols}
                   >
