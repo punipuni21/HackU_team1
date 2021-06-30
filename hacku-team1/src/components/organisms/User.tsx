@@ -6,6 +6,7 @@ import { db } from "../../firebase/firebase";
 
 import UserIcon from "../molecules/UserIcon";
 import UserName from "../molecules/UserName";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles({
   divider: {
@@ -42,14 +43,16 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
 
   return (
     <div>
-      <Grid container alignItems="center" justify="center">
-        <Grid item xs={3}>
-          <UserIcon name={name} icon={icon} />
+      <Box m={2}>
+        <Grid container alignItems="center" justify="center">
+          <Grid item xs={4}>
+            <UserIcon name={name} icon={icon} />
+          </Grid>
+          <Grid item xs={8}>
+            <UserName name={name} />
+          </Grid>
         </Grid>
-        <Grid item xs={9}>
-          <UserName name={name} />
-        </Grid>
-      </Grid>
+      </Box>
       <Divider className={classes.divider} variant="middle" />
     </div>
   );

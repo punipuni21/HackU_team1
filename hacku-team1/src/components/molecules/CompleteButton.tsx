@@ -35,7 +35,7 @@ const CompleteButton = (props: Props) => {
     <>
       <Button
         variant="contained"
-        color="default"
+        color="primary"
         className={classes.button}
         onClick={handleOpen}
         startIcon={<DoneIcon />}

@@ -9,17 +9,13 @@ interface Props {
 }
 
 const useStyles = makeStyles((theme) => ({
-  avatar: {
-    width: "100px",
-    height: "100px",
-    margin: "1em auto",
-  },
+  avatar: { width: "fit-content", height: "fit-content" },
 }));
 
 const UserIcon = (props: Props) => {
   const classes = useStyles();
   return (
-    <Container maxWidth="sm">
+    <Container>
       <Avatar alt={props.name} src={props.icon} className={classes.avatar} />
     </Container>
   );

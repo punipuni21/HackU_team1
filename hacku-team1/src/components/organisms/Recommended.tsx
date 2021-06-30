@@ -4,6 +4,9 @@ import RecommendButton from "../molecules/RecommendButton";
 import RecommendAddButton from "../molecules/RecommendAddButton";
 import { db } from "../../firebase/firebase";
 import { DeleteForeverTwoTone } from "@material-ui/icons";
+import DecoratedHead from "../molecules/DecoratedHead";
+import RecommendIcon from "../atoms/RecommendIcon";
+import { Box } from "@material-ui/core";
 
 type Props = {
   myUid: any;
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "20px",
   },
   buttons: {
-    marginLeft: "40px",
+    // marginLeft: "40px",
   },
 }));
 
@@ -60,7 +63,19 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
 
   return (
     <div>
-      <h2 className={classes.h2}>おすすめです。</h2>
+      <Box mt={2}>
+        <DecoratedHead
+          color="primary.main"
+          icon={
+            <RecommendIcon
+              size={28}
+              color="#bb4d54"
+              style={{ marginRight: "0.5rem" }}
+            />
+          }
+          text="これ、おすすめです!"
+        />
+      </Box>
       <div className={classes.buttons}>
         {recommendedDataList.map((data: Data) => (
           <RecommendButton
