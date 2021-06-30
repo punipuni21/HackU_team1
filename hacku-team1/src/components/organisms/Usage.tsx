@@ -84,7 +84,10 @@ const Usage: React.FC = () => {
                     1. 何の素人か登録する
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    自分が始めたいことは、マイページから登録できます
+                    自分が始めたいことは、「わたし」から登録できます
+                  </Typography>
+                  <Typography className={classes.usageBody}>
+                    「わたし」に行き、何の素人かを登録しましょう
                   </Typography>
                 </CardContent>
               </Card>
@@ -103,7 +106,58 @@ const Usage: React.FC = () => {
                     2. おすすめされるのを待つ
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    おすすめされると、マイページの「おすすめです。」欄に表示されます
+                    先輩たちからおすすめされると、「わたし」の「おすすめです。」欄に表示されます
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box mb={1.5}>
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={isSmall ? 1 : 4}
+          >
+            <Grid item>
+              <Card>
+                <CardContent className={classes.usageCard}>
+                  <div style={{ textAlign: "center" }}>
+                    <img
+                      alt="Usage3"
+                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage3.png?alt=media&token=c0666f00-ed9c-436f-a032-83b7a0b1ae38"
+                      className={classes.usageImage}
+                    />
+                  </div>
+                  <Typography variant="h5" className={classes.usageTitle}>
+                    3. さっそく挑戦
+                  </Typography>
+                  <Typography className={classes.usageBody}>
+                    おすすめされた内容を確認して、挑戦してみましょう
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item>
+              <Card>
+                <CardContent className={classes.usageCard}>
+                  <div style={{ textAlign: "center" }}>
+                    <img
+                      alt="Usage4"
+                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage4.png?alt=media&token=c0a3498c-34ee-4515-b4fd-e98ef7678838"
+                      className={classes.usageImage}
+                    />
+                  </div>
+                  <Typography variant="h5" className={classes.usageTitle}>
+                    4. はじめの一歩を報告する
+                  </Typography>
+                  <Typography className={classes.usageBody}>
+                    挑戦できたら、「わたし」から写真をつけて結果を報告しましょう
+                  </Typography>
+                  <Typography className={classes.usageBody}>
+                    先輩たちが、あなたの報告を心待ちにしています
                   </Typography>
                 </CardContent>
               </Card>
@@ -122,16 +176,19 @@ const Usage: React.FC = () => {
               <CardContent className={classes.usageCard}>
                 <div style={{ textAlign: "center" }}>
                   <img
-                    alt="Usage3"
-                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage3.png?alt=media&token=c0666f00-ed9c-436f-a032-83b7a0b1ae38"
+                    alt="Usage5"
+                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage5.png?alt=media&token=cd16591b-9138-4186-9fc8-efd81330179c"
                     className={classes.usageImage}
                   />
                 </div>
                 <Typography variant="h5" className={classes.usageTitle}>
-                  3. さっそく挑戦
+                  5. おすすめ待ち人を探す
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  おすすめされた内容を確認して、挑戦してみましょう
+                  次はあなたが先輩となっておすすめする番です
+                </Typography>
+                <Typography className={classes.usageBody}>
+                  「だれか」からあなたがおすすめできる人を探しましょう
                 </Typography>
               </CardContent>
             </Card>
@@ -141,19 +198,19 @@ const Usage: React.FC = () => {
               <CardContent className={classes.usageCard}>
                 <div style={{ textAlign: "center" }}>
                   <img
-                    alt="Usage4"
-                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage4.png?alt=media&token=c0a3498c-34ee-4515-b4fd-e98ef7678838"
+                    alt="Usage6"
+                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage6.png?alt=media&token=1bb04f0e-4c53-4b05-9fcf-96c5585a22dd"
                     className={classes.usageImage}
                   />
                 </div>
                 <Typography variant="h5" className={classes.usageTitle}>
-                  4. はじめの一歩を報告する
+                  6. 先輩としておすすめする
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  挑戦できたら、マイページから写真をつけて結果を報告しましょう
+                  見つけた素人さんにおすすめを届けましょう
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  先輩たちが、あなたの報告を心待ちにしています
+                  その人の「おすすめです。」欄におすすめを追加することができます
                 </Typography>
               </CardContent>
             </Card>
