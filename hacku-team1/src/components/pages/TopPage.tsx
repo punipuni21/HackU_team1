@@ -6,39 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
 import Usage from "../organisms/Usage";
-import TextLabel from "../atoms/TextLabel";
 import { db } from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    textLabel: {
-      position: "static",
-      left: "0.69%",
-      right: "72.08%",
-      top: "50%",
-      bottom: "46.09%",
-      width: "730px",
-      height: "56px",
-      /* H2 - bold 44 (56, 0.2px) */
-      fontFamily: "Roboto",
-      fontStyle: "normal",
-      fontWeight: "normal",
-      fontSize: "28px",
-      lineHeight: "140.62%",
-
-      /* identical to box height, or 127% */
-      textDecorationLine: "underline",
-      textAlign: "center",
-      letterSpacing: "0.2px",
-      /* Light / Black */
-      color: "black",
-      /* Inside Auto Layout */
-      flex: "none",
-      order: 0,
-      flexGrow: 0,
-      margin: "0",
-      padding: "3% 0",
-    },
     contentList: {
       width: "100%",
       height: "auto",
