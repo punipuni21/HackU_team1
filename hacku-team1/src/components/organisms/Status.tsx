@@ -25,15 +25,8 @@ interface Props {
 }
 
 const useStyles = makeStyles((theme) => ({
-  h2: {
-    textAlign: "left",
-    marginTop: "20px",
-    marginRight: "0px",
-    marginBottom: "10px",
-    marginLeft: "20px",
-  },
   items: {
-    marginLeft: "40px",
+    // marginLeft: "40px",
   },
   editButton: {
     marginTop: "5px",

@@ -6,6 +6,9 @@ import {
   DialogContent,
   DialogActions,
   DialogTitle,
+  Container,
+  Typography,
+  Box,
 } from "@material-ui/core";
 import Image from "../atoms/Image";
 
@@ -24,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     width: "80%",
+  },
+  action: {
+    width: "fit-content",
+  },
+  box: {
+    textAlign: "right",
   },
 }));
 
@@ -48,27 +57,40 @@ const CompleteDialog = (props: Props) => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title" className={classes.content}>
-          {props.title}
-        </DialogTitle>
-        <DialogContent>
-          <div className={classes.content}>
-            <Image
-              src={props.img}
-              alt={props.title}
-              classname={classes.image}
-            />
-          </div>
-          <a href={props.refURL} target="_blank" rel="noopener noreferrer">
-            おすすめのリンク
-          </a>
-          <p>{props.msg}</p>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            閉じる
-          </Button>
-        </DialogActions>
+        <Container>
+          <DialogTitle id="form-dialog-title" className={classes.content}>
+            <Typography align="center" variant="h6">
+              {props.title}
+            </Typography>
+          </DialogTitle>
+          <DialogContent dividers>
+            <div className={classes.content}>
+              <Image
+                src={props.img}
+                alt={props.title}
+                classname={classes.image}
+              />
+            </div>
+            <Box className={classes.box}>
+              <a href={props.refURL} target="_blank" rel="noopener noreferrer">
+                おすすめのリンク
+              </a>
+            </Box>
+            <Typography variant="body1">{props.msg}</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Container className={classes.action}>
+              <Button
+                onClick={handleClose}
+                color="primary"
+                variant="outlined"
+                size="large"
+              >
+                閉じる
+              </Button>
+            </Container>
+          </DialogActions>
+        </Container>
       </Dialog>
     </>
   );

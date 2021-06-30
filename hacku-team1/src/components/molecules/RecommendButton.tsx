@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import RecommendDialog from "../molecules/RecommendDialog";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+
 // import { Typography } from "@material-ui/core/styles/createTypography";
 import { Typography } from "@material-ui/core";
 
 import firebase from "firebase/app";
 import { db, firebaseApp } from "../../firebase/firebase";
+import RecommendIcon from "../atoms/RecommendIcon";
 
 interface Props {
   myUid: string;
@@ -65,9 +66,14 @@ const RecommendButton = (props: Props) => {
         onClick={handleOpen}
         endIcon={
           <div className={classes.goodIcon}>
-            <FavoriteIcon
-              fontSize="small"
-              color={!isGood ? "secondary" : "primary"}
+            <RecommendIcon
+              size={18}
+              color={!isGood ? "#e2e2e2" : "#bb4d54"}
+              style={{
+                marginRight: "0.2rem",
+                marginTop: "0.1rem",
+                marginLeft: "0.3rem",
+              }}
             />
             <Typography className={classes.goodNumFont}>{goodNum}</Typography>
           </div>

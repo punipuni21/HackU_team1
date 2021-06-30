@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CompleteButton from "../molecules/CompleteButton";
 import { db } from "../../firebase/firebase";
+import DecoratedHead from "../molecules/DecoratedHead";
+import RecommendIcon from "../atoms/RecommendIcon";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { Box } from "@material-ui/core";
 
 type Props = {
   myUid: any;
@@ -24,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "20px",
   },
   buttons: {
-    marginLeft: "40px",
+    // marginLeft: "40px",
   },
 }));
 
@@ -58,7 +62,13 @@ const Complete: React.FC<Props> = ({ myUid, otherUid }) => {
 
   return (
     <div>
-      <h2 className={classes.h2}>達成！！</h2>
+      <Box mt={1}>
+        <DecoratedHead
+          color="primary.main"
+          icon={<CheckCircleIcon color="primary" />}
+          text="達成"
+        />
+      </Box>
       <div className={classes.buttons}>
         {completeDataList.map((data: Data) => (
           <CompleteButton

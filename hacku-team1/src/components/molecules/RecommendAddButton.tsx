@@ -1,14 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { IconButton } from "@material-ui/core";
+import { Chip, Container, Fab, IconButton } from "@material-ui/core";
 import LocalHospitalRoundedIcon from "@material-ui/icons/LocalHospitalRounded";
 
 import RecommendAddDialog from "../molecules/RecommendAddDialog";
 
+import AddIcon from "@material-ui/icons/Add";
+
 const useStyles = makeStyles((theme) => ({
   addbutton: {
     marginTop: "5px",
+  },
+  container: {
+    width: "fit-content",
+    marginTop: "1rem",
   },
 }));
 
@@ -31,16 +37,16 @@ const RecommendAddButton: React.FC<Props> = ({ myUid, otherUid, reloadDB }) => {
 
   return (
     <>
-      <IconButton className={classes.addbutton} onClick={handleOpen}>
-        <LocalHospitalRoundedIcon
-          style={{
-            maxWidth: "60px",
-            maxHeight: "60px",
-            minWidth: "60px",
-            minHeight: "60px",
-          }}
+      <Container className={classes.container}>
+        <Chip
+          size="medium"
+          label="おすすめを追加する"
+          onClick={handleOpen}
+          onDelete={handleOpen}
+          deleteIcon={<AddIcon />}
+          color="primary"
         />
-      </IconButton>
+      </Container>
       <RecommendAddDialog
         myUid={myUid}
         otherUid={otherUid}
