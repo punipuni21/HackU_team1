@@ -64,10 +64,12 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
       <div className={classes.buttons}>
         {recommendedDataList.map((data: Data) => (
           <RecommendButton
+            myUid={myUid}
             docid={data.docid}
             text={data.content}
             refURL={data.refURL}
-            goodNum={data.recommenderIDs.length}
+            recommenderIDs={data.recommenderIDs}
+            isMyPage={myUid===otherUid}
             // onClick={}
           />
         ))}

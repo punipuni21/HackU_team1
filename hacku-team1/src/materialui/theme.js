@@ -1,9 +1,21 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 
 export const theme = createMuiTheme({
-    typography:{
-        fontFamily:"serif"
+  typography:{
+    fontFamily:"Noto Sans JP",
+    h2: {
+      fontSize: "24px",
+      "@media (max-width:600px)": {
+        fontSize: "20px",
+      },
     },
+    body1: {
+      fontSize: "20px",
+      "@media (max-width:600px)": {
+        fontSize: "16px",
+      },
+    },
+  },
   palette: {
     primary: {
       light: '#f17d80',
