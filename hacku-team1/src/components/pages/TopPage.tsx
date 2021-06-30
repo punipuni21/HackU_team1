@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
@@ -110,6 +113,14 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
         contents={shuffleArray(recoUsersList)}
       ></RecommendedUsersList>
       <Usage />
+      <Divider variant="middle" />
+      <Typography variant="body2" align="right">
+        icon by <Link href="https://icooon-mono.com/">ICOON MONO</Link>
+      </Typography>
+      <Typography variant="body2" align="right">
+        illustration by{" "}
+        <Link href="https://loosedrawing.com/">Loose Drawing</Link>
+      </Typography>
     </Container>
   );
 };
