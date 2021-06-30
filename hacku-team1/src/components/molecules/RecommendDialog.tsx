@@ -7,11 +7,6 @@ import {
   DialogActions,
   DialogTitle,
   TextField,
-  // <<<<<<< HEAD
-  //   Icon
-  // } from "@material-ui/core";
-  // import { Box } from "@material-ui/core";
-  // =======
   Container,
   Box,
   Typography,
