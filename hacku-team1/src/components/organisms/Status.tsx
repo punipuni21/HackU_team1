@@ -2,10 +2,21 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import StatusItem from "../molecules/StatusItem";
-import { IconButton } from "@material-ui/core";
+import {
+  Box,
+  Chip,
+  Grid,
+  IconButton,
+  SvgIcon,
+  Typography,
+} from "@material-ui/core";
 
 import EditButton from "../molecules/EditButton";
 import { db } from "../../firebase/firebase";
+import DecoratedHead from "../molecules/DecoratedHead";
+import CheckCircle from "@material-ui/icons/CheckCircle";
+import BiginnerIcon from "../atoms/BeginnerIcon";
+import { StayPrimaryLandscape } from "@material-ui/icons";
 
 interface Props {
   text: string;
@@ -121,26 +132,48 @@ const Status = (props: Props) => {
 
   return (
     <div>
-      <div style={{ display: "flex" }}>
-        <h2 className={classes.h2}>何の初心者？</h2>
-        {props.myUid === props.otherUid && (
-          <EditButton
-            style={classes.editButton}
-            contents={statusDataList}
-            editContents={setStatusDataList}
-            updateDB={updateDB}
-          />
-        )}
-      </div>
+      <Box borderBottom={2} color="primary.main" mb={3} pb={1}>
+        <Grid container direction="row" alignItems="center" spacing={1}>
+          <Grid item>
+            <Box mt={0.5}>
+              <BiginnerIcon
+                size={28}
+                color="#bb4d54"
+                style={{ marginRight: "0.5rem" }}
+              />
+            </Box>
+          </Grid>
+          <Grid item>
+            <Typography variant="h2">何の初心者？</Typography>
+          </Grid>
+          <Grid item>
+            {props.myUid === props.otherUid && (
+              <EditButton
+                style={classes.editButton}
+                contents={statusDataList}
+                editContents={setStatusDataList}
+                updateDB={updateDB}
+              />
+            )}
+          </Grid>
+        </Grid>
+      </Box>
       <div className={classes.items}>
-        {statusDataList.map((status) => (
-          <StatusItem
-            text={status}
-            isEditMode={false}
-            index={0}
-            handleDelete={null}
+        {statusDataList.length === 0 ? (
+          <Chip
+            variant="outlined"
+            label="右上のボタンから2つ以上追加してみよう！"
           />
-        ))}
+        ) : (
+          statusDataList.map((status) => (
+            <StatusItem
+              text={status}
+              isEditMode={false}
+              index={0}
+              handleDelete={null}
+            />
+          ))
+        )}
       </div>
     </div>
   );
