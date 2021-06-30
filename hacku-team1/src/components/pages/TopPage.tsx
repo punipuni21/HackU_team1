@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Link from "@material-ui/core/Link";
@@ -7,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+
+import Alert from "@material-ui/lab/Alert";
 
 import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
@@ -38,12 +41,14 @@ export type UserData = {
 const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   const [contentDataList, setContentDataList] = useState([]);
   const [recoUsersList, setRecoUsersList] = useState<UserData[]>();
+  const [open, setOpen] = useState<boolean>(false);
   const classes = useStyles();
 
   useEffect(() => {
     getData();
     getRecoUsersList();
-  }, []);
+    getUserData();
+  }, [uid]);
 
   const getData = async () => {
     const temporaryContentData: any = [];
@@ -85,6 +90,50 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
       });
   };
 
+  const getUserData = () => {
+    if (!uid) return;
+    db.collection("Status")
+      .where("userID", "==", uid)
+      .get()
+      .then((response) => {
+        if (response.empty) setOpen(true);
+        // response.forEach((userDocument) => {
+        //   // console.log(userDocument.data());
+        //   console.log(response.empty);
+        //   if (!response) setOpen(true);
+        // });
+      });
+  };
+
+  const returnAlert = () => {
+    if (!uid || !open) return;
+    return (
+      <Box
+        style={{
+          position: "fixed",
+          zIndex: 100,
+          width: "100%",
+        }}
+      >
+        <Box mx={1}>
+          <Alert
+            variant="filled"
+            onClose={() => {
+              setOpen(false);
+            }}
+            severity="info"
+          >
+            「
+            <Link href="/mypage" color="secondary">
+              わたし
+            </Link>
+            」から何の素人なのかを登録しましょう
+          </Alert>
+        </Box>
+      </Box>
+    );
+  };
+
   const shuffleArray = (inputArray: UserData[] | undefined) => {
     if (inputArray !== undefined) {
       inputArray.sort(() => Math.random() - 0.5);
@@ -94,34 +143,37 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   };
 
   return (
-    <Container>
-      <Introduction uid={uid} />
-      <ContentList
-        colSize={5}
-        title="最近達成されたおすすめ"
-        icon={<CheckCircle />}
-        color="primary.main"
-        contents={contentDataList}
-      ></ContentList>
-      <UsersList
-        uid={uid}
-        setOtherUid={setOtherUid}
-        colSize={5}
-        title="おすすめのユーザー"
-        icon={<SupervisedUserCircleIcon />}
-        color="primary.main"
-        contents={shuffleArray(recoUsersList)}
-      ></UsersList>
-      <Usage />
-      <Divider variant="middle" />
-      <Typography variant="body2" align="right">
-        icon by <Link href="https://icooon-mono.com/">ICOON MONO</Link>
-      </Typography>
-      <Typography variant="body2" align="right">
-        illustration by{" "}
-        <Link href="https://loosedrawing.com/">Loose Drawing</Link>
-      </Typography>
-    </Container>
+    <>
+      {returnAlert()}
+      <Container>
+        <Introduction uid={uid} />
+        <ContentList
+          colSize={5}
+          title="最近達成されたおすすめ"
+          icon={<CheckCircle />}
+          color="primary.main"
+          contents={contentDataList}
+        ></ContentList>
+        <UsersList
+          uid={uid}
+          setOtherUid={setOtherUid}
+          colSize={5}
+          title="おすすめのユーザー"
+          icon={<SupervisedUserCircleIcon />}
+          color="primary.main"
+          contents={shuffleArray(recoUsersList)}
+        ></UsersList>
+        <Usage />
+        <Divider variant="middle" />
+        <Typography variant="body2" align="right">
+          icon by <Link href="https://icooon-mono.com/">ICOON MONO</Link>
+        </Typography>
+        <Typography variant="body2" align="right">
+          illustration by{" "}
+          <Link href="https://loosedrawing.com/">Loose Drawing</Link>
+        </Typography>
+      </Container>
+    </>
   );
 };
 

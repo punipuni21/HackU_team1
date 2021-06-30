@@ -82,7 +82,6 @@ const SectionBar: React.FC<Props> = (props) => {
     else if (path === "/mypage" && value !== 1) setValue(1);
     else if (path === "/otherspage" && value !== 2) setValue(2);
     else if (path === "/otheruserpage" && value !== 2) setValue(2);
-    console.log("aaaa");
   }, [location, value, props.isSignIn]);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
