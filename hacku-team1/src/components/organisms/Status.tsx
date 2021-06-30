@@ -159,7 +159,7 @@ const Status = (props: Props) => {
         </Grid>
       </Box>
       <div className={classes.items}>
-        {statusDataList.length === 0 ? (
+        {props.myUid === props.otherUid && statusDataList.length === 0 ? (
           <Chip
             variant="outlined"
             label="右上のボタンから2つ以上追加してみよう！"
