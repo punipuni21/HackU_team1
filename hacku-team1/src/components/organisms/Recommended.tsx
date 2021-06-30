@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import RecommendButton from "../molecules/RecommendButton";
+import RecommendAddButton from "../molecules/RecommendAddButton";
 import { db } from "../../firebase/firebase";
 import { DeleteForeverTwoTone } from "@material-ui/icons";
 
@@ -73,6 +74,13 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
           />
         ))}
       </div>
+      {myUid !== otherUid && (
+        <RecommendAddButton
+          myUid={myUid}
+          otherUid={otherUid}
+          reloadDB={getData}
+        />
+      )}
     </div>
   );
 };
