@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import firebase from "firebase/app";
 import { db, firebaseApp } from "../../firebase/firebase";
@@ -32,6 +32,7 @@ type Props = {
   goodNum: number;
   setGoodNum: any;
   doClose: () => void;
+  reloadDB: VoidFunction;
 };
 
 // previewを追加
@@ -51,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
   },
   goodButton: {
     marginTop: 10,
-    justifyContent: 'center'
-  }
+    justifyContent: "center",
+  },
 }));
 
 const RecommendDialog = (props: Props) => {
@@ -154,38 +155,63 @@ const RecommendDialog = (props: Props) => {
   };
 
   const DeleteData = async () => {
-    await db.collection("Tips").doc(props.docid).delete();
+    await db
+      .collection("Tips")
+      .doc(props.docid)
+      .delete()
+      .then(() => {
+        // 最後にいろいろな変数のリセット
+        setInput("");
+        setFiles([]);
+        props.reloadDB();
+        setOpen(false);
+        props.doClose();
+      });
   };
 
   const handleCloseWithGoodUpdate = async () => {
     // 過去：falseで今：true => 新たに追加
     if (!props.isGoodInit && isGood) {
-      await db.collection("Tips").doc(props.docid).update({
-        "recommenderIDs" : firebase.firestore.FieldValue.arrayUnion(props.myUid)
-      }).then(() => {
-        props.setGoodNum(props.goodNum + 1)
-        props.setIsGoodInit(isGood)
-        setOpen(false);
-        props.doClose();
-      }).catch(error => {
-        console.log(error);
-      })
-    } else if (props.isGoodInit && !isGood) { // 過去：trueで今：false => 配列から削除
-      await db.collection("Tips").doc(props.docid).update({
-        "recommenderIDs" : firebase.firestore.FieldValue.arrayRemove(props.myUid)
-      }).then(() => {
-        props.setGoodNum(props.goodNum - 1)
-        props.setIsGoodInit(isGood)
-        setOpen(false);
-        props.doClose();
-      }).catch(error => {
-        console.log(error);
-      })
-    } else {  // それ以外は変化なしなのでスルー
+      await db
+        .collection("Tips")
+        .doc(props.docid)
+        .update({
+          recommenderIDs: firebase.firestore.FieldValue.arrayUnion(props.myUid),
+        })
+        .then(() => {
+          props.setGoodNum(props.goodNum + 1);
+          props.setIsGoodInit(isGood);
+          setOpen(false);
+          props.doClose();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (props.isGoodInit && !isGood) {
+      // 過去：trueで今：false => 配列から削除
+      await db
+        .collection("Tips")
+        .doc(props.docid)
+        .update({
+          recommenderIDs: firebase.firestore.FieldValue.arrayRemove(
+            props.myUid
+          ),
+        })
+        .then(() => {
+          props.setGoodNum(props.goodNum - 1);
+          props.setIsGoodInit(isGood);
+          setOpen(false);
+          props.doClose();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      // それ以外は変化なしなのでスルー
       setOpen(false);
       props.doClose();
     }
-  }
+  };
 
   const handleCloseWithUpload = () => {
     uploadData();
@@ -200,21 +226,14 @@ const RecommendDialog = (props: Props) => {
 
   const handleCloseWithDelete = () => {
     DeleteData();
-    setInput("");
-    setFiles([]);
-    window.location.reload();
-    setOpen(false);
-    props.doClose();
   };
 
   return (
     <Dialog
       open={open}
-      onClose={props.isMyPage ? (
-          handleCloseWithCancel
-          ):(
-          handleCloseWithGoodUpdate
-      )}
+      onClose={
+        props.isMyPage ? handleCloseWithCancel : handleCloseWithGoodUpdate
+      }
       aria-labelledby="form-dialog-title"
       fullWidth
     >
@@ -228,21 +247,21 @@ const RecommendDialog = (props: Props) => {
           <a href={props.refURL} target="_blank" rel="noopener noreferrer">
             おすすめのリンク
           </a>
-          { props.isMyPage ? (
+          {props.isMyPage ? (
             <React.Fragment>
               <Box mt={1} mb={1}>
-              <form>
-                <TextField
-                  className={classes.text}
-                  id="outlined-multiline-static"
-                  label="感想など"
-                  multiline
-                  rows={8}
-                  value={input}
-                  onChange={(event) => setInput(event.target.value)}
-                  variant="outlined"
-                />
-              </form>
+                <form>
+                  <TextField
+                    className={classes.text}
+                    id="outlined-multiline-static"
+                    label="感想など"
+                    multiline
+                    rows={8}
+                    value={input}
+                    onChange={(event) => setInput(event.target.value)}
+                    variant="outlined"
+                  />
+                </form>
               </Box>
               <Upload
                 uploading={uploading}
@@ -253,22 +272,22 @@ const RecommendDialog = (props: Props) => {
               />
             </React.Fragment>
           ) : (
-            <Box textAlign='center'>
+            <Box textAlign="center">
               <Button
                 variant="outlined"
-                color={ isGood ? ("secondary") : ("primary")}
+                color={isGood ? "secondary" : "primary"}
                 className={classes.goodButton}
                 endIcon={<FavoriteIcon />}
-                onClick={ () => setisGood(!isGood)}
+                onClick={() => setisGood(!isGood)}
               >
-                { isGood ? ("いいね済み") : ("いいね")}
+                {isGood ? "いいね済み" : "いいね"}
               </Button>
             </Box>
           )}
         </Container>
       </DialogContent>
       <DialogActions>
-        { props.isMyPage ? (
+        {props.isMyPage ? (
           <Button
             // onClick={handleCloseWithDelete}
             onClick={() => {
@@ -277,16 +296,15 @@ const RecommendDialog = (props: Props) => {
             }}
             color="primary"
           >
-          <DeleteOutlinedIcon />
-          このおすすめを削除
-        </Button>
+            <DeleteOutlinedIcon />
+            このおすすめを削除
+          </Button>
         ) : (
           <></>
         )}
-        
       </DialogActions>
       <DialogActions>
-        { props.isMyPage ? (
+        {props.isMyPage ? (
           <Container className={classes.action}>
             <Button
               onClick={handleCloseWithUpload}
@@ -305,9 +323,7 @@ const RecommendDialog = (props: Props) => {
           </Container>
         ) : (
           <Container className={classes.action}>
-            <Button 
-              onClick={handleCloseWithGoodUpdate} 
-              color="primary">
+            <Button onClick={handleCloseWithGoodUpdate} color="primary">
               戻る
             </Button>
           </Container>
