@@ -1,15 +1,11 @@
 import React from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-
-import CheckCircle from "@material-ui/icons/CheckCircle";
 
 import DecoratedHead from "../molecules/DecoratedHead";
 import ContentButton from "../molecules/ContentButton";
@@ -43,21 +39,27 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
+  classname?: string;
   colSize: number;
-  classname: string;
+  title: string;
+  icon: any;
+  color: string;
   contents: any[];
 };
 
-const ContentList: React.FC<Props> = ({ colSize, classname, contents }) => {
+const ContentList: React.FC<Props> = ({
+  classname,
+  colSize,
+  title,
+  icon,
+  color,
+  contents,
+}) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <DecoratedHead
-        color="primary.main"
-        icon={<CheckCircle />}
-        text="最近消化されたおすすめ"
-      />
+    <div className={classname}>
+      <DecoratedHead color={color} icon={icon} text={title} />
       <GridList className={classes.gridList} cols={colSize}>
         {contents.map((content) => (
           <ContentButton content={content} />
