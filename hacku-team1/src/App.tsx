@@ -92,7 +92,11 @@ const App: React.FC = () => {
           />
           <div className={classes.toolbar} />
           <Switch>
-            <Route exact path="/" render={() => <TopPage uid={uid} />} />
+            <Route
+              exact
+              path="/"
+              render={() => <TopPage uid={uid} setOtherUid={setOtherUid} />}
+            />
             <Route
               path="/mypage"
               render={() => <UserPage myUid={uid} otherUid={otherUid} />}
