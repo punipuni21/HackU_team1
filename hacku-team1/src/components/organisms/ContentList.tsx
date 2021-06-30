@@ -12,6 +12,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 
 import DecoratedHead from "../molecules/DecoratedHead";
+import ContentButton from "../molecules/ContentButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,27 +60,7 @@ const ContentList: React.FC<Props> = ({ colSize, classname, contents }) => {
       />
       <GridList className={classes.gridList} cols={colSize}>
         {contents.map((content) => (
-          <GridListTile
-            key={content.src + content.text}
-            className={classes.gridListTile}
-          >
-            <Button
-              onClick={() => alert("おすすめを押した")}
-              className={classes.overall}
-            >
-              <Container style={{ padding: 0 }}>
-                <Avatar
-                  variant="square"
-                  alt={content.text}
-                  src={content.src}
-                  className={classes.avatar}
-                />
-                <Typography variant="body1" className={classes.typography}>
-                  {content.text}
-                </Typography>
-              </Container>
-            </Button>
-          </GridListTile>
+          <ContentButton content={content} />
         ))}
       </GridList>
     </div>

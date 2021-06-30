@@ -50,6 +50,8 @@ const TopPage: React.FC<Props> = ({ uid }) => {
             src: doc.data().imageURL,
             alt: doc.data().content,
             text: doc.data().content,
+            refURL: doc.data().refURL,
+            doneContent: doc.data().doneContent,
           });
         });
       });
