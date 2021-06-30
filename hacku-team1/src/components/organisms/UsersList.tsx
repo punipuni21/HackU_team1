@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     typography: {
       margin: "1rem 0",
+      textTransform: "none",
     },
     overall: {
       width: "100%",
@@ -68,7 +69,7 @@ const RecommendedUsersList: React.FC<Props> = ({
       setOtherUid(userID);
       history.push("otheruserpage");
     } else {
-      alert("ログインしてください");
+      alert("サインインしてください");
     }
   };
 

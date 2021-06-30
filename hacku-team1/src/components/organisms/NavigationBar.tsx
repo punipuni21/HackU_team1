@@ -139,7 +139,7 @@ const NavigationBar: React.FC<Props> = ({ handleLogin, uid, setOtherUid }) => {
                   <Box mr={1} mt={1}>
                     <MeetingRoomOutlinedIcon />
                   </Box>
-                  Logout
+                  Sign Out
                 </MenuItem>
               </Menu>
             </>

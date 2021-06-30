@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -69,9 +69,11 @@ const SectionBar: React.FC<Props> = (props) => {
     if (path === "/") return 0;
     else if (path === "/mypage") return 1;
     else if (path === "/otherspage") return 2;
+    else if (path === "/otheruserpage") return 2;
   };
 
   const classes = useStyles();
+  const location = useLocation();
   const [value, setValue] = React.useState(currentTab());
 
   React.useEffect(() => {
@@ -79,7 +81,8 @@ const SectionBar: React.FC<Props> = (props) => {
     if (path === "/" && value !== 0) setValue(0);
     else if (path === "/mypage" && value !== 1) setValue(1);
     else if (path === "/otherspage" && value !== 2) setValue(2);
-  }, [value, props.isSignIn]);
+    else if (path === "/otheruserpage" && value !== 2) setValue(2);
+  }, [location, value, props.isSignIn]);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
