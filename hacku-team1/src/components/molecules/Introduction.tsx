@@ -1,7 +1,11 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+
+import firebase from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,8 +35,38 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Introduction: React.FC = () => {
+type Props = {
+  uid: string | null;
+};
+
+const Introduction: React.FC<Props> = ({ uid }) => {
   const classes = useStyles();
+
+  const onClick = () => {
+    signIn();
+  };
+
+  const signIn = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  };
+
+  const returnSignInButton = () => {
+    if (!uid) {
+      return (
+        <Box mb={4}>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ textTransform: "none" }}
+            onClick={onClick}
+          >
+            Google で Sign In
+          </Button>
+        </Box>
+      );
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -60,6 +94,7 @@ const Introduction: React.FC = () => {
         その白い線から一歩踏み出す <br className={classes.mobileBr} />
         お手伝いをするアプリです
       </Typography>
+      {returnSignInButton()}
       <Divider className={classes.divider} variant="middle" />
     </div>
   );

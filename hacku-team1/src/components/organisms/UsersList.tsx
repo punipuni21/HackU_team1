@@ -68,7 +68,7 @@ const RecommendedUsersList: React.FC<Props> = ({
       setOtherUid(userID);
       history.push("otheruserpage");
     } else {
-      alert("ログインしてください");
+      alert("サインインしてください");
     }
   };
 

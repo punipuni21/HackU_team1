@@ -95,7 +95,7 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
 
   return (
     <Container>
-      <Introduction />
+      <Introduction uid={uid} />
       <ContentList
         colSize={5}
         title="最近達成されたおすすめ"
