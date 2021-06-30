@@ -7,10 +7,14 @@ import {
   DialogActions,
   DialogTitle,
   TextField,
+  Box,
+  Typography,
+  Container,
 } from "@material-ui/core";
 
 import firebase from "firebase/app";
 import { db, firebaseApp } from "../../firebase/firebase";
+import RecommendIcon from "../atoms/RecommendIcon";
 
 type Props = {
   myUid: any;
@@ -25,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   text: {
-    width: "30em",
+    // width: "30em",
+  },
+  container: {
+    width: "fit-content",
   },
 }));
 
@@ -77,23 +84,30 @@ const RecommendAddDialog = (props: Props) => {
       open={open}
       onClose={handleCloseWithCancel}
       aria-labelledby="form-dialog-title"
+      fullWidth
     >
       <DialogTitle id="form-dialog-title" className={classes.content}>
-        おすすめする
+        <Typography align="center" variant="h6">
+          おすすめする
+        </Typography>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent dividers>
+        <Box mb={1}>
+          <form>
+            <TextField
+              fullWidth
+              className={classes.text}
+              id="outlined-multiline-static"
+              label="おすすめ内容"
+              value={inputContent}
+              onChange={(event) => setInputContent(event.target.value)}
+              variant="outlined"
+            />
+          </form>
+        </Box>
         <form>
           <TextField
-            className={classes.text}
-            id="outlined-multiline-static"
-            label="おすすめ内容"
-            value={inputContent}
-            onChange={(event) => setInputContent(event.target.value)}
-            variant="outlined"
-          />
-        </form>
-        <form>
-          <TextField
+            fullWidth
             className={classes.text}
             id="outlined-multiline-static"
             label="参考URL"
@@ -104,16 +118,25 @@ const RecommendAddDialog = (props: Props) => {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={handleCloseWithUpload}
-          color="primary"
-          disabled={inputContent === "" || inputRefURL === ""}
-        >
-          おすすめする！
-        </Button>
-        <Button onClick={handleCloseWithCancel} color="primary">
-          キャンセル
-        </Button>
+        <Container className={classes.container}>
+          <Button
+            onClick={handleCloseWithUpload}
+            color="primary"
+            disabled={inputContent === "" || inputRefURL === ""}
+            variant="contained"
+            style={{ marginRight: "2rem" }}
+          >
+            <RecommendIcon
+              size={16}
+              color="#ffffff"
+              style={{ marginRight: "0.5rem" }}
+            />
+            おすすめする！
+          </Button>
+          <Button onClick={handleCloseWithCancel} color="primary">
+            キャンセル
+          </Button>
+        </Container>
       </DialogActions>
     </Dialog>
   );
