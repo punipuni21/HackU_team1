@@ -70,6 +70,7 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
             refURL={data.refURL}
             recommenderIDs={data.recommenderIDs}
             isMyPage={myUid === otherUid}
+            reloadDB={getData}
             // onClick={}
           />
         ))}
