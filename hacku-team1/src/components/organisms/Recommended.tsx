@@ -73,7 +73,11 @@ const Recommended: React.FC<Props> = ({ myUid, otherUid }) => {
         ))}
       </div>
       {myUid !== otherUid && (
-        <RecommendAddButton myUid={myUid} otherUid={otherUid} />
+        <RecommendAddButton
+          myUid={myUid}
+          otherUid={otherUid}
+          reloadDB={getData}
+        />
       )}
     </div>
   );

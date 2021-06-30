@@ -15,9 +15,10 @@ const useStyles = makeStyles((theme) => ({
 type Props = {
   myUid: any;
   otherUid: any;
+  reloadDB: VoidFunction;
 };
 
-const RecommendAddButton: React.FC<Props> = ({ myUid, otherUid }) => {
+const RecommendAddButton: React.FC<Props> = ({ myUid, otherUid, reloadDB }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -45,6 +46,7 @@ const RecommendAddButton: React.FC<Props> = ({ myUid, otherUid }) => {
         otherUid={otherUid}
         isOpen={open}
         doClose={() => handleClose()}
+        reloadDB={reloadDB}
       />
     </>
   );

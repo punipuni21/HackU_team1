@@ -17,6 +17,7 @@ type Props = {
   otherUid: any;
   isOpen: boolean;
   doClose: () => void;
+  reloadDB: VoidFunction;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +60,7 @@ const RecommendAddDialog = (props: Props) => {
     addRecommendOnDB();
     setInputContent("");
     setInputRefURL("");
-    window.location.reload();
+    props.reloadDB();
     setOpen(false);
     props.doClose();
   };
