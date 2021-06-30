@@ -25,7 +25,7 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [otherUid]);
 
   const getData = async () => {
     // console.log("uid = ", uid);

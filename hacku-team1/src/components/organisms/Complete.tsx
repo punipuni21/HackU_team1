@@ -34,7 +34,7 @@ const Complete: React.FC<Props> = ({ myUid, otherUid }) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [otherUid]);
 
   const getData = async () => {
     const tmpData: any = [];

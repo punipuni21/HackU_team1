@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import RecommendDialog from "../molecules/RecommendDialog";
@@ -17,6 +16,7 @@ interface Props {
   refURL: string;
   recommenderIDs: Array<string>;
   isMyPage: boolean;
+  reloadDB: VoidFunction;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -39,8 +39,15 @@ const useStyles = makeStyles((theme) => ({
 const RecommendButton = (props: Props) => {
   const classes = useStyles();
 
-  const [goodNum, setGoodNum] = useState(props.recommenderIDs.length)
-  const [isGood, setIsGood] = useState(props.recommenderIDs.indexOf(props.myUid) !== -1)
+  const [goodNum, setGoodNum] = useState(props.recommenderIDs.length);
+  const [isGood, setIsGood] = useState(
+    props.recommenderIDs.indexOf(props.myUid) !== -1
+  );
+
+  useEffect(() => {
+    setGoodNum(props.recommenderIDs.length);
+    setIsGood(props.recommenderIDs.indexOf(props.myUid) !== -1);
+  }, [props.docid]);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -58,10 +65,11 @@ const RecommendButton = (props: Props) => {
         onClick={handleOpen}
         endIcon={
           <div className={classes.goodIcon}>
-            <FavoriteIcon fontSize="small" color={ !isGood ? ("secondary") : ("primary")}/>
-            <Typography className={classes.goodNumFont}>
-              {goodNum}
-            </Typography>
+            <FavoriteIcon
+              fontSize="small"
+              color={!isGood ? "secondary" : "primary"}
+            />
+            <Typography className={classes.goodNumFont}>{goodNum}</Typography>
           </div>
         }
       >
@@ -70,11 +78,11 @@ const RecommendButton = (props: Props) => {
       <RecommendDialog
         myUid={props.myUid}
         docid={props.docid}
-        title={ props.isMyPage ? (
-          "「" + props.text + "」の成果を投稿！"
-        ) : (
-          "「" + props.text + "」がオススメ！"
-        )}
+        title={
+          props.isMyPage
+            ? "「" + props.text + "」の成果を投稿！"
+            : "「" + props.text + "」がオススメ！"
+        }
         refURL={props.refURL}
         isOpen={open}
         isMyPage={props.isMyPage}
@@ -83,6 +91,7 @@ const RecommendButton = (props: Props) => {
         goodNum={goodNum}
         setGoodNum={setGoodNum}
         doClose={() => handleClose()}
+        reloadDB={props.reloadDB}
       ></RecommendDialog>
     </>
   );

@@ -63,7 +63,7 @@ const Status = (props: Props) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [props.otherUid]);
 
   const updateDB = async () => {
     // 追加されたリストから重複の削除
