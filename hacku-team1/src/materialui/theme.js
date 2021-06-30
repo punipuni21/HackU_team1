@@ -5,6 +5,9 @@ export const theme = createMuiTheme({
     fontFamily:"Noto Sans JP",
     h2: {
       fontSize: "24px",
+      "@media (max-width:600px)": {
+        fontSize: "20px",
+      },
     },
     body1: {
       fontSize: "20px",

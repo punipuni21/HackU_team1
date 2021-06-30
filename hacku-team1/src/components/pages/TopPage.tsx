@@ -59,8 +59,8 @@ const TopPage: React.FC<Props> = ({ uid }) => {
   return (
     <Container className={classes.root}>
       <Introduction />
-      <Typography variant="h2">最近消化されたおすすめ</Typography>
       <ContentList
+        colSize={5}
         classname={classes.contentList}
         contents={contentDataList}
       ></ContentList>

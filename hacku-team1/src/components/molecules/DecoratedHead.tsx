@@ -14,7 +14,7 @@ const DecoratedHead: React.FC<Props> = ({ color, icon, text }) => {
     <Box borderBottom={2} color={color} mb={3} pb={1}>
       <Grid container direction="row" alignItems="center" spacing={1}>
         <Grid item>
-          <Box mt={0.8}>{icon}</Box>
+          <Box mt={0.5}>{icon}</Box>
         </Grid>
         <Grid item>
           <Typography variant="h2">{text}</Typography>
