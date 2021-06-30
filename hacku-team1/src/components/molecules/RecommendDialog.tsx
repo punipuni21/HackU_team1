@@ -274,6 +274,24 @@ const RecommendDialog = (props: Props) => {
       </DialogContent>
       <DialogActions>
         { props.isMyPage ? (
+          <Button
+            // onClick={handleCloseWithDelete}
+            onClick={() => {
+              if (window.confirm("本当にこのおすすめを削除しますか？"))
+                handleCloseWithDelete();
+            }}
+            color="primary"
+          >
+          <DeleteOutlinedIcon />
+          このおすすめを削除
+        </Button>
+        ) : (
+          <></>
+        )}
+        
+      </DialogActions>
+      <DialogActions>
+        { props.isMyPage ? (
           <Container className={classes.action}>
             <Button
               onClick={handleCloseWithUpload}
@@ -291,11 +309,13 @@ const RecommendDialog = (props: Props) => {
             </Button>
           </Container>
         ) : (
-          <Button 
-            onClick={handleCloseWithGoodUpdate} 
-            color="primary">
-            戻る
-          </Button>
+          <Container className={classes.action}>
+            <Button 
+              onClick={handleCloseWithGoodUpdate} 
+              color="primary">
+              戻る
+            </Button>
+          </Container>
         )}
       </DialogActions>
     </Dialog>
