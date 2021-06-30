@@ -1,63 +1,84 @@
 import React from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 
+import CheckCircle from "@material-ui/icons/CheckCircle";
+
+import DecoratedHead from "../molecules/DecoratedHead";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      width: "100%",
-      position: "relative",
-      display: "flex",
-      height: "15em",
-      flexWrap: "wrap",
-      justifyContent: "space-around",
-      overflow: "auto",
-      backgroundColor: theme.palette.background.paper,
-    },
     gridList: {
-      flexWrap: "wrap",
+      flexWrap: "nowrap",
       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
       transform: "translateZ(0)",
     },
-    title: {
-      color: "white",
-      fontWeight: "bold",
+    gridListTile: {
+      width: "100%",
+      minWidth: "180px",
+      height: "100% !important",
+      maxHeight: "400px",
     },
-    titleBar: {
-      background:
-        "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    avatar: {
+      width: "160px",
+      height: "120px",
+      margin: "0 auto",
     },
-    image: {
-      width: "auto",
+    typography: {
+      margin: "1rem 0",
+    },
+    overall: {
+      width: "100%",
       height: "100%",
     },
   })
 );
 
 type Props = {
+  colSize: number;
   classname: string;
   contents: any[];
 };
 
-const ContentList: React.FC<Props> = ({ classname, contents }) => {
+const ContentList: React.FC<Props> = ({ colSize, classname, contents }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={2} spacing={5}>
+    <div>
+      <DecoratedHead
+        color="primary.main"
+        icon={<CheckCircle />}
+        text="最近消化されたおすすめ"
+      />
+      <GridList className={classes.gridList} cols={colSize}>
         {contents.map((content) => (
-          <GridListTile>
-            <img className={classes.image} src={content.src} alt={content.alt} />
-            <GridListTileBar
-              title={content.text}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-            />
+          <GridListTile
+            key={content.src + content.text}
+            className={classes.gridListTile}
+          >
+            <Button
+              onClick={() => alert("おすすめを押した")}
+              className={classes.overall}
+            >
+              <Container style={{ padding: 0 }}>
+                <Avatar
+                  variant="square"
+                  alt={content.text}
+                  src={content.src}
+                  className={classes.avatar}
+                />
+                <Typography variant="body1" className={classes.typography}>
+                  {content.text}
+                </Typography>
+              </Container>
+            </Button>
           </GridListTile>
         ))}
       </GridList>
