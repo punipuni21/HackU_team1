@@ -7,10 +7,18 @@ import {
   DialogActions,
   DialogTitle,
   TextField,
-  Icon
+// <<<<<<< HEAD
+//   Icon
+// } from "@material-ui/core";
+// import { Box } from "@material-ui/core";
+// =======
+  Container,
+  Box,
+  Typography,
 } from "@material-ui/core";
+import SendRoundedIcon from "@material-ui/icons/SendRounded";
+import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { Box } from "@material-ui/core";
 
 import firebase from "firebase/app";
 import { db, firebaseApp } from "../../firebase/firebase";
@@ -37,11 +45,14 @@ type MyFile = File & {
 };
 
 const useStyles = makeStyles((theme) => ({
-  content: {
-    textAlign: "center",
-  },
   text: {
-    width: "30em",
+    width: "100%",
+  },
+  action: {
+    width: "fit-content",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
   },
   goodButton: {
     marginTop: 10,
@@ -210,19 +221,34 @@ const RecommendDialog = (props: Props) => {
           handleCloseWithGoodUpdate
       )}
       aria-labelledby="form-dialog-title"
+      fullWidth
     >
-      <DialogTitle id="form-dialog-title" className={classes.content}>
-        {props.title}
+      <DialogTitle id="form-dialog-title">
+        <Typography align="center" variant="h6">
+          {props.title}
+        </Typography>
       </DialogTitle>
-      <DialogContent>
-        <div className={classes.content}>
+      <DialogContent dividers>
+        <Container>
           <a href={props.refURL} target="_blank" rel="noopener noreferrer">
             おすすめのリンク
           </a>
-        </div>
-        { props.isMyPage ? (
-          <React.Fragment>
-            <div className={classes.content}>
+          { props.isMyPage ? (
+            <React.Fragment>
+              <Box mt={1} mb={1}>
+              <form>
+                <TextField
+                  className={classes.text}
+                  id="outlined-multiline-static"
+                  label="感想など"
+                  multiline
+                  rows={8}
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  variant="outlined"
+                />
+              </form>
+              </Box>
               <Upload
                 uploading={uploading}
                 files={files}
@@ -230,59 +256,40 @@ const RecommendDialog = (props: Props) => {
                 setImageURL={setImageURL}
                 setFiles={setFiles}
               />
-            </div>
-            <form>
-              <TextField
-                className={classes.text}
-                id="outlined-multiline-static"
-                label="感想など"
-                multiline
-                rows={8}
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
+            </React.Fragment>
+          ) : (
+            <Box textAlign='center'>
+              <Button
                 variant="outlined"
-              />
-            </form>
-          </React.Fragment>
-        ) : (
-          <Box textAlign='center'>
-            <Button
-              variant="outlined"
-              color={ isGood ? ("secondary") : ("primary")}
-              className={classes.goodButton}
-              endIcon={<FavoriteIcon />}
-              onClick={ () => setisGood(!isGood)}
-            >
-              { isGood ? ("いいね済み") : ("いいね")}
-            </Button>
-          </Box>
-          
-        )}
+                color={ isGood ? ("secondary") : ("primary")}
+                className={classes.goodButton}
+                endIcon={<FavoriteIcon />}
+                onClick={ () => setisGood(!isGood)}
+              >
+                { isGood ? ("いいね済み") : ("いいね")}
+              </Button>
+            </Box>
+          )}
+        </Container>
       </DialogContent>
       <DialogActions>
         { props.isMyPage ? (
-          <React.Fragment>
-            <Button
-            // onClick={handleCloseWithDelete}
-            onClick={() => {
-              if (window.confirm("本当にこのおすすめを削除しますか？"))
-                handleCloseWithDelete();
-            }}
-            color="primary"
-            >
-              削除
-            </Button>
+          <Container className={classes.action}>
             <Button
               onClick={handleCloseWithUpload}
               color="primary"
               disabled={files.length === 0 || input === ""}
+              variant="contained"
             >
+              <Box mr={1} mt={1}>
+                <SendRoundedIcon fontSize="small" />
+              </Box>
               投稿
             </Button>
             <Button onClick={handleCloseWithCancel} color="primary">
               キャンセル
             </Button>
-          </React.Fragment>
+          </Container>
         ) : (
           <Button 
             onClick={handleCloseWithGoodUpdate} 

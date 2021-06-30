@@ -1,40 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+
 import Introduction from "../molecules/Introduction";
 import ContentList from "../organisms/ContentList";
-import TextLabel from "../atoms/TextLabel";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Usage from "../organisms/Usage";
 import { db } from "../../firebase/firebase";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    textLabel: {
-      position: "static",
-      left: "0.69%",
-      right: "72.08%",
-      top: "50%",
-      bottom: "46.09%",
-      width: "730px",
-      height: "56px",
-      /* H2 - bold 44 (56, 0.2px) */
-      fontFamily: "Roboto",
-      fontStyle: "normal",
-      fontWeight: "normal",
-      fontSize: "28px",
-      lineHeight: "140.62%",
-
-      /* identical to box height, or 127% */
-      textDecorationLine: "underline",
-      textAlign: "center",
-      letterSpacing: "0.2px",
-      /* Light / Black */
-      color: "black",
-      /* Inside Auto Layout */
-      flex: "none",
-      order: 0,
-      flexGrow: 0,
-      margin: "0",
-      padding: "3% 0",
-    },
     contentList: {
       width: "100%",
       height: "auto",
@@ -44,17 +19,14 @@ const useStyles = makeStyles((theme: Theme) =>
       // bottom: "0px",
       background: "#FFFFFF",
     },
-    introduction: {
-      margin: "0px",
+    root: {
+      // height: "90vh",
     },
-    introContent: {
-      height: "90vh",
-    }
   })
 );
 
 type Props = {
-  uid : string | null;
+  uid: string | null;
 };
 
 const TopPage: React.FC<Props> = ({ uid }) => {
@@ -85,19 +57,15 @@ const TopPage: React.FC<Props> = ({ uid }) => {
   };
 
   return (
-    <div className={classes.introContent}>
-      <div className={classes.introduction}>
-        <Introduction></Introduction>
-        <TextLabel
-          classname="description"
-          text="みんなに消化されたコンテンツ"
-        ></TextLabel>
-      </div>
-        <ContentList
-          classname={classes.contentList}
-          contents={contentDataList}
-        ></ContentList>
-    </div>
+    <Container className={classes.root}>
+      <Introduction />
+      <ContentList
+        colSize={5}
+        classname={classes.contentList}
+        contents={contentDataList}
+      ></ContentList>
+      <Usage />
+    </Container>
   );
 };
 

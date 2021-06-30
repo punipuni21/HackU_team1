@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       bottom: 0,
       zIndex: 1000,
       textAlign: "center",
-      backgroundColor: "gray",
+      backgroundColor: "#bb4d54",
       margin: 0,
     },
   },
