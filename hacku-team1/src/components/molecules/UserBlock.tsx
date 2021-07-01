@@ -18,10 +18,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     typography: {
       margin: "1rem 0",
+      textTransform: "none",
     },
 
-    tag1: { marginRight: "0.25rem" },
-    tag2: { marginLeft: "0.25rem" },
+    tag1: {
+      marginRight: "0.25rem",
+      textTransform: "none",
+    },
+    tag2: {
+      marginLeft: "0.25rem",
+      textTransform: "none",
+    },
 
     overall: {
       width: "100%",
