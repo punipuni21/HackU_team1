@@ -4,11 +4,12 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
-import UserIcon from "../atoms/UserIcon";
-import GroupIcon from "../atoms/GroupIcon";
+import PeopleIcon from "@material-ui/icons/People";
 import AppIcon from "../atoms/AppIcon";
 import AppName from "./AppName";
 import { Typography } from "@material-ui/core";
+
+import PersonIcon from "@material-ui/icons/Person";
 
 type Props = {
   isSignIn: boolean;
@@ -130,9 +131,8 @@ const SectionBar: React.FC<Props> = (props) => {
             <Tab
               label={
                 <div style={{ display: "flex", paddingTop: "0.8rem" }}>
-                  <UserIcon
-                    size={28}
-                    color="white"
+                  <PersonIcon
+                    fontSize="large"
                     style={{ marginRight: "0.5rem" }}
                   />
                   <Typography variant="h6">わたし</Typography>
@@ -151,11 +151,11 @@ const SectionBar: React.FC<Props> = (props) => {
             <Tab
               label={
                 <div style={{ display: "flex", paddingTop: "0.8rem" }}>
-                  <GroupIcon
-                    size={30}
-                    color="white"
+                  <PeopleIcon
+                    fontSize="large"
                     style={{ marginRight: "0.5rem" }}
                   />
+
                   <Typography variant="h6">だれか</Typography>
                 </div>
               }
@@ -183,9 +183,7 @@ const SectionBar: React.FC<Props> = (props) => {
             <Tab style={{ display: "none" }}></Tab>
             <div className={classes.tabMobile} onClick={() => handleClick(1)}>
               <Tab
-                icon={
-                  <UserIcon size={18} color="white" style={{ margin: 0 }} />
-                }
+                icon={<PersonIcon style={{ margin: 0 }} />}
                 label={<span className={classes.tabMobileLabel}>わたし</span>}
                 component={Link}
                 to="/mypage"
@@ -195,9 +193,7 @@ const SectionBar: React.FC<Props> = (props) => {
             </div>
             <div className={classes.tabMobile} onClick={() => handleClick(2)}>
               <Tab
-                icon={
-                  <GroupIcon size={18} color="white" style={{ margin: 0 }} />
-                }
+                icon={<PeopleIcon style={{ margin: 0 }} />}
                 label={<span className={classes.tabMobileLabel}>だれか</span>}
                 component={Link}
                 to="/otherspage"
