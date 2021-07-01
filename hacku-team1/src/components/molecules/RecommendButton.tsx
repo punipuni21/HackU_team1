@@ -6,9 +6,8 @@ import RecommendDialog from "../molecules/RecommendDialog";
 // import { Typography } from "@material-ui/core/styles/createTypography";
 import { Typography } from "@material-ui/core";
 
-import firebase from "firebase/app";
-import { db, firebaseApp } from "../../firebase/firebase";
 import RecommendIcon from "../atoms/RecommendIcon";
+import LightTooltip from "../atoms/LightTooltip";
 
 interface Props {
   myUid: string;
@@ -60,27 +59,36 @@ const RecommendButton = (props: Props) => {
 
   return (
     <>
-      <Button
-        variant="outlined"
-        className={classes.button}
-        onClick={handleOpen}
-        endIcon={
-          <div className={classes.goodIcon}>
-            <RecommendIcon
-              size={18}
-              color={!isGood ? "#e2e2e2" : "#bb4d54"}
-              style={{
-                marginRight: "0.2rem",
-                marginTop: "0.1rem",
-                marginLeft: "0.3rem",
-              }}
-            />
-            <Typography className={classes.goodNumFont}>{goodNum}</Typography>
-          </div>
-        }
+      <LightTooltip 
+        title={
+          <a href={props.refURL} target="_blank" rel="noopener noreferrer">
+            おすすめ者による参考URL
+          </a>}
+        placement="top-end"
+        interactive
       >
-        {props.text}
-      </Button>
+        <Button
+          variant="outlined"
+          className={classes.button}
+          onClick={handleOpen}
+          endIcon={
+            <div className={classes.goodIcon}>
+              <RecommendIcon
+                size={18}
+                color={!isGood ? "#e2e2e2" : "#bb4d54"}
+                style={{
+                  marginRight: "0.2rem",
+                  marginTop: "0.1rem",
+                  marginLeft: "0.3rem",
+                }}
+              />
+              <Typography className={classes.goodNumFont}>{goodNum}</Typography>
+            </div>
+          }
+        >
+          {props.text}
+        </Button>
+      </LightTooltip>
       <RecommendDialog
         myUid={props.myUid}
         docid={props.docid}
