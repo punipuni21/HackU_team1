@@ -244,9 +244,9 @@ const RecommendDialog = (props: Props) => {
       </DialogTitle>
       <DialogContent dividers>
         <Container>
-          <a href={props.refURL} target="_blank" rel="noopener noreferrer">
+          {/* <a href={props.refURL} target="_blank" rel="noopener noreferrer">
             おすすめのリンク
-          </a>
+          </a> */}
           {props.isMyPage ? (
             <React.Fragment>
               <Box mt={1} mb={1}>
