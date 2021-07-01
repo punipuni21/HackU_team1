@@ -137,7 +137,7 @@ const Status = (props: Props) => {
             </Box>
           </Grid>
           <Grid item>
-            <Typography variant="h2">何の初心者？</Typography>
+            <Typography variant="h2">何の素人？</Typography>
           </Grid>
           <Grid item>
             {props.myUid === props.otherUid && (

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import { Box, IconButton, Tooltip} from "@material-ui/core";
+import { Box, IconButton, Tooltip } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import EditDialog from "./EditDialog";
@@ -16,7 +16,7 @@ interface Props {
 const LightTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
+    color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
     fontSize: 11,
   },
@@ -41,7 +41,7 @@ const EditButton: React.FC<Props> = (props) => {
         </LightTooltip>
       </Box>
       <EditDialog
-        title={"何の初心者?"}
+        title={"何の素人?"}
         contents={props.contents}
         editContents={props.editContents}
         isOpen={open}
