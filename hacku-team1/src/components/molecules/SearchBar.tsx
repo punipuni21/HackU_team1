@@ -1,20 +1,19 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import SearchIcon from "@material-ui/icons/Search";
-import Button from "@material-ui/core/Button";
 import React, { useState } from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      "& > *": {
-        width: "25ch",
-      },
+      display: "flex",
+      justifyContent: "center",
     },
     searchBox: {
       display: "flex",
-      // alignItems: "center",
-      justifyContent: "center",
+      width: "90%",
     },
     searchIcon: {
       fontSize: "xx-large",
@@ -39,9 +38,20 @@ type Props = {
 
 const SearchBar: React.FC<Props> = ({ text, onChange, onClick }) => {
   const classes = useStyles();
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    onClick();
+  };
+
   return (
-    <div className={classes.searchBox}>
-      <form noValidate className={classes.root} autoComplete="off">
+    <form
+      noValidate
+      className={classes.root}
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <div className={classes.searchBox}>
         <TextField
           id="outlined-basic"
           value={text}
@@ -51,16 +61,16 @@ const SearchBar: React.FC<Props> = ({ text, onChange, onClick }) => {
           onChange={onChange}
           className={classes.textfield}
         />
-      </form>
-
-      <Button
-        onClick={onClick}
-        variant="contained"
-        className={classes.searchButton}
-      >
-        <SearchIcon className={classes.searchIcon} />
-      </Button>
-    </div>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.searchButton}
+        >
+          <SearchIcon className={classes.searchIcon} />
+        </Button>
+      </div>
+    </form>
   );
 };
 
