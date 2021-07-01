@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { useHistory } from "react-router-dom";
-
-import SectionBar from "../molecules/SectionBar";
-
-import firebase from "../../firebase/firebase";
-import { db } from "../../firebase/firebase";
 import {
   Avatar,
   Button,
@@ -17,6 +10,8 @@ import {
   Box,
 } from "@material-ui/core";
 import MeetingRoomOutlinedIcon from "@material-ui/icons/MeetingRoomOutlined";
+
+import SectionBar from "../molecules/SectionBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,61 +38,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type Props = {
-  handleLogin: (uid: string | null) => void;
+  signIn: () => void;
+  signOut: () => void;
   uid: string | null;
+  userIcon: string;
   setOtherUid: any;
 };
-const NavigationBar: React.FC<Props> = ({ handleLogin, uid, setOtherUid }) => {
+const NavigationBar: React.FC<Props> = ({
+  signIn,
+  signOut,
+  uid,
+  userIcon,
+  setOtherUid,
+}) => {
   const classes = useStyles();
-  const history = useHistory();
 
-  const [user, setUser] = useState<firebase.firestore.DocumentData | null>(
-    null
-  );
-
-  const [usericon, setUserIcon] = useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
-  useEffect(() => {
-    return firebase.auth().onAuthStateChanged(async (user) => {
-      setUser(user);
-      if (user) {
-        handleLogin(user.uid);
-        user.photoURL && setUserIcon(user.photoURL);
-        var userDoc = await db.collection("User").doc(user.uid).get();
-        if (!userDoc.exists) {
-          // Firestore にユーザー用のドキュメントが作られていなければ作る
-          await userDoc.ref.set({
-            displayName: user.displayName,
-            iconURL: user.photoURL,
-          });
-
-          // 例として、statusに「このアプリの初心者」
-          await db
-            .collection("Status")
-            .add({ content: "このアプリの初心者", userID: user.uid });
-        } else {
-          // 存在する場合はディスプレイネームとアイコンを更新
-          await userDoc.ref.update({
-            displayName: user.displayName,
-            iconURL: user.photoURL,
-          });
-        }
-      } else {
-        handleLogin(null);
-      }
-    });
-  }, []);
-
-  const signIn = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
-  };
-
-  const signOut = () => {
-    firebase.auth().signOut();
-    history.push("/");
-  };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -113,20 +69,20 @@ const NavigationBar: React.FC<Props> = ({ handleLogin, uid, setOtherUid }) => {
         <Toolbar className={classes.toolBar}>
           <div className={classes.sectionBar}>
             <SectionBar
-              isSignIn={user ? true : false}
+              isSignIn={uid ? true : false}
               uid={uid}
               setOtherUid={setOtherUid}
             />
           </div>
 
-          {user ? (
+          {uid ? (
             <>
               <Button
                 onClick={handleClick}
                 aria-controls="simple-menu"
                 aria-haspopup="true"
               >
-                <Avatar src={usericon} />
+                <Avatar src={userIcon} />
               </Button>
               <Menu
                 id="simple-menu"
