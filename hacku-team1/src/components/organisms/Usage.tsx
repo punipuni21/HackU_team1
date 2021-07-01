@@ -81,13 +81,13 @@ const Usage: React.FC = () => {
                     />
                   </div>
                   <Typography variant="h5" className={classes.usageTitle}>
-                    1. 何の素人か登録する
+                    1. 何のしろうとか登録する
                   </Typography>
                   <Typography className={classes.usageBody}>
                     自分が始めたいことは、「わたし」から登録できます
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    「わたし」に行き、何の素人かを登録しましょう
+                    「わたし」に行き、何のしろうとかを登録しましょう
                   </Typography>
                 </CardContent>
               </Card>
@@ -106,7 +106,7 @@ const Usage: React.FC = () => {
                     2. おすすめされるのを待つ
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    先輩たちからおすすめされると、「わたし」の「おすすめです。」欄に表示されます
+                    せんぱいたちからおすすめされると、「わたし」の「おすすめです。」欄に表示されます
                   </Typography>
                 </CardContent>
               </Card>
@@ -157,7 +157,7 @@ const Usage: React.FC = () => {
                     挑戦できたら、「わたし」から写真をつけて結果を報告しましょう
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    先輩たちが、あなたの報告を心待ちにしています
+                    せんぱいたちが、あなたの報告を心待ちにしています
                   </Typography>
                 </CardContent>
               </Card>
@@ -185,7 +185,7 @@ const Usage: React.FC = () => {
                   5. おすすめ待ち人を探す
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  次はあなたが先輩となっておすすめする番です
+                  次はあなたがせんぱいとなっておすすめする番です
                 </Typography>
                 <Typography className={classes.usageBody}>
                   「だれか」からあなたがおすすめできる人を探しましょう
@@ -204,10 +204,10 @@ const Usage: React.FC = () => {
                   />
                 </div>
                 <Typography variant="h5" className={classes.usageTitle}>
-                  6. 先輩としておすすめする
+                  6. せんぱいとしておすすめする
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  見つけた素人さんにおすすめを届けましょう
+                  見つけたしろうとさんにおすすめを届けましょう
                 </Typography>
                 <Typography className={classes.usageBody}>
                   その人の「おすすめです。」欄におすすめを追加することができます

@@ -122,7 +122,7 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
             <Link href="/mypage" color="secondary">
               わたし
             </Link>
-            」から何の素人なのかを登録しましょう
+            」から何のしろうとなのかを登録しましょう
           </Alert>
         </Box>
       </Box>
