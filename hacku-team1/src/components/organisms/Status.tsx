@@ -9,6 +9,7 @@ import {
   IconButton,
   SvgIcon,
   Typography,
+  Fab,
 } from "@material-ui/core";
 
 import EditButton from "../molecules/EditButton";
@@ -17,6 +18,7 @@ import DecoratedHead from "../molecules/DecoratedHead";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import BiginnerIcon from "../atoms/BeginnerIcon";
 import { StayPrimaryLandscape } from "@material-ui/icons";
+import AddIcon from "@material-ui/icons/Add";
 
 interface Props {
   text: string;
@@ -64,6 +66,13 @@ async function deleteStatusFromDB(
 const Status = (props: Props) => {
   const classes = useStyles();
   const [statusDataList, setStatusDataList] = useState<string[]>([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     getData();
@@ -146,6 +155,9 @@ const Status = (props: Props) => {
                 contents={statusDataList}
                 editContents={setStatusDataList}
                 updateDB={updateDB}
+                open={open}
+                handleClose={handleClose}
+                handleOpen={handleOpen}
               />
             )}
           </Grid>
@@ -153,10 +165,16 @@ const Status = (props: Props) => {
       </Box>
       <div className={classes.items}>
         {props.myUid === props.otherUid && statusDataList.length === 0 ? (
-          <Chip
-            variant="outlined"
-            label="右上のボタンから2つ以上追加してみよう！"
-          />
+          // <Chip
+          //   variant="outlined"
+          //   label="右上の「…」ボタンから2つ以上追加してみよう！"
+          // />
+          <Box mb={3}>
+            <Fab variant="extended" color="primary" onClick={handleOpen}>
+              あなたが初心者であるものを設定しましょう！
+              <AddIcon />
+            </Fab>
+          </Box>
         ) : (
           statusDataList.map((status) => (
             <StatusItem

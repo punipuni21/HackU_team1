@@ -11,10 +11,12 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputLabel from "@material-ui/core/InputLabel";
 
 import firebase from "firebase/app";
 import { db, firebaseApp } from "../../firebase/firebase";
-import RecommendIcon from "../atoms/RecommendIcon";
 
 type Props = {
   myUid: any;
@@ -36,45 +38,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RecommendAddDialog = (props: Props) => {
+const UserEditDialog = (props: Props) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const [inputContent, setInputContent] = useState("");
-  const [inputRefURL, setInputRefURL] = useState("");
+  const [inputName, setInputName] = useState("");
 
   useEffect(() => {
     setOpen(props.isOpen);
   }, [props.isOpen]);
 
-  const addRecommendOnDB = async () => {
+  const editUserNameOnDB = async () => {
     try {
-      await db.collection("Tips").add({
-        content: inputContent,
-        done: false,
-        doneContent: "",
-        imageURL: "",
-        recommenderIDs: [props.myUid],
-        refURL: inputRefURL,
-        userID: props.otherUid,
+      await db.collection("User").doc(props.myUid).update({
+        displayName: inputName,
       });
     } catch (error) {
-      console.log("おすすめの追加に失敗");
+      console.log("ユーザー名の変更に失敗");
     }
   };
 
   const handleCloseWithUpload = () => {
-    addRecommendOnDB();
-    setInputContent("");
-    setInputRefURL("");
+    editUserNameOnDB();
+    setInputName("");
     props.reloadDB();
     setOpen(false);
     props.doClose();
   };
 
   const handleCloseWithCancel = () => {
-    setInputContent("");
-    setInputRefURL("");
+    setInputName("");
     setOpen(false);
     props.doClose();
   };
@@ -87,37 +80,19 @@ const RecommendAddDialog = (props: Props) => {
       fullWidth
     >
       <DialogTitle id="form-dialog-title" className={classes.content}>
-        <Typography align="center" variant="h5">
-          おすすめする
+        <Typography align="center" variant="h6">
+          ユーザー編集
         </Typography>
       </DialogTitle>
       <DialogContent dividers>
-        <Typography align="center" variant="subtitle1">
-          初心者がはじめの一歩としてできる、かなり「具体的な」行動を
-          <br />
-          一文と参考URLを記入しておすすめしてみましょう！
-        </Typography>
-        <Box mb={1}>
-          <form>
-            <TextField
-              fullWidth
-              className={classes.text}
-              id="outlined-multiline-static"
-              label="おすすめ内容"
-              value={inputContent}
-              onChange={(event) => setInputContent(event.target.value)}
-              variant="outlined"
-            />
-          </form>
-        </Box>
         <form>
           <TextField
             fullWidth
             className={classes.text}
             id="outlined-multiline-static"
-            label="参考URL"
-            value={inputRefURL}
-            onChange={(event) => setInputRefURL(event.target.value)}
+            label="名前"
+            value={inputName}
+            onChange={(event) => setInputName(event.target.value)}
             variant="outlined"
           />
         </form>
@@ -127,16 +102,11 @@ const RecommendAddDialog = (props: Props) => {
           <Button
             onClick={handleCloseWithUpload}
             color="primary"
-            disabled={inputContent === "" || inputRefURL === ""}
+            disabled={inputName === ""}
             variant="contained"
             style={{ marginRight: "2rem" }}
           >
-            <RecommendIcon
-              size={16}
-              color="#ffffff"
-              style={{ marginRight: "0.5rem" }}
-            />
-            おすすめする！
+            更新
           </Button>
           <Button onClick={handleCloseWithCancel} color="primary">
             キャンセル
@@ -147,4 +117,4 @@ const RecommendAddDialog = (props: Props) => {
   );
 };
 
-export default RecommendAddDialog;
+export default UserEditDialog;

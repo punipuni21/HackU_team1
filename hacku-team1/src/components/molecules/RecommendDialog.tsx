@@ -82,7 +82,8 @@ const RecommendDialog = (props: Props) => {
       console.log("uploadImageAsPromise start");
 
       // アップロード先のファイルパスの作成
-      const file_name = file.name;
+      const file_name =
+        "/" + props.myUid + "/" + Date.now().toString() + "_" + file.name;
       const storageRef = firebaseApp
         .storage()
         .ref()
@@ -245,7 +246,7 @@ const RecommendDialog = (props: Props) => {
       <DialogContent dividers>
         <Container>
           <a href={props.refURL} target="_blank" rel="noopener noreferrer">
-            おすすめのリンク
+            せんぱいによる参考URL
           </a>
           {props.isMyPage ? (
             <React.Fragment>

@@ -6,7 +6,9 @@ import { db } from "../../firebase/firebase";
 
 import UserIcon from "../molecules/UserIcon";
 import UserName from "../molecules/UserName";
-import { Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
+import UserEditButton from "../molecules/UserEditButton";
 
 const useStyles = makeStyles({
   divider: {
@@ -45,14 +47,36 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
     <div>
       <Box m={2}>
         <Grid container alignItems="center" justify="center">
-          {icon.length !== 0 && (
-            <Grid item xs={4}>
-              <UserIcon name={name} icon={icon} />
-            </Grid>
+          {icon.length !== 0 ? (
+            <>
+              <Grid item xs={3}>
+                <UserIcon name={name} icon={icon} />
+              </Grid>
+              <Grid item xs={8}>
+                <UserName name={name} />
+              </Grid>
+              <Grid item xs={1}>
+                {myUid === otherUid && (
+                  <UserEditButton
+                    myUid={myUid}
+                    otherUid={otherUid}
+                    reloadDB={getData}
+                  />
+                )}
+              </Grid>
+            </>
+          ) : (
+            <>
+              <Grid item xs={4}>
+                <Skeleton variant="circle" width={96} height={96} />
+              </Grid>
+              <Grid item xs={8}>
+                <Typography component="div" variant="h3">
+                  <Skeleton />
+                </Typography>
+              </Grid>
+            </>
           )}
-          <Grid item xs={8}>
-            <UserName name={name} />
-          </Grid>
         </Grid>
       </Box>
       <Divider className={classes.divider} variant="middle" />
