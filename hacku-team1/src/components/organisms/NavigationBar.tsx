@@ -77,9 +77,9 @@ const NavigationBar: React.FC<Props> = ({ handleLogin, uid, setOtherUid }) => {
             .collection("Status")
             .add({ content: "このアプリの初心者", userID: user.uid });
         } else {
-          // 存在する場合はディスプレイネームとアイコンを更新
+          // 存在する場合はアイコンを更新
           await userDoc.ref.update({
-            displayName: user.displayName,
+            // displayName: user.displayName,
             iconURL: user.photoURL,
           });
         }

@@ -6,6 +6,7 @@ import { db } from "../../firebase/firebase";
 
 import UserIcon from "../molecules/UserIcon";
 import UserName from "../molecules/UserName";
+import UserEditButton from "../molecules/UserEditButton";
 import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -50,8 +51,17 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
               <UserIcon name={name} icon={icon} />
             </Grid>
           )}
-          <Grid item xs={8}>
+          <Grid item xs={7}>
             <UserName name={name} />
+          </Grid>
+          <Grid item xs={1}>
+            {myUid === otherUid && (
+              <UserEditButton
+                myUid={myUid}
+                otherUid={otherUid}
+                reloadDB={getData}
+              />
+            )}
           </Grid>
         </Grid>
       </Box>
