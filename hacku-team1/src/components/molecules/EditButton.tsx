@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import { Box, IconButton, Tooltip} from "@material-ui/core";
+import { Box, IconButton } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import EditDialog from "./EditDialog";
+import LightTooltip from "../atoms/LightTooltip"
 
 interface Props {
   style: string;
@@ -12,15 +12,6 @@ interface Props {
   editContents: any;
   updateDB: VoidFunction;
 }
-
-const LightTooltip = withStyles((theme: Theme) => ({
-  tooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
-    boxShadow: theme.shadows[1],
-    fontSize: 11,
-  },
-}))(Tooltip);
 
 const EditButton: React.FC<Props> = (props) => {
   const [open, setOpen] = useState(false);
