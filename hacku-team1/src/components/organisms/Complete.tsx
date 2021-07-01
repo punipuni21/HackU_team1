@@ -42,10 +42,10 @@ const useStyles = makeStyles((theme) => ({
     // marginLeft: "40px",
   },
   gridList: {
-    width: 500,
-    height: 450,
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)",
+    // maxWidth: 600,
+    // height: 450,
+    // // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    // transform: "translateZ(0)",
   },
   titleBar: {
     // background:
@@ -58,6 +58,19 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
+  },
+  gridtile: {
+    maxWidth: "300px",
+    maxHeight: "300px",
+    "& > *": {
+      borderRadius: "4px",
+      boxShadow:
+        "0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)",
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: "200px",
+    },
   },
 }));
 
@@ -110,42 +123,13 @@ const Complete: React.FC<Props> = ({ myUid, otherUid }) => {
           text="達成"
         />
       </Box>
-      {/* <div className={classes.buttons}>
-        {completeDataList.map((data: Data) => (
-          <CompleteButton
-            text={data.content}
-            refURL={data.refURL}
-            img={data.imageURL}
-            msg={data.doneContent}
-            // onClick={}
-          />
-        ))}
-      </div> */}
 
-      <GridList cellHeight={200} spacing={1} className={classes.gridList}>
-        {/* {tileData.map((tile) => (
-          <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.title}
-              titlePosition="top"
-              actionIcon={
-                  <StarBorderIcon />
-              }
-              actionPosition="left"
-              className={classes.titleBar}
-            />
-          </GridListTile>
-        ))} */}
+      <GridList cellHeight="auto" spacing={2} className={classes.gridList}>
         {completeDataList.map((data: Data) => (
-          <GridListTile key={data.content + data.imageURL} cols={1} rows={1}>
-            {/* <CompleteButton
-              text={data.content}
-              refURL={data.refURL}
-              img={data.imageURL}
-              msg={data.doneContent}
-              // onClick={}
-            /> */}
+          <GridListTile
+            key={data.content + data.imageURL}
+            className={classes.gridtile}
+          >
             <img src={data.imageURL} alt={data.content} />
             <GridListTileBar
               title={
