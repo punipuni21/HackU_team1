@@ -45,9 +45,11 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
     <div>
       <Box m={2}>
         <Grid container alignItems="center" justify="center">
-          <Grid item xs={4}>
-            <UserIcon name={name} icon={icon} />
-          </Grid>
+          {icon.length !== 0 && (
+            <Grid item xs={4}>
+              <UserIcon name={name} icon={icon} />
+            </Grid>
+          )}
           <Grid item xs={8}>
             <UserName name={name} />
           </Grid>
