@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Chip, Container, Fab, IconButton } from "@material-ui/core";
-import LocalHospitalRoundedIcon from "@material-ui/icons/LocalHospitalRounded";
+import { Container, Fab } from "@material-ui/core";
 
 import RecommendAddDialog from "../molecules/RecommendAddDialog";
 
@@ -38,14 +37,10 @@ const RecommendAddButton: React.FC<Props> = ({ myUid, otherUid, reloadDB }) => {
   return (
     <>
       <Container className={classes.container}>
-        <Chip
-          size="medium"
-          label="おすすめを追加する"
-          onClick={handleOpen}
-          onDelete={handleOpen}
-          deleteIcon={<AddIcon />}
-          color="primary"
-        />
+        <Fab variant="extended" color="primary" onClick={handleOpen}>
+          おすすめを追加する
+          <AddIcon />
+        </Fab>
       </Container>
       <RecommendAddDialog
         myUid={myUid}
