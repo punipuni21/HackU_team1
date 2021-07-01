@@ -87,11 +87,16 @@ const RecommendAddDialog = (props: Props) => {
       fullWidth
     >
       <DialogTitle id="form-dialog-title" className={classes.content}>
-        <Typography align="center" variant="h6">
+        <Typography align="center" variant="h5">
           おすすめする
         </Typography>
       </DialogTitle>
       <DialogContent dividers>
+        <Typography align="center" variant="subtitle1">
+          初心者がはじめの一歩としてできる、かなり「具体的な」行動を
+          <br />
+          一文と参考URLを記入しておすすめしてみましょう！
+        </Typography>
         <Box mb={1}>
           <form>
             <TextField

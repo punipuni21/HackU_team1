@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 15,
     paddingTop: 4,
     paddingBottom: 4,
+    textTransform: "none",
   },
   goodIcon: {
     display: "flex",
