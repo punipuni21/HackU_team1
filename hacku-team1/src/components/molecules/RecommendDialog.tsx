@@ -18,6 +18,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import firebase from "firebase/app";
 import { db, firebaseApp } from "../../firebase/firebase";
 import Upload from "../molecules/Upload";
+import RecommendIcon from "../atoms/RecommendIcon";
 import { error } from "console";
 
 type Props = {
@@ -278,10 +279,20 @@ const RecommendDialog = (props: Props) => {
                 variant="outlined"
                 color={isGood ? "secondary" : "primary"}
                 className={classes.goodButton}
-                endIcon={<FavoriteIcon />}
+                endIcon={
+                  <RecommendIcon
+                    size={18}
+                    color={!isGood ? "#bb4d54" : "#e2e2e2"}
+                    style={{
+                      marginRight: "0.2rem",
+                      marginTop: "0.1rem",
+                      marginLeft: "0.3rem",
+                    }}
+                  />
+                }
                 onClick={() => setisGood(!isGood)}
               >
-                {isGood ? "いいね済み" : "いいね"}
+                {isGood ? "おすすめ済み" : "おすすめ"}
               </Button>
             </Box>
           )}

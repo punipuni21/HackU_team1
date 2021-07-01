@@ -60,11 +60,12 @@ const RecommendButton = (props: Props) => {
 
   return (
     <>
-      <LightTooltip 
+      <LightTooltip
         title={
           <a href={props.refURL} target="_blank" rel="noopener noreferrer">
             せんぱいによる参考URL
-          </a>}
+          </a>
+        }
         placement="top-end"
         interactive
       >
@@ -76,7 +77,9 @@ const RecommendButton = (props: Props) => {
             <div className={classes.goodIcon}>
               <RecommendIcon
                 size={18}
-                color={!isGood ? "#e2e2e2" : "#bb4d54"}
+                color={
+                  props.isMyPage ? "#333333" : !isGood ? "#e2e2e2" : "#bb4d54"
+                }
                 style={{
                   marginRight: "0.2rem",
                   marginTop: "0.1rem",
@@ -96,7 +99,7 @@ const RecommendButton = (props: Props) => {
         title={
           props.isMyPage
             ? "「" + props.text + "」の成果を投稿！"
-            : "「" + props.text + "」がオススメ！"
+            : "「" + props.text + "」がおすすめ！"
         }
         refURL={props.refURL}
         isOpen={open}
