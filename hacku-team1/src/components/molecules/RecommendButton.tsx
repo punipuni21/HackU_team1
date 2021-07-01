@@ -63,7 +63,7 @@ const RecommendButton = (props: Props) => {
       <LightTooltip 
         title={
           <a href={props.refURL} target="_blank" rel="noopener noreferrer">
-            おすすめ者による参考URL
+            せんぱいによる参考URL
           </a>}
         placement="top-end"
         interactive
