@@ -1,37 +1,30 @@
-import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
+import SearchIcon from "@material-ui/icons/Search";
+
+import DecoratedHead from "../molecules/DecoratedHead";
 import SearchBar from "../molecules/SearchBar";
 
-const useStyles = makeStyles({
-  searchbar: {
-    marginBottom: "20px", 
-  },
-  divider: {
-    marginBottom: "20px",
-  },
-  h2: {
-    textAlign: "left",
-    marginLeft: "20px",
-    marginBottom: "20px",
-  },
-});
-
-type Props= {
-    text: string; 
-    onChange: any;
-    onClick: any;
-}
+type Props = {
+  text: string;
+  onChange: any;
+  onClick: any;
+};
 
 const Search: React.FC<Props> = ({ text, onChange, onClick }) => {
-  const classes = useStyles();
-
   return (
     <div>
-      <h2 className={classes.h2}>おすすめ待ちびとを探す</h2>
-      <div className={classes.searchbar}>
-        <SearchBar text = {text} onChange = {onChange} onClick = {onClick}/>
-      </div>
-      <Divider className={classes.divider} variant="middle"/>
+      <DecoratedHead
+        color="primary.main"
+        icon={<SearchIcon />}
+        text="おすすめ待ち人を探す"
+      />
+      <Box mb={3}>
+        <SearchBar text={text} onChange={onChange} onClick={onClick} />
+      </Box>
+      <Box mb={2}>
+        <Divider variant="middle" />
+      </Box>
     </div>
   );
 };
