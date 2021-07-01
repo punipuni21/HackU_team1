@@ -71,6 +71,10 @@ const useStyles = makeStyles((theme: Theme) =>
     circular: {
       textAlign: "center",
     },
+    warnning: {
+      fontSize: 3,
+      color: "#BB4D54"
+    }
   })
 );
 
@@ -111,7 +115,7 @@ export default function Upload(props: Props) {
   }, []);
 
   // Dropzone
-  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     onDrop,
     accept: acceptFile,
     minSize: 0,
@@ -186,7 +190,8 @@ export default function Upload(props: Props) {
                 <React.Fragment>
                 <Paper className={classes.dropzone} {...getRootProps()}>
                   <input {...getInputProps()} />
-                  {isDragActive ? <p>ドロップ</p> : <p>画像をアップロード(5MBまで)</p>}
+                  {isDragActive ? <p>ドロップ</p> : <p>画像をアップロード(5MBまで)</p>} 
+                  {fileRejections.length !== 0 ? <Typography className={classes.warnning}>5MB未満で1つの画像ファイルにしてください！</Typography> : <></>}
                 </Paper>
                 </React.Fragment>
               ) : (
