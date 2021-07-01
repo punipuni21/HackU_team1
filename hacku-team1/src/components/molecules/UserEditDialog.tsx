@@ -85,16 +85,17 @@ const UserEditDialog = (props: Props) => {
         </Typography>
       </DialogTitle>
       <DialogContent dividers>
-        <FormControl fullWidth variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-amount">
-            新しいユーザー名
-          </InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-amount"
+        <form>
+          <TextField
+            fullWidth
+            className={classes.text}
+            id="outlined-multiline-static"
+            label="名前"
             value={inputName}
             onChange={(event) => setInputName(event.target.value)}
+            variant="outlined"
           />
-        </FormControl>
+        </form>
       </DialogContent>
       <DialogActions>
         <Container className={classes.container}>
