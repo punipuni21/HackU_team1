@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
+import firebase, { db } from "./firebase/firebase";
+
 import TopPage from "./components/pages/TopPage";
-
 import NavigationBar from "./components/organisms/NavigationBar";
-
 import Footer from "./components/organisms/Footer";
-
 import UserPage from "./components/pages/UserPage";
-
 import OtherUsersPage from "./components/pages/OtherUsersPage";
-
-import { Redirect } from "react-router";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -72,13 +70,50 @@ function useLocalStorage(key: any, initialValue: any) {
 const App: React.FC = () => {
   const classes = useStyles();
 
+  const [userIcon, setUserIcon] = useState<string>("");
   const [uid, setUid] = useLocalStorage("uid", null);
   const [otherUid, setOtherUid] = useLocalStorage("otherUid", null);
 
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        handleLogin(user.uid);
+        user.photoURL && setUserIcon(user.photoURL);
+        var userDoc = await db.collection("User").doc(user.uid).get();
+        if (!userDoc.exists) {
+          // Firestore にユーザー用のドキュメントが作られていなければ作る
+          await userDoc.ref.set({
+            displayName: user.displayName,
+            iconURL: user.photoURL,
+          });
+          // 例として、statusに「このアプリの初心者」
+          await db
+            .collection("Status")
+            .add({ content: "しろ-せんの素人", userID: user.uid });
+        } else {
+          // 存在する場合はディスプレイネームとアイコンを更新
+          await userDoc.ref.update({
+            iconURL: user.photoURL,
+          });
+        }
+      } else {
+        handleLogin(null);
+      }
+    });
+  }, []);
+
+  const signIn = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  };
+
+  const signOut = () => {
+    firebase.auth().signOut();
+  };
+
   const handleLogin = (uid: string | null) => {
-    // console.log(uid);
     setUid(uid);
-    setOtherUid(otherUid);
+    // setOtherUid(otherUid);
   };
 
   return (
@@ -86,8 +121,10 @@ const App: React.FC = () => {
       <div className={classes.fixedfooter}>
         <Router>
           <NavigationBar
-            handleLogin={handleLogin}
+            signIn={signIn}
+            signOut={signOut}
             uid={uid}
+            userIcon={userIcon}
             setOtherUid={setOtherUid}
           />
           <div className={classes.toolbar} />
@@ -99,22 +136,35 @@ const App: React.FC = () => {
             />
             <Route
               path="/mypage"
-              render={() => <UserPage myUid={uid} otherUid={otherUid} />}
+              render={() =>
+                uid ? (
+                  <UserPage myUid={uid} otherUid={otherUid} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
             <Route
               path="/otherspage"
-              render={() => (
-                <OtherUsersPage uid={uid} setOtherUid={setOtherUid} />
-              )}
+              render={() =>
+                uid ? (
+                  <OtherUsersPage uid={uid} setOtherUid={setOtherUid} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
             <Route
               path="/otheruserpage"
-              // render={() => <UserPage myUid={uid} otherUid={otherUid} />}
               render={() =>
-                uid === otherUid ? (
-                  <Redirect to="/mypage" />
+                uid ? (
+                  uid === otherUid ? (
+                    <Redirect to="/mypage" />
+                  ) : (
+                    <UserPage myUid={uid} otherUid={otherUid} />
+                  )
                 ) : (
-                  <UserPage myUid={uid} otherUid={otherUid} />
+                  <Redirect to="/" />
                 )
               }
             />

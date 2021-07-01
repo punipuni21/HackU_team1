@@ -39,7 +39,7 @@ const EditButton: React.FC<Props> = (props) => {
         </LightTooltip>
       </Box>
       <EditDialog
-        title={"何の初心者?"}
+        title={"何のしろうと?"}
         contents={props.contents}
         editContents={props.editContents}
         isOpen={props.open}

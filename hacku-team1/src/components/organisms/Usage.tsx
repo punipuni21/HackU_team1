@@ -76,18 +76,18 @@ const Usage: React.FC = () => {
                   <div style={{ textAlign: "center" }}>
                     <img
                       alt="Usage1"
-                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage1.png?alt=media&token=c87b0e4d-08e5-4590-9b30-2eff1deb5485"
+                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage1.png?alt=media&token=ab31c0c8-6bfe-47c4-8cef-e7173506d4ef"
                       className={classes.usageImage}
                     />
                   </div>
                   <Typography variant="h5" className={classes.usageTitle}>
-                    1. 何の素人か登録する
+                    1. 何のしろうとか登録する
                   </Typography>
                   <Typography className={classes.usageBody}>
                     自分が始めたいことは、「わたし」から登録できます
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    「わたし」に行き、何の素人かを登録しましょう
+                    「わたし」に行き、何のしろうとかを登録しましょう
                   </Typography>
                 </CardContent>
               </Card>
@@ -98,7 +98,7 @@ const Usage: React.FC = () => {
                   <div style={{ textAlign: "center" }}>
                     <img
                       alt="Usage2"
-                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage2.png?alt=media&token=ff5e3289-eabc-4385-a7b8-98721256ba51"
+                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage2.png?alt=media&token=44643198-6172-40fc-8106-6cdc52dd2da0"
                       className={classes.usageImage}
                     />
                   </div>
@@ -106,7 +106,7 @@ const Usage: React.FC = () => {
                     2. おすすめされるのを待つ
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    先輩たちからおすすめされると、「わたし」の「おすすめです。」欄に表示されます
+                    せんぱいたちからおすすめされると、「わたし」の「おすすめです。」欄に表示されます
                   </Typography>
                 </CardContent>
               </Card>
@@ -127,7 +127,7 @@ const Usage: React.FC = () => {
                   <div style={{ textAlign: "center" }}>
                     <img
                       alt="Usage3"
-                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage3.png?alt=media&token=c0666f00-ed9c-436f-a032-83b7a0b1ae38"
+                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage3.png?alt=media&token=f6879f18-020d-40a3-84d4-4f8d6aa3c670"
                       className={classes.usageImage}
                     />
                   </div>
@@ -146,7 +146,7 @@ const Usage: React.FC = () => {
                   <div style={{ textAlign: "center" }}>
                     <img
                       alt="Usage4"
-                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage4.png?alt=media&token=c0a3498c-34ee-4515-b4fd-e98ef7678838"
+                      src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage4.png?alt=media&token=1f64ae86-5215-4e2b-bf52-2355078bc587"
                       className={classes.usageImage}
                     />
                   </div>
@@ -157,7 +157,7 @@ const Usage: React.FC = () => {
                     挑戦できたら、「わたし」から写真をつけて結果を報告しましょう
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    先輩たちが、あなたの報告を心待ちにしています
+                    せんぱいたちが、あなたの報告を心待ちにしています
                   </Typography>
                 </CardContent>
               </Card>
@@ -177,7 +177,7 @@ const Usage: React.FC = () => {
                 <div style={{ textAlign: "center" }}>
                   <img
                     alt="Usage5"
-                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage5.png?alt=media&token=cd16591b-9138-4186-9fc8-efd81330179c"
+                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage5.png?alt=media&token=e6b97169-7b83-4e44-a60d-dd5c2b6831f8"
                     className={classes.usageImage}
                   />
                 </div>
@@ -185,7 +185,7 @@ const Usage: React.FC = () => {
                   5. おすすめ待ち人を探す
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  次はあなたが先輩となっておすすめする番です
+                  次はあなたがせんぱいとなっておすすめする番です
                 </Typography>
                 <Typography className={classes.usageBody}>
                   「だれか」からあなたがおすすめできる人を探しましょう
@@ -199,15 +199,15 @@ const Usage: React.FC = () => {
                 <div style={{ textAlign: "center" }}>
                   <img
                     alt="Usage6"
-                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2Fusage6.png?alt=media&token=1bb04f0e-4c53-4b05-9fcf-96c5585a22dd"
+                    src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage6.png?alt=media&token=05c71997-8624-426e-88fc-830f3eb64f96"
                     className={classes.usageImage}
                   />
                 </div>
                 <Typography variant="h5" className={classes.usageTitle}>
-                  6. 先輩としておすすめする
+                  6. せんぱいとしておすすめする
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  見つけた素人さんにおすすめを届けましょう
+                  見つけたしろうとさんにおすすめを届けましょう
                 </Typography>
                 <Typography className={classes.usageBody}>
                   その人の「おすすめです。」欄におすすめを追加することができます

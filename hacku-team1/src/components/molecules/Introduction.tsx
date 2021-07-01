@@ -72,7 +72,7 @@ const Introduction: React.FC<Props> = ({ uid }) => {
     <div className={classes.root}>
       <img
         alt="Top Image"
-        src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FTopImg.png?alt=media&token=c9750052-2bdb-483f-858d-f8f9d64680c1"
+        src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2FTopImg.png?alt=media&token=b8c232e6-a77d-4a17-a5f4-54b8396132d1"
         className={classes.topImage}
       />
       <Typography variant="body1" className={classes.typography}>
