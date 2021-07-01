@@ -8,6 +8,8 @@ import UserIcon from "../molecules/UserIcon";
 import UserName from "../molecules/UserName";
 import { Box, Typography } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
+import UserEditButton from "../molecules/UserEditButton";
+
 
 const useStyles = makeStyles({
   divider: {
@@ -67,6 +69,19 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
               </Grid>
             </>
           )}
+
+          <Grid item xs={7}>
+            <UserName name={name} />
+          </Grid>
+          <Grid item xs={1}>
+            {myUid === otherUid && (
+              <UserEditButton
+                myUid={myUid}
+                otherUid={otherUid}
+                reloadDB={getData}
+              />
+            )}
+          </Grid>
         </Grid>
       </Box>
       <Divider className={classes.divider} variant="middle" />
