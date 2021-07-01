@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, IconButton } from "@material-ui/core";
 
 import EditDialog from "./EditDialog";
-import LightTooltip from "../atoms/LightTooltip"
+import LightTooltip from "../atoms/LightTooltip";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 interface Props {
@@ -29,7 +29,11 @@ const EditButton: React.FC<Props> = (props) => {
     <>
       <Box>
         <LightTooltip title="追加・削除" placement="right">
-          <IconButton className={props.style} onClick={handleOpen}　color="primary">
+          <IconButton
+            className={props.style}
+            onClick={props.handleOpen}
+            color="primary"
+          >
             <MoreHorizIcon />
           </IconButton>
         </LightTooltip>

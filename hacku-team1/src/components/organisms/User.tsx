@@ -10,7 +10,6 @@ import { Box, Typography } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import UserEditButton from "../molecules/UserEditButton";
 
-
 const useStyles = makeStyles({
   divider: {
     marginBottom: "20px",
@@ -50,11 +49,20 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
         <Grid container alignItems="center" justify="center">
           {icon.length !== 0 ? (
             <>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <UserIcon name={name} icon={icon} />
               </Grid>
               <Grid item xs={8}>
                 <UserName name={name} />
+              </Grid>
+              <Grid item xs={1}>
+                {myUid === otherUid && (
+                  <UserEditButton
+                    myUid={myUid}
+                    otherUid={otherUid}
+                    reloadDB={getData}
+                  />
+                )}
               </Grid>
             </>
           ) : (
@@ -69,19 +77,6 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
               </Grid>
             </>
           )}
-
-          <Grid item xs={7}>
-            <UserName name={name} />
-          </Grid>
-          <Grid item xs={1}>
-            {myUid === otherUid && (
-              <UserEditButton
-                myUid={myUid}
-                otherUid={otherUid}
-                reloadDB={getData}
-              />
-            )}
-          </Grid>
         </Grid>
       </Box>
       <Divider className={classes.divider} variant="middle" />
