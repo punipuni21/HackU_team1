@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
   name: string;
   icon: string;
-  tag1: string;
-  tag2: string;
+  tag1: string | null;
+  tag2: string | null;
   userid: string;
   setOtherUid: any;
 };
@@ -63,18 +63,26 @@ const UserBlock: React.FC<Props> = ({
         <Typography variant="h5" className={classes.typography}>
           {name}
         </Typography>
-        <Chip
-          variant="outlined"
-          size="small"
-          label={tag1}
-          className={classes.tag1}
-        />
-        <Chip
-          variant="outlined"
-          size="small"
-          label={tag2}
-          className={classes.tag2}
-        />
+        {tag1 !== null ? (
+          <Chip
+            variant="outlined"
+            size="small"
+            label={tag1}
+            className={classes.tag1}
+          />
+        ) : (
+          <></>
+        )}
+        {tag2 !== null ? (
+          <Chip
+            variant="outlined"
+            size="small"
+            label={tag2}
+            className={classes.tag2}
+          />
+        ) : (
+          <></>
+        )}
       </Container>
     </Button>
   );

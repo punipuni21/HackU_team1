@@ -59,10 +59,10 @@ const UsersBlock: React.FC<Props> = ({ width, Users, setOtherUid }) => {
               name={Users[value].user.displayName}
               icon={Users[value].user.iconURL}
               tag1={
-                Users[value].status[0] ? Users[value].status[0].content : "null"
+                Users[value].status[0] ? Users[value].status[0].content : null
               }
               tag2={
-                Users[value].status[1] ? Users[value].status[1].content : "null"
+                Users[value].status[1] ? Users[value].status[1].content : null
               }
               userid={Users[value].userid}
               setOtherUid={setOtherUid}
