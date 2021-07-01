@@ -82,7 +82,8 @@ const RecommendDialog = (props: Props) => {
       console.log("uploadImageAsPromise start");
 
       // アップロード先のファイルパスの作成
-      const file_name = file.name;
+      const file_name =
+        "/" + props.myUid + "/" + Date.now().toString() + "_" + file.name;
       const storageRef = firebaseApp
         .storage()
         .ref()
