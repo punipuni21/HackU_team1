@@ -106,7 +106,7 @@ const Usage: React.FC = () => {
                     2. おすすめされるのを待つ
                   </Typography>
                   <Typography className={classes.usageBody}>
-                    せんぱいたちからおすすめされると、「わたし」の「おすすめです。」欄に表示されます
+                    せんぱいたちからおすすめされると、「わたし」の「これ、おすすめです!」欄に表示されます
                   </Typography>
                 </CardContent>
               </Card>
@@ -207,10 +207,10 @@ const Usage: React.FC = () => {
                   6. せんぱいとしておすすめする
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  見つけたしろうとさんにおすすめを届けましょう
+                  見つけたしろうとさんにおすすめしましょう
                 </Typography>
                 <Typography className={classes.usageBody}>
-                  その人の「おすすめです。」欄におすすめを追加することができます
+                  その人の「これ、おすすめです!」欄におすすめを追加することができます
                 </Typography>
               </CardContent>
             </Card>

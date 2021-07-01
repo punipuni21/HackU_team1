@@ -17,7 +17,7 @@ const Search: React.FC<Props> = ({ text, onChange, onClick }) => {
       <DecoratedHead
         color="primary.main"
         icon={<SearchIcon />}
-        text="おすすめ待ち人を探す"
+        text="他のしろうとさんを探す"
       />
       <Box mb={3}>
         <SearchBar text={text} onChange={onChange} onClick={onClick} />
