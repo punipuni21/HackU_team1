@@ -84,8 +84,10 @@ const EditDialog = (props: Props) => {
   };
 
   const handleAddButton = (value: string) => {
-    props.editContents([...props.contents, value]);
-    setInput("");
+    if (value.length !== 0){
+      props.editContents([...props.contents, value]);
+      setInput("");
+    }
   };
 
   const handleDeleteButton = (index: number) => {
@@ -121,6 +123,7 @@ const EditDialog = (props: Props) => {
                 id="outlined-basic"
                 label="10文字以内"
                 value={input}
+                inputProps={{ maxLength: CHARACTER_LIMIT}}
                 helperText={`${input.length}/${CHARACTER_LIMIT}`}
                 onChange={(event) => setInput(event.target.value)}
                 variant="outlined"
