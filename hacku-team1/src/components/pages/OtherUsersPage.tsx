@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 
-import Search from "../organisms/Search";
-import UsersBlock from "../organisms/UsersBlock";
+import Search from '../organisms/Search';
+import UsersBlock from '../organisms/UsersBlock';
 
-import { db } from "../../firebase/firebase";
+import { db } from '../../firebase/firebase';
 
 const useStyles = makeStyles({
   h4: {
-    textAlign: "left",
-    marginLeft: "20px",
-    marginBottom: "20px",
+    textAlign: 'left',
+    marginLeft: '20px',
+    marginBottom: '20px',
   },
 });
 
@@ -23,7 +23,7 @@ type Props = {
 
 const OtherUsersPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   const classes = useStyles();
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   const [usersOrig, setUsersOrig] = useState<{
     [key: string]: {
@@ -44,6 +44,8 @@ const OtherUsersPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   // 初期マウント時に発火する
   // Firestoreからデータを取得
   useEffect(() => {
+    console.log('OtherUsersPage');
+
     GetAllUserData();
   }, []);
 
@@ -55,7 +57,7 @@ const OtherUsersPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   // 全てのStatusを取得、status.userIDをハッシュ値に変数のstatusを更新する
   const GetAllUserData = () => {
     let usersInfo: any = [];
-    db.collection("User")
+    db.collection('User')
       .get()
       .then((response) => {
         // then()の中は逐次処理となるので上から実行していく。
@@ -67,7 +69,7 @@ const OtherUsersPage: React.FC<Props> = ({ uid, setOtherUid }) => {
           };
         });
 
-        db.collection("Status")
+        db.collection('Status')
           .get()
           .then((response) => {
             response.forEach((statusDocument) => {
@@ -89,9 +91,7 @@ const OtherUsersPage: React.FC<Props> = ({ uid, setOtherUid }) => {
     usersOrig &&
       Object.keys(usersOrig).forEach((value) => {
         if (
-          usersOrig[value].user.displayName
-            .toLowerCase()
-            .indexOf(text.trim().toLowerCase()) > -1
+          usersOrig[value].user.displayName.toLowerCase().indexOf(text.trim().toLowerCase()) > -1
         ) {
           Usercopy[value] = usersOrig[value];
         }

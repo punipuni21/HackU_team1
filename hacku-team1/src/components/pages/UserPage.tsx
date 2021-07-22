@@ -52,6 +52,8 @@ const UserPage: React.FC<Props> = ({ myUid, otherUid }) => {
   const [icon, seticon] = useState('');
 
   useEffect(() => {
+    console.log('UserPage');
+
     getDataUser();
     getDataStatus();
     getDataTipsTodo();

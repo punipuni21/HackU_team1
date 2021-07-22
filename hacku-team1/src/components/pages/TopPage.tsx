@@ -41,6 +41,8 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   const classes = useStyles();
 
   useEffect(() => {
+    console.log('TopPage');
+
     getData();
     getRecoUsersList();
     getUserData();
