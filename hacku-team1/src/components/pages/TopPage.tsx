@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import Divider from "@material-ui/core/Divider";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import React, { useEffect, useState } from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Box, Container, Divider, Link, Typography } from '@material-ui/core';
 
-import CheckCircle from "@material-ui/icons/CheckCircle";
-import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
-import Alert from "@material-ui/lab/Alert";
+import Alert from '@material-ui/lab/Alert';
 
-import Introduction from "../molecules/Introduction";
-import ContentList from "../organisms/ContentList";
-import UsersList from "../organisms/UsersList";
-import Usage from "../organisms/Usage";
+import Introduction from '../molecules/Introduction';
+import ContentList from '../organisms/ContentList';
+import UsersList from '../organisms/UsersList';
+import Usage from '../organisms/Usage';
 
-import { db } from "../../firebase/firebase";
+import { db } from '../../firebase/firebase';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     contentList: {
-      width: "100%",
-      height: "auto",
+      width: '100%',
+      height: 'auto',
     },
   })
 );
@@ -45,6 +41,8 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   const classes = useStyles();
 
   useEffect(() => {
+    console.log('TopPage');
+
     getData();
     getRecoUsersList();
     getUserData();
@@ -53,8 +51,8 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
   const getData = async () => {
     const temporaryContentData: any = [];
     await db
-      .collection("Tips")
-      .where("done", "==", true)
+      .collection('Tips')
+      .where('done', '==', true)
       .limit(5)
       .get()
       .then(async (snapshots) => {
@@ -73,7 +71,7 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
 
   const getRecoUsersList = () => {
     let usersInfo: any = [];
-    db.collection("User")
+    db.collection('User')
       .get()
       .then((response) => {
         response.forEach((userDocument) => {
@@ -92,8 +90,8 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
 
   const getUserData = () => {
     if (!uid) return;
-    db.collection("Status")
-      .where("userID", "==", uid)
+    db.collection('Status')
+      .where('userID', '==', uid)
       .get()
       .then((response) => {
         if (response.empty) setOpen(true);
@@ -105,19 +103,17 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
     return (
       <Box
         style={{
-          position: "fixed",
+          position: 'fixed',
           zIndex: 100,
-          width: "100%",
-        }}
-      >
+          width: '100%',
+        }}>
         <Box mx={1}>
           <Alert
             variant="filled"
             onClose={() => {
               setOpen(false);
             }}
-            severity="info"
-          >
+            severity="info">
             「
             <Link href="/mypage" color="secondary">
               わたし
@@ -147,8 +143,7 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
           title="最近達成されたおすすめ"
           icon={<CheckCircle />}
           color="primary.main"
-          contents={contentDataList}
-        ></ContentList>
+          contents={contentDataList}></ContentList>
         <UsersList
           uid={uid}
           setOtherUid={setOtherUid}
@@ -156,16 +151,14 @@ const TopPage: React.FC<Props> = ({ uid, setOtherUid }) => {
           title="おすすめのユーザー"
           icon={<SupervisedUserCircleIcon />}
           color="primary.main"
-          contents={shuffleArray(recoUsersList)}
-        ></UsersList>
+          contents={shuffleArray(recoUsersList)}></UsersList>
         <Usage />
         <Divider variant="middle" />
         <Typography variant="body2" align="right">
           icon by <Link href="https://icooon-mono.com/">ICOON MONO</Link>
         </Typography>
         <Typography variant="body2" align="right">
-          illustration by{" "}
-          <Link href="https://loosedrawing.com/">Loose Drawing</Link>
+          illustration by <Link href="https://loosedrawing.com/">Loose Drawing</Link>
         </Typography>
       </Container>
     </>

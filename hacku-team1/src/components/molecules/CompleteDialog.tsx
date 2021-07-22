@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Dialog,
@@ -10,9 +10,8 @@ import {
   Typography,
   Box,
   Divider,
-} from "@material-ui/core";
-import Image from "../atoms/Image";
-import LinkIcon from "@material-ui/icons/Link";
+} from '@material-ui/core';
+import LinkIcon from '@material-ui/icons/Link';
 type Props = {
   title: string;
   refURL: string;
@@ -24,17 +23,17 @@ type Props = {
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   image: {
-    width: "80%",
+    width: '80%',
   },
   action: {
-    width: "fit-content",
+    width: 'fit-content',
   },
   box: {
-    display: "flex",
-    justifyContent: "flex-end",
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
 }));
 
@@ -54,27 +53,17 @@ const CompleteDialog = (props: Props) => {
 
   return (
     <>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <Container>
           <DialogTitle id="form-dialog-title" className={classes.content}>
-            <Typography align="center" variant="h4">
-              {props.title}
-            </Typography>
+            {props.title}
           </DialogTitle>
           <DialogContent dividers>
             <Box mb={1}>
               <Typography variant="body1">{props.msg}</Typography>
             </Box>
             <div className={classes.content}>
-              <Image
-                src={props.img}
-                alt={props.title}
-                classname={classes.image}
-              />
+              <img src={props.img} alt={props.title} className={classes.image} />
             </div>
             <Box m={1}>
               <Divider />
@@ -88,12 +77,7 @@ const CompleteDialog = (props: Props) => {
           </DialogContent>
           <DialogActions>
             <Container className={classes.action}>
-              <Button
-                onClick={handleClose}
-                color="primary"
-                variant="outlined"
-                size="large"
-              >
+              <Button onClick={handleClose} color="primary" variant="outlined" size="large">
                 閉じる
               </Button>
             </Container>

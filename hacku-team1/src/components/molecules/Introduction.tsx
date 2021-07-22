@@ -1,36 +1,36 @@
-import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
-import firebase from "../../firebase/firebase";
+import firebase from '../../firebase/firebase';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
-      textAlign: "center",
+      width: '100%',
+      textAlign: 'center',
     },
     topImage: {
-      height: "240px",
-      [theme.breakpoints.down("xs")]: {
-        height: "180px",
+      height: '240px',
+      [theme.breakpoints.down('xs')]: {
+        height: '180px',
       },
     },
     typography: {
-      margin: "1.5rem 0",
-      fontFamily: "serif",
+      margin: '1.5rem 0',
+      fontFamily: 'serif',
     },
     mobileBr: {
-      display: "none",
-      [theme.breakpoints.down("xs")]: {
-        display: "inline",
+      display: 'none',
+      [theme.breakpoints.down('xs')]: {
+        display: 'inline',
       },
     },
     divider: {
-      marginBottom: "20px",
+      marginBottom: '20px',
     },
   })
 );
@@ -58,9 +58,8 @@ const Introduction: React.FC<Props> = ({ uid }) => {
           <Button
             variant="contained"
             color="primary"
-            style={{ textTransform: "none" }}
-            onClick={onClick}
-          >
+            style={{ textTransform: 'none' }}
+            onClick={onClick}>
             Google で Sign In
           </Button>
         </Box>
@@ -85,11 +84,11 @@ const Introduction: React.FC<Props> = ({ uid }) => {
       </Typography>
       <Typography variant="body1" className={classes.typography}>
         それは自分と他の人の間に引かれた <br className={classes.mobileBr} />
-        <span style={{ textDecoration: "underline" }}>見えない境界線</span>
+        <span style={{ textDecoration: 'underline' }}>見えない境界線</span>
         のよう
       </Typography>
       <Typography variant="body1" className={classes.typography}>
-        <b style={{ color: "#bb4d54", fontSize: "1.2em" }}>「しろ-せん」</b>は{" "}
+        <b style={{ color: '#bb4d54', fontSize: '1.2em' }}>「しろ-せん」</b>は{' '}
         <br className={classes.mobileBr} />
         その白い線から一歩踏み出す <br className={classes.mobileBr} />
         お手伝いをするアプリです
