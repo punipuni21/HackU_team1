@@ -1,47 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import { db } from "../../firebase/firebase";
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
-import UserIcon from "../molecules/UserIcon";
-import UserName from "../molecules/UserName";
-import { Box, Typography } from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
-import UserEditButton from "../molecules/UserEditButton";
+import UserEditButton from '../molecules/UserEditButton';
+
+import { Box, Typography, Grid, Divider, Avatar, Container } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const useStyles = makeStyles({
-  divider: {
-    marginBottom: "20px",
-  },
+  avatar: { width: 'fit-content', height: 'fit-content' },
 });
 
 type Props = {
   myUid: any;
   otherUid: any;
+  name: string;
+  icon: string;
+  getData: any;
 };
 
-const User: React.FC<Props> = ({ myUid, otherUid }) => {
+const User: React.FC<Props> = ({ myUid, otherUid, name, icon, getData }) => {
   const classes = useStyles();
-  const [name, setName] = useState("");
-  const [icon, seticon] = useState("");
-
-  useEffect(() => {
-    getData();
-  }, [otherUid]);
-
-  const getData = async () => {
-    // console.log("uid = ", uid);
-    const userDoc = await db.collection("User").doc(otherUid).get();
-    if (userDoc.exists) {
-      // console.log(userDoc.get("displayName"));
-      // console.log(userDoc.get("iconURL"));
-      setName(userDoc.get("displayName"));
-      seticon(userDoc.get("iconURL"));
-    } else {
-      console.log("No such uid.");
-    }
-  };
 
   return (
     <div>
@@ -50,18 +28,16 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
           {icon.length !== 0 ? (
             <>
               <Grid item xs={3}>
-                <UserIcon name={name} icon={icon} />
+                <Container>
+                  <Avatar alt={name} src={icon} className={classes.avatar} />
+                </Container>
               </Grid>
               <Grid item xs={8}>
-                <UserName name={name} />
+                <Typography variant="h4">{name}</Typography>
               </Grid>
               <Grid item xs={1}>
                 {myUid === otherUid && (
-                  <UserEditButton
-                    myUid={myUid}
-                    otherUid={otherUid}
-                    reloadDB={getData}
-                  />
+                  <UserEditButton myUid={myUid} otherUid={otherUid} reloadDB={getData} />
                 )}
               </Grid>
             </>
@@ -79,7 +55,9 @@ const User: React.FC<Props> = ({ myUid, otherUid }) => {
           )}
         </Grid>
       </Box>
-      <Divider className={classes.divider} variant="middle" />
+      <Box mb={2}>
+        <Divider variant="middle" />
+      </Box>
     </div>
   );
 };

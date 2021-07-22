@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import RecommendDialog from "../molecules/RecommendDialog";
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import RecommendDialog from '../molecules/RecommendDialog';
 
 // import { Typography } from "@material-ui/core/styles/createTypography";
-import { Typography } from "@material-ui/core";
+import { Typography } from '@material-ui/core';
 
-import RecommendIcon from "../atoms/RecommendIcon";
-import LightTooltip from "../atoms/LightTooltip";
+import RecommendIcon from '../atoms/RecommendIcon';
+import LightTooltip from '../atoms/LightTooltip';
 
 interface Props {
   myUid: string;
@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 15,
     paddingTop: 4,
     paddingBottom: 4,
-    textTransform: "none",
+    textTransform: 'none',
   },
   goodIcon: {
-    display: "flex",
+    display: 'flex',
   },
   goodNumFont: {
     fontSize: 12,
@@ -41,9 +41,7 @@ const RecommendButton = (props: Props) => {
   const classes = useStyles();
 
   const [goodNum, setGoodNum] = useState(props.recommenderIDs.length);
-  const [isGood, setIsGood] = useState(
-    props.recommenderIDs.indexOf(props.myUid) !== -1
-  );
+  const [isGood, setIsGood] = useState(props.recommenderIDs.indexOf(props.myUid) !== -1);
 
   useEffect(() => {
     setGoodNum(props.recommenderIDs.length);
@@ -67,8 +65,7 @@ const RecommendButton = (props: Props) => {
           </a>
         }
         placement="top-end"
-        interactive
-      >
+        interactive>
         <Button
           variant="outlined"
           className={classes.button}
@@ -77,19 +74,16 @@ const RecommendButton = (props: Props) => {
             <div className={classes.goodIcon}>
               <RecommendIcon
                 size={18}
-                color={
-                  props.isMyPage ? "#333333" : !isGood ? "#e2e2e2" : "#bb4d54"
-                }
+                color={props.isMyPage ? '#333333' : !isGood ? '#e2e2e2' : '#bb4d54'}
                 style={{
-                  marginRight: "0.2rem",
-                  marginTop: "0.1rem",
-                  marginLeft: "0.3rem",
+                  marginRight: '0.2rem',
+                  marginTop: '0.1rem',
+                  marginLeft: '0.3rem',
                 }}
               />
               <Typography className={classes.goodNumFont}>{goodNum}</Typography>
             </div>
-          }
-        >
+          }>
           {props.text}
         </Button>
       </LightTooltip>
@@ -98,8 +92,8 @@ const RecommendButton = (props: Props) => {
         docid={props.docid}
         title={
           props.isMyPage
-            ? "「" + props.text + "」の成果を投稿！"
-            : "「" + props.text + "」がおすすめ！"
+            ? '「' + props.text + '」の成果を投稿！'
+            : '「' + props.text + '」がおすすめ！'
         }
         refURL={props.refURL}
         isOpen={open}
@@ -110,7 +104,7 @@ const RecommendButton = (props: Props) => {
         setGoodNum={setGoodNum}
         doClose={() => handleClose()}
         reloadDB={props.reloadDB}
-      ></RecommendDialog>
+      />
     </>
   );
 };

@@ -1,54 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import {
-  createStyles,
-  makeStyles,
-  Theme,
-  useTheme,
-} from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+  Box,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from '@material-ui/core';
 
-import HelpIcon from "@material-ui/icons/Help";
+import HelpIcon from '@material-ui/icons/Help';
 
-import DecoratedHead from "../molecules/DecoratedHead";
+import DecoratedHead from '../molecules/DecoratedHead';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
-      margin: "20px 0",
+      width: '100%',
+      margin: '20px 0',
     },
     divider: {
-      marginBottom: "20px",
+      marginBottom: '20px',
     },
     usageCard: {
-      height: "400px",
-      width: "360px",
-      [theme.breakpoints.down("xs")]: {
-        fontSize: "20px",
-        height: "auto",
-        width: "320px",
+      height: '400px',
+      width: '360px',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '20px',
+        height: 'auto',
+        width: '320px',
       },
     },
     usageImage: {
-      height: "180px",
-      padding: "20px",
+      height: '180px',
+      padding: '20px',
     },
     usageTitle: {
-      fontSize: "28px",
-      fontWeight: "bold",
-      marginBottom: "20px",
-      [theme.breakpoints.down("xs")]: {
-        fontSize: "20px",
+      fontSize: '28px',
+      fontWeight: 'bold',
+      marginBottom: '20px',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '20px',
       },
     },
     usageBody: {
-      fontSize: "18px",
+      fontSize: '18px',
     },
   })
 );
@@ -56,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Usage: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("xs"));
+  const isSmall = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <div className={classes.root}>
@@ -68,12 +65,11 @@ const Usage: React.FC = () => {
             direction="row"
             justify="center"
             alignItems="center"
-            spacing={isSmall ? 1 : 4}
-          >
+            spacing={isSmall ? 1 : 4}>
             <Grid item>
               <Card>
                 <CardContent className={classes.usageCard}>
-                  <div style={{ textAlign: "center" }}>
+                  <div style={{ textAlign: 'center' }}>
                     <img
                       alt="Usage1"
                       src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage1.png?alt=media&token=ab31c0c8-6bfe-47c4-8cef-e7173506d4ef"
@@ -95,7 +91,7 @@ const Usage: React.FC = () => {
             <Grid item>
               <Card>
                 <CardContent className={classes.usageCard}>
-                  <div style={{ textAlign: "center" }}>
+                  <div style={{ textAlign: 'center' }}>
                     <img
                       alt="Usage2"
                       src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage2.png?alt=media&token=44643198-6172-40fc-8106-6cdc52dd2da0"
@@ -119,12 +115,11 @@ const Usage: React.FC = () => {
             direction="row"
             justify="center"
             alignItems="center"
-            spacing={isSmall ? 1 : 4}
-          >
+            spacing={isSmall ? 1 : 4}>
             <Grid item>
               <Card>
                 <CardContent className={classes.usageCard}>
-                  <div style={{ textAlign: "center" }}>
+                  <div style={{ textAlign: 'center' }}>
                     <img
                       alt="Usage3"
                       src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage3.png?alt=media&token=f6879f18-020d-40a3-84d4-4f8d6aa3c670"
@@ -143,7 +138,7 @@ const Usage: React.FC = () => {
             <Grid item>
               <Card>
                 <CardContent className={classes.usageCard}>
-                  <div style={{ textAlign: "center" }}>
+                  <div style={{ textAlign: 'center' }}>
                     <img
                       alt="Usage4"
                       src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage4.png?alt=media&token=1f64ae86-5215-4e2b-bf52-2355078bc587"
@@ -169,12 +164,11 @@ const Usage: React.FC = () => {
           direction="row"
           justify="center"
           alignItems="center"
-          spacing={isSmall ? 1 : 4}
-        >
+          spacing={isSmall ? 1 : 4}>
           <Grid item>
             <Card>
               <CardContent className={classes.usageCard}>
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: 'center' }}>
                   <img
                     alt="Usage5"
                     src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage5.png?alt=media&token=e6b97169-7b83-4e44-a60d-dd5c2b6831f8"
@@ -196,7 +190,7 @@ const Usage: React.FC = () => {
           <Grid item>
             <Card>
               <CardContent className={classes.usageCard}>
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: 'center' }}>
                   <img
                     alt="Usage6"
                     src="https://firebasestorage.googleapis.com/v0/b/hacku-team1.appspot.com/o/images%2FApp%2Fusage6.png?alt=media&token=05c71997-8624-426e-88fc-830f3eb64f96"

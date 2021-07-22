@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import LocalHospitalRoundedIcon from "@material-ui/icons/LocalHospitalRounded";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Dialog,
@@ -8,15 +7,13 @@ import {
   DialogActions,
   DialogTitle,
   TextField,
-  IconButton,
   Typography,
   Box,
   Container,
-} from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+} from '@material-ui/core';
 
-import StatusItem from "../molecules/StatusItem";
-import AddIcon from "@material-ui/icons/Add";
+import AddIcon from '@material-ui/icons/Add';
+import { Chip } from '@material-ui/core';
 
 type Props = {
   title: string;
@@ -29,38 +26,41 @@ type Props = {
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   items: {
-    marginLeft: "20px",
+    marginLeft: '20px',
   },
   add: {
-    padding: "0",
+    padding: '0',
   },
   addButton: {
-    borderRadius: "0px 4px 4px 0px",
-    boxShadow: "none",
+    borderRadius: '0px 4px 4px 0px',
+    boxShadow: 'none',
     // height: "9.4vh",
-    height: "73%",
+    height: '73%',
   },
   textfield: {
     // width: "20em",
 
     [`& fieldset`]: {
-      borderRadius: "4px 0px 0px 4px",
+      borderRadius: '4px 0px 0px 4px',
     },
   },
   addIcon: {
-    fontSize: "xx-large",
+    fontSize: 'xx-large',
   },
   addBox: {
-    display: "flex",
+    display: 'flex',
     // alignItems: "center",
-    justifyContent: "center",
-    marginTop: "1rem",
+    justifyContent: 'center',
+    marginTop: '1rem',
   },
   action: {
-    width: "fit-content",
+    width: 'fit-content',
+  },
+  chip: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -70,7 +70,7 @@ const EditDialog = (props: Props) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
 
   useEffect(() => {
     setOpen(props.isOpen);
@@ -78,15 +78,15 @@ const EditDialog = (props: Props) => {
 
   const handleCloseWithUpdate = () => {
     props.updateDB();
-    setInput("");
+    setInput('');
     setOpen(false);
     props.doClose();
   };
 
   const handleAddButton = (value: string) => {
-    if (value.length !== 0){
+    if (value.length !== 0) {
       props.editContents([...props.contents, value]);
-      setInput("");
+      setInput('');
     }
   };
 
@@ -99,8 +99,7 @@ const EditDialog = (props: Props) => {
       open={open}
       onClose={handleCloseWithUpdate}
       aria-labelledby="form-dialog-title"
-      fullWidth
-    >
+      fullWidth>
       <Container>
         <DialogTitle id="form-dialog-title">
           <Typography align="center" variant="h6">
@@ -110,11 +109,12 @@ const EditDialog = (props: Props) => {
 
         <DialogContent dividers>
           {props.contents.map((status, index) => (
-            <StatusItem
-              text={status}
-              isEditMode={true}
-              index={index}
-              handleDelete={handleDeleteButton}
+            <Chip
+              variant="outlined"
+              className={classes.chip}
+              label={status}
+              onDelete={() => handleDeleteButton(index)}
+              key={status + index}
             />
           ))}
           <div className={classes.addBox}>
@@ -123,7 +123,7 @@ const EditDialog = (props: Props) => {
                 id="outlined-basic"
                 label="10文字以内"
                 value={input}
-                inputProps={{ maxLength: CHARACTER_LIMIT}}
+                inputProps={{ maxLength: CHARACTER_LIMIT }}
                 helperText={`${input.length}/${CHARACTER_LIMIT}`}
                 onChange={(event) => setInput(event.target.value)}
                 variant="outlined"
@@ -135,8 +135,7 @@ const EditDialog = (props: Props) => {
                 onClick={() => handleAddButton(input)}
                 variant="contained"
                 className={classes.addButton}
-                color="primary"
-              >
+                color="primary">
                 <AddIcon className={classes.addIcon} />
               </Button>
             </Box>
@@ -144,12 +143,7 @@ const EditDialog = (props: Props) => {
         </DialogContent>
         <DialogActions>
           <Container className={classes.action}>
-            <Button
-              onClick={handleCloseWithUpdate}
-              color="primary"
-              variant="outlined"
-              size="large"
-            >
+            <Button onClick={handleCloseWithUpdate} color="primary" variant="outlined" size="large">
               閉じる
             </Button>
           </Container>

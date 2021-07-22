@@ -1,15 +1,12 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import PeopleIcon from "@material-ui/icons/People";
-import AppIcon from "../atoms/AppIcon";
-import AppName from "./AppName";
-import { Typography } from "@material-ui/core";
+import PeopleIcon from '@material-ui/icons/People';
+import AppIcon from '../atoms/AppIcon';
+import { Typography, Tabs, Tab } from '@material-ui/core';
 
-import PersonIcon from "@material-ui/icons/Person";
+import PersonIcon from '@material-ui/icons/Person';
 
 type Props = {
   isSignIn: boolean;
@@ -20,57 +17,57 @@ type Props = {
 function a11yProps(index: any) {
   return {
     id: `section-tab-${index}`,
-    "aria-controls": `section-tabpanel-${index}`,
+    'aria-controls': `section-tabpanel-${index}`,
   };
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: "inherit",
+    backgroundColor: 'inherit',
   },
   title: {
     flexGrow: 1,
   },
   tabPC: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
   tabsMobile: {
-    [theme.breakpoints.up("md")]: {
-      display: "none",
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
     },
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      position: "fixed",
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      position: 'fixed',
       left: 0,
       bottom: 0,
       zIndex: 1000,
-      textAlign: "center",
-      backgroundColor: "#bb4d54",
+      textAlign: 'center',
+      backgroundColor: '#bb4d54',
       margin: 0,
     },
   },
   tabMobile: {
-    width: "100%",
+    width: '100%',
     marginTop: -10,
   },
   tabMobileLabel: {
-    fontSize: "12px",
+    fontSize: '12px',
   },
   indicator: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
 }));
 
 const SectionBar: React.FC<Props> = (props) => {
   const currentTab = () => {
     let path = window.location.pathname;
-    if (path === "/") return 0;
-    else if (path === "/mypage") return 1;
-    else if (path === "/otherspage") return 2;
-    else if (path === "/otheruserpage") return 2;
+    if (path === '/') return 0;
+    else if (path === '/mypage') return 1;
+    else if (path === '/otherspage') return 2;
+    else if (path === '/otheruserpage') return 2;
   };
 
   const classes = useStyles();
@@ -79,10 +76,10 @@ const SectionBar: React.FC<Props> = (props) => {
 
   React.useEffect(() => {
     let path = window.location.pathname;
-    if (path === "/" && value !== 0) setValue(0);
-    else if (path === "/mypage" && value !== 1) setValue(1);
-    else if (path === "/otherspage" && value !== 2) setValue(2);
-    else if (path === "/otheruserpage" && value !== 2) setValue(2);
+    if (path === '/' && value !== 0) setValue(0);
+    else if (path === '/mypage' && value !== 1) setValue(1);
+    else if (path === '/otherspage' && value !== 2) setValue(2);
+    else if (path === '/otheruserpage' && value !== 2) setValue(2);
   }, [location, value, props.isSignIn]);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -104,18 +101,15 @@ const SectionBar: React.FC<Props> = (props) => {
           aria-label="section tabs"
           classes={{
             indicator: classes.indicator,
-          }}
-        >
+          }}>
           <Tab
-            style={{ width: "220px", textTransform: "none" }}
+            style={{ width: '220px', textTransform: 'none' }}
             label={
-              <div style={{ display: "flex" }}>
-                <AppIcon
-                  size={40}
-                  color="white"
-                  style={{ marginRight: "8px" }}
-                />
-                <AppName className={classes.title} />
+              <div style={{ display: 'flex' }}>
+                <AppIcon size={40} color="white" style={{ marginRight: '8px' }} />
+                <Typography className={classes.title} variant="h4" noWrap>
+                  しろ-せん
+                </Typography>
               </div>
             }
             component={Link}
@@ -126,15 +120,11 @@ const SectionBar: React.FC<Props> = (props) => {
           <div
             className={classes.tabPC}
             onClick={() => handleClick(1)}
-            style={props.isSignIn ? {} : { display: "none" }}
-          >
+            style={props.isSignIn ? {} : { display: 'none' }}>
             <Tab
               label={
-                <div style={{ display: "flex", paddingTop: "0.8rem" }}>
-                  <PersonIcon
-                    fontSize="large"
-                    style={{ marginRight: "0.5rem" }}
-                  />
+                <div style={{ display: 'flex', paddingTop: '0.8rem' }}>
+                  <PersonIcon fontSize="large" style={{ marginRight: '0.5rem' }} />
                   <Typography variant="h6">わたし</Typography>
                 </div>
               }
@@ -146,15 +136,11 @@ const SectionBar: React.FC<Props> = (props) => {
           <div
             className={classes.tabPC}
             onClick={() => handleClick(2)}
-            style={props.isSignIn ? {} : { display: "none" }}
-          >
+            style={props.isSignIn ? {} : { display: 'none' }}>
             <Tab
               label={
-                <div style={{ display: "flex", paddingTop: "0.8rem" }}>
-                  <PeopleIcon
-                    fontSize="large"
-                    style={{ marginRight: "0.5rem" }}
-                  />
+                <div style={{ display: 'flex', paddingTop: '0.8rem' }}>
+                  <PeopleIcon fontSize="large" style={{ marginRight: '0.5rem' }} />
 
                   <Typography variant="h6">だれか</Typography>
                 </div>
@@ -166,10 +152,7 @@ const SectionBar: React.FC<Props> = (props) => {
           </div>
         </Tabs>
 
-        <div
-          className={classes.tabsMobile}
-          style={props.isSignIn ? {} : { display: "none" }}
-        >
+        <div className={classes.tabsMobile} style={props.isSignIn ? {} : { display: 'none' }}>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -178,9 +161,8 @@ const SectionBar: React.FC<Props> = (props) => {
             classes={{
               indicator: classes.indicator,
             }}
-            style={{ height: "48px" }}
-          >
-            <Tab style={{ display: "none" }}></Tab>
+            style={{ height: '48px' }}>
+            <Tab style={{ display: 'none' }}></Tab>
             <div className={classes.tabMobile} onClick={() => handleClick(1)}>
               <Tab
                 icon={<PersonIcon style={{ margin: 0 }} />}
@@ -188,7 +170,7 @@ const SectionBar: React.FC<Props> = (props) => {
                 component={Link}
                 to="/mypage"
                 {...a11yProps(1)}
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
               />
             </div>
             <div className={classes.tabMobile} onClick={() => handleClick(2)}>
@@ -198,7 +180,7 @@ const SectionBar: React.FC<Props> = (props) => {
                 component={Link}
                 to="/otherspage"
                 {...a11yProps(2)}
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
               />
             </div>
           </Tabs>

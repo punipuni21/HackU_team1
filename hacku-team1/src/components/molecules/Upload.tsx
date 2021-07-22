@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useCallback } from 'react';
 
-// import * as firebase from 'firebase/app';
-import firebase from "firebase/app";
-import { firebaseApp } from "../../firebase/firebase";
-
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import {
   Typography,
@@ -12,69 +8,65 @@ import {
   GridList,
   GridListTile,
   GridListTileBar,
-  Button,
   IconButton,
   Paper,
   CircularProgress,
-} from "@material-ui/core/";
+} from '@material-ui/core/';
 
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import InfoIcon from "@material-ui/icons/Info";
+import InfoIcon from '@material-ui/icons/Info';
 
-import { useDropzone } from "react-dropzone";
+import { useDropzone } from 'react-dropzone';
 
 // スタイルを適用する
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
+      display: 'flex',
     },
     paper: {
       padding: theme.spacing(2),
-      textAlign: "center",
-      "& > *": {
+      textAlign: 'center',
+      '& > *': {
         margin: theme.spacing(3),
       },
     },
     dropzone: {
-      width: "100%",
-      height: "200%",
-      boxSizing: "border-box",
+      width: '100%',
+      height: '200%',
+      boxSizing: 'border-box',
       borderWidth: 2,
-      borderColor: "#666666",
-      borderStyle: "dashed",
+      borderColor: '#666666',
+      borderStyle: 'dashed',
       borderRadius: 5,
-      verticalAlign: "top",
-      marginRight: "2%",
+      verticalAlign: 'top',
+      marginRight: '2%',
     },
     thumbsContainer: {
       marginTop: 8,
     },
     gridList: {
-      width: "100%",
-      // height: 450,
-      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: "translateZ(0)",
+      width: '100%',
+      transform: 'translateZ(0)',
     },
     titleBar: {
       background:
-        "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-        "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+        'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
+        'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
     icon: {
-      color: "white",
+      color: 'white',
     },
     upButton: {
-      color: "secondary",
+      color: 'secondary',
       margin: theme.spacing(3),
     },
     circular: {
-      textAlign: "center",
+      textAlign: 'center',
     },
     warnning: {
       fontSize: 3,
-      color: "#BB4D54"
-    }
+      color: '#BB4D54',
+    },
   })
 );
 
@@ -93,7 +85,7 @@ type Props = {
 };
 
 // Dropzoneの設定
-const acceptFile = "image/*";
+const acceptFile = 'image/*';
 const maxFileSize = 5242880; // 5MB
 
 export default function Upload(props: Props) {
@@ -103,7 +95,6 @@ export default function Upload(props: Props) {
   ドロップした時の処理
   */
   const onDrop = useCallback((acceptedFiles: File[]) => {
-
     // previewの追加
     props.setFiles(
       acceptedFiles.map((file) =>
@@ -120,7 +111,7 @@ export default function Upload(props: Props) {
     accept: acceptFile,
     minSize: 0,
     maxSize: maxFileSize,
-    multiple: false
+    multiple: false,
   });
 
   // アップロード中はCircularを表示する
@@ -158,20 +149,13 @@ export default function Upload(props: Props) {
 
     // サムネイルの作成
     const thumbs = props.files.map((file, index) => (
-      <GridListTile
-        key={file.preview}
-        cols={tile_featured.indexOf(index) >= 0 ? 2 : 1}
-        rows={1}
-      >
+      <GridListTile key={file.preview} cols={tile_featured.indexOf(index) >= 0 ? 2 : 1} rows={1}>
         <img src={file.preview} alt={file.name} />
         <GridListTileBar
           title={file.name}
           subtitle={file.size}
           actionIcon={
-            <IconButton
-              aria-label={`star ${file.name}`}
-              className={classes.icon}
-            >
+            <IconButton aria-label={`star ${file.name}`} className={classes.icon}>
               <InfoIcon />
             </IconButton>
           }
@@ -188,19 +172,21 @@ export default function Upload(props: Props) {
             <div>
               {props.files.length === 0 ? (
                 <React.Fragment>
-                <Paper className={classes.dropzone} {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  {isDragActive ? <p>ドロップ</p> : <p>画像をアップロード(5MBまで)</p>} 
-                  {fileRejections.length !== 0 ? <Typography className={classes.warnning}>5MB未満で1つの画像ファイルにしてください！</Typography> : <></>}
-                </Paper>
+                  <Paper className={classes.dropzone} {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    {isDragActive ? <p>ドロップ</p> : <p>画像をアップロード(5MBまで)</p>}
+                    {fileRejections.length !== 0 ? (
+                      <Typography className={classes.warnning}>
+                        5MB未満で1つの画像ファイルにしてください！
+                      </Typography>
+                    ) : (
+                      <></>
+                    )}
+                  </Paper>
                 </React.Fragment>
               ) : (
                 <aside className={classes.thumbsContainer}>
-                  <GridList
-                    cellHeight="auto"
-                    className={classes.gridList}
-                    cols={tile_cols}
-                  >
+                  <GridList cellHeight="auto" className={classes.gridList} cols={tile_cols}>
                     {thumbs}
                   </GridList>
                 </aside>
